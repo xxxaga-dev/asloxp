@@ -117,6 +117,7 @@ function updateFeatured(){const root=document.querySelector(".v4-featured-row");
 function menuClick(e){const b=e.target.closest("[data-sport]");if(!b)return;prefSport=b.dataset.sport;try{sessionStorage.setItem("asloxp-demo-sport",prefSport)}catch(e){}heroIndex=0;featuredIndex=0;newsCount=5;render();}
 function updateLocation(){try{localStorage.setItem("asloxp-demo-location",JSON.stringify(region))}catch(e){}heroIndex=0;featuredIndex=0;render();}
 function bindControls(){
+ if(bound)return;bound=true;
  document.addEventListener("click",click);
  document.addEventListener("input",searchInput);
  document.addEventListener("change",onChange);
@@ -133,12 +134,12 @@ function click(e){
  const theme=e.target.closest("#v4-theme");if(theme){const next=document.documentElement.getAttribute("data-theme")==="light"?"dark":"light";try{localStorage.setItem("asloxp-theme",next)}catch(e){}location.reload();return}
  const sample=e.target.closest("[data-sample-match]");if(sample){e.preventDefault();alert(tx("Este partido es ficticio. El detalle para este deporte se diseñará más adelante.","This match is fictional; its details are not yet designed.","Dieses Spiel ist fiktiv; die Detailansicht ist noch nicht gestaltet."));}
 }
-function searchInput(e){if(e.target.id!=="v4-search")return;search=e.target.value;const cards=document.querySelector(".v4-news-grid");if(cards){cards.innerHTML=sortedNews().slice(0,newsCount).map(n=>`<button type="button" class="v4-news-card" data-read-news="${n.id}"><div class="v4-news-card-photo" style="--card-photo:url('${n.photo}')"><span>${sportName(n.sport)}</span></div><h3>${esc(n.title[0])}</h3><small>${n.city}</small></button>`).join("")}heroIndex=0;updateHero();}
+function searchInput(e){if(e.target.id!=="v4-search")return;search=e.target.value;const cards=document.querySelector(".v4-news-grid");if(cards){cards.innerHTML=sortedNews().slice(0,newsCount).map(n=>`<button type="button" class="v4-news-card" data-read-news="${n.id}"><div class="v4-news-card-photo" style="--card-photo:url('${n.photo}')"><span>${sportName(n.sport)}</span></div><h3>${esc(n.title[lang()==="de"?2:lang()==="en"?1:0])}</h3><small>${n.city}</small></button>`).join("")}heroIndex=0;updateHero();}
 function onChange(e){if(!["v4-country","v4-state","v4-city"].includes(e.target.id))return;
 if(e.target.id==="v4-country"){region.country=e.target.value;region.state=Object.keys(geo[region.country])[0];region.city=geo[region.country][region.state][0]}
 if(e.target.id==="v4-state"){region.state=e.target.value;region.city=geo[region.country][region.state][0]}
 if(e.target.id==="v4-city"){region.city=e.target.value}
-updateLocation();locationOpen=true;render();
+locationOpen=true;updateLocation();
 }
 function openStory(n){
  const existing=document.getElementById("v4-story");if(existing)existing.remove();
