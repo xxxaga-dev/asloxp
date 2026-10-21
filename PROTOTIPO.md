@@ -1,14 +1,13 @@
-# asloXP · Alcance del prototipo
+# asloXP — Recorrido visitante inmersivo
 
-El producto real no está implementado. El prototipo público usa únicamente HTML, CSS y JS con datos ficticios. No hay autenticación ni políticas de seguridad funcionales.
+**Para evaluar en navegador:** https://xxxaga-dev.github.io/asloxp/
 
-## Prueba de la iteración actual
+1. Entrar a la portada y revisar el impacto visual en pantalla completa.
+2. Cambiar el partido destacado con las flechas del panel.
+3. Activar opcionalmente el sonido de ambiente con el botón superior; apagarlo con el mismo botón. No hay autoplay.
+4. Alternar «Resultados» / «Próximos» dentro del centro de partidos.
+5. Entrar en «Explorar ligas», filtrar por región y buscar por ciudad.
+6. Seleccionar una liga; entrar en uno de sus torneos; visitar Resumen / Tabla / Partidos / Noticias.
+7. Probar atrás/adelante del navegador, tema claro/oscuro, inglés/alemán y vista móvil.
 
-1. [Visitar inicio](index.html) como anónimo, consultar ligas y torneo.
-2. Pulsar [Iniciar sesión](acceso.html), usar **cuenta de prueba multirol**.
-3. [Cambiar modo](modos.html) a jugador o juez.
-4. Abrir el menú del usuario (avatar y nombre) en la cabecera, entrar en [Mi perfil](cuenta.html?tab=perfil) o [Seguridad](cuenta.html?tab=seguridad).
-5. Cambiar [tema](cuenta.html?tab=apariencia) o [idioma](cuenta.html?tab=idioma), probar English y Deutsch también en la parte pública.
-6. Cerrar sesión desde el menú de cuenta. La configuración visual persiste en el navegador.
-
-Los controles de seguridad son maquetas deshabilitadas deliberadamente; nunca se simula haber cambiado la contraseña o habilitado 2FA.
+**Fuera de alcance:** completar funciones de usuario logueado, reproducir partidos reales, conectar APIs, persistir datos, entregar premios, emular exactamente FIFA o copiar recursos de terceros. Todos los resultados son ficticios.
