@@ -1,12 +1,14 @@
-# asloXP · prototipo público
+# asloXP · Alcance del prototipo
 
-Experiencia estática de demostración, con datos ficticios. No existe autenticación real, registro de cuentas, almacenamiento de contraseñas ni permisos efectivos.
+El producto real no está implementado. El prototipo público usa únicamente HTML, CSS y JS con datos ficticios. No hay autenticación ni políticas de seguridad funcionales.
 
-## Recorridos disponibles
+## Prueba de la iteración actual
 
-- Invitado: [inicio](index.html) → [ligas](ligas.html) → [liga](liga.html?id=metropolitana) → [torneo](torneo.html?id=apertura).
-- Desde cualquier página pública: [iniciar sesión](acceso.html) / [crear cuenta](registro.html).
-- Acceso ficticio: pulsar **Entrar con cuenta de prueba multirol** → [mis modos](modos.html) → seleccionar Jugador, Equipo, Organizador, Juez o Aficionado → [vista contextual](modo.html).
-- Registro ficticio: el ejemplo comienza en Aficionado; los demás modos precisan vínculos y autorizaciones y no se habilitan por defecto.
+1. [Visitar inicio](index.html) como anónimo, consultar ligas y torneo.
+2. Pulsar [Iniciar sesión](acceso.html), usar **cuenta de prueba multirol**.
+3. [Cambiar modo](modos.html) a jugador o juez.
+4. Abrir el menú del usuario (avatar y nombre) en la cabecera, entrar en [Mi perfil](cuenta.html?tab=perfil) o [Seguridad](cuenta.html?tab=seguridad).
+5. Cambiar [tema](cuenta.html?tab=apariencia) o [idioma](cuenta.html?tab=idioma), probar English y Deutsch también en la parte pública.
+6. Cerrar sesión desde el menú de cuenta. La configuración visual persiste en el navegador.
 
-Las funciones internas de cada modo aún no están diseñadas. No ingresar datos personales reales. Las pruebas se guardan únicamente en la sesión de la pestaña del navegador.
+Los controles de seguridad son maquetas deshabilitadas deliberadamente; nunca se simula haber cambiado la contraseña o habilitado 2FA.

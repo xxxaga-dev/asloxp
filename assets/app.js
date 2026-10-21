@@ -16,7 +16,7 @@
   const tu=(id,tab)=>"torneo.html?id="+encodeURIComponent(id)+(tab?"&tab="+encodeURIComponent(tab):"");
   const param=new URLSearchParams(location.search);
   const page=document.body.dataset.page;
-  const shell=(html,nav="")=>{document.body.innerHTML=window.asloAuth.chrome(html,nav)};
+  const shell=(html,nav="")=>{document.body.innerHTML=window.asloAuth.chrome(html,nav);window.asloAuth.attachChrome();window.asloPublicTranslate.apply()};
   const leagueCard=l=>`<a class="card" href="${lu(l.id)}"><span class="chip">${esc(l.area)}</span><h3>${esc(l.name)}</h3><p>${esc(l.place)} · ${l.tournaments.length} competición(es)</p><span class="link">Conocer la liga ↗</span></a>`;
   const newsCards=()=>leagues.map(l=>`<a class="card" href="${lu(l.id)}"><span class="eyebrow">Noticias · ${esc(l.area)}</span><h3>${esc(l.news)}</h3><p>${esc(l.name)} · Información pública simulada.</p><span class="link">Ver liga ↗</span></a>`).join("");
   function start(){
@@ -26,7 +26,7 @@
   function list(){
     shell(`<section class="shell"><div class="pagehead"><div class="crumb"><a href="index.html">Inicio</a> / Ligas</div><span class="eyebrow">EXPLORAR</span><h1>Encuentra tu liga.</h1><p class="intro">Consulta la actividad deportiva pública de las ligas sin iniciar sesión.</p></div><div class="searchbar"><input id="q" type="search" placeholder="Buscar liga o ciudad" aria-label="Buscar liga o ciudad">${["Todas","Bogotá","Cundinamarca","Atlántico"].map((c,i)=>`<button type="button" data-area="${c}" class="filter ${i===0?"on":""}">${c}</button>`).join("")}</div><p id="count" class="muted" aria-live="polite"></p><div id="results" class="cards"></div><div id="empty" class="empty" hidden>No hay ligas con esos filtros.</div></section>`,"ligas");
     let area="Todas";const input=document.querySelector("#q");
-    const render=()=>{const q=input.value.toLowerCase().trim();const found=leagues.filter(x=>(area==="Todas"||x.area===area)&&(x.name+" "+x.place).toLowerCase().includes(q));document.querySelector("#results").innerHTML=found.map(leagueCard).join("");document.querySelector("#count").textContent=found.length+" ligas disponibles en la demostración";document.querySelector("#empty").hidden=found.length>0};
+    const render=()=>{const q=input.value.toLowerCase().trim();const found=leagues.filter(x=>(area==="Todas"||x.area===area)&&(x.name+" "+x.place).toLowerCase().includes(q));document.querySelector("#results").innerHTML=found.map(leagueCard).join("");document.querySelector("#count").textContent=found.length+" ligas disponibles en la demostración";document.querySelector("#empty").hidden=found.length>0;window.asloPublicTranslate.apply()};
     input.addEventListener("input",render);document.querySelectorAll("[data-area]").forEach(b=>b.addEventListener("click",()=>{area=b.dataset.area;document.querySelectorAll("[data-area]").forEach(x=>x.classList.toggle("on",x===b));render()}));render();
   }
   function leaguePage(){
