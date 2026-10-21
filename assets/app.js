@@ -16,7 +16,7 @@
   const tu=(id,tab)=>"torneo.html?id="+encodeURIComponent(id)+(tab?"&tab="+encodeURIComponent(tab):"");
   const param=new URLSearchParams(location.search);
   const page=document.body.dataset.page;
-  const shell=(html,nav="")=>{document.body.innerHTML=`<header class="sitehead"><div class="shell headrow"><a class="brand" href="index.html">aslo<i>XP</i></a><nav aria-label="Navegación del visitante"><a class="${nav==="inicio"?"sel":""}" href="index.html">Inicio</a><a class="${nav==="ligas"?"sel":""}" href="ligas.html">Ligas</a></nav><span class="guest">Modo visitante</span></div></header><div class="notice"><div class="shell"><b>PROTOTIPO UX</b> · Todas las ligas, personas, noticias y cifras son ficticias. Información pública de demostración.</div></div><main>${html}</main><footer class="foot"><div class="shell"><b>asloXP</b> · Solo modo visitante · Sin registro, operaciones deportivas ni rankings oficiales.</div></footer>`};
+  const shell=(html,nav="")=>{document.body.innerHTML=window.asloAuth.chrome(html,nav)};
   const leagueCard=l=>`<a class="card" href="${lu(l.id)}"><span class="chip">${esc(l.area)}</span><h3>${esc(l.name)}</h3><p>${esc(l.place)} · ${l.tournaments.length} competición(es)</p><span class="link">Conocer la liga ↗</span></a>`;
   const newsCards=()=>leagues.map(l=>`<a class="card" href="${lu(l.id)}"><span class="eyebrow">Noticias · ${esc(l.area)}</span><h3>${esc(l.news)}</h3><p>${esc(l.name)} · Información pública simulada.</p><span class="link">Ver liga ↗</span></a>`).join("");
   function start(){

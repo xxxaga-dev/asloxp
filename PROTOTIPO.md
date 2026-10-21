@@ -1,8 +1,12 @@
 # asloXP · prototipo público
 
-Esta página es una demostración estática de la experiencia **modo visitante** de ASLO, creada para validar la interfaz con el propietario.
+Experiencia estática de demostración, con datos ficticios. No existe autenticación real, registro de cuentas, almacenamiento de contraseñas ni permisos efectivos.
 
-- Abrir [inicio](index.html), [ligas](ligas.html), [detalle de liga](liga.html?id=metropolitana) y [torneo](torneo.html?id=apertura).
-- Todas las ligas, equipos, cifras, noticias y resultados son **ficticios**.
-- No hay registro de usuarios, base de datos, conexión a partidos reales, operaciones deportivas ni rankings oficiales.
-- Las ampliaciones se hacen **de una en una**, después de corregir la experiencia ya presentada.
+## Recorridos disponibles
+
+- Invitado: [inicio](index.html) → [ligas](ligas.html) → [liga](liga.html?id=metropolitana) → [torneo](torneo.html?id=apertura).
+- Desde cualquier página pública: [iniciar sesión](acceso.html) / [crear cuenta](registro.html).
+- Acceso ficticio: pulsar **Entrar con cuenta de prueba multirol** → [mis modos](modos.html) → seleccionar Jugador, Equipo, Organizador, Juez o Aficionado → [vista contextual](modo.html).
+- Registro ficticio: el ejemplo comienza en Aficionado; los demás modos precisan vínculos y autorizaciones y no se habilitan por defecto.
+
+Las funciones internas de cada modo aún no están diseñadas. No ingresar datos personales reales. Las pruebas se guardan únicamente en la sesión de la pestaña del navegador.
