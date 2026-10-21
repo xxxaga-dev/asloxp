@@ -25,7 +25,7 @@ function getMode(){const a=getAccount();if(!a)return null;let id=null;try{id=ses
 function chrome(inner,nav=""){
  const a=getAccount(),id=getMode(),role=roles.find(x=>x.id===id);
  const buttons=a?`<a class="userlink" href="modos.html"><span class="dot"></span>${esc(role?role.name:"Mi cuenta")} <span class="switch-label">⇄ Cambiar modo</span></a>`:`<a class="loginlink" href="acceso.html">Iniciar sesión</a><a class="registerlink" href="registro.html">Crear cuenta</a>`;
- const head=`<header class="sitehead"><div class="shell headrow"><a class="brand" href="index.html">aslo<i>XP</i></a><nav class="publicnav" aria-label="Sección pública"><a class="${nav==="inicio"?"sel":""}" href="index.html">Inicio</a><a class="${nav==="ligas"?"sel":""}" href="ligas.html">Ligas</a></nav><div class="account-actions">${buttons}</div></div></header>`;
+ const head=`<header class="sitehead"><div class="shell headrow"><a class="brand" href="index.html">aslo<i>XP</i></a>${a&&nav===""?`<nav class="publicnav" aria-label="Navegación del modo"><a href="modos.html">Mis modos</a></nav>`:`<nav class="publicnav" aria-label="Sección pública"><a class="${nav==="inicio"?"sel":""}" href="index.html">Inicio</a><a class="${nav==="ligas"?"sel":""}" href="ligas.html">Ligas</a></nav>`}<div class="account-actions">${buttons}</div></div></header>`;
  return head+`<div class="notice"><div class="shell"><b>PROTOTIPO UX</b> · Datos ficticios · ${a?"Cuenta de demostración, sin inicio de sesión real.":"Visitante: información pública."}</div></div><main>${inner}</main><footer class="foot"><div class="shell"><b>asloXP</b> · Experiencia en revisión · No se guardan contraseñas ni se aplican permisos reales.</div></footer>`;
 }
 function show(html){document.body.innerHTML=chrome(html)}
