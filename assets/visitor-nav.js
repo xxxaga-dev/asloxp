@@ -24,10 +24,28 @@ function build(){
  document.getElementById("v5-menu-backdrop")?.remove();
  document.querySelector(".v5-bottomnav")?.remove();
  document.getElementById("v5-mobile-hamburger")?.remove();
+ document.getElementById("v5-mobile-account-link")?.remove();
  normalizeHeader();
  const row=document.querySelector(".sitehead .headrow");if(!row)return;
  const button=document.createElement("button");
  button.type="button";button.className="v5-mobile-hamburger";button.id="v5-mobile-hamburger";button.setAttribute("aria-label",tx("Abrir menú","Open menu","Menü öffnen"));button.setAttribute("aria-expanded","false");button.setAttribute("aria-controls","v5-mobile-menu");button.innerHTML=`<span aria-hidden="true">☰</span><span>${tx("Menú","Menu","Menü")}</span>`;
+ // Conversion stays visible on mobile: login for guests, account avatar for signed-in users.
+ const userAccount=account();
+ const quickAccess=document.createElement("a");
+ quickAccess.className="v5-mobile-account-link";
+ quickAccess.id="v5-mobile-account-link";
+ if(userAccount){
+   quickAccess.href="cuenta.html?tab=perfil";
+   quickAccess.setAttribute("aria-label",tx("Abrir mi cuenta","Open my account","Mein Konto öffnen"));
+   const initial=String(userAccount.name||"U").trim().slice(0,1).toUpperCase();
+   quickAccess.innerHTML='<span class="v5-mobile-avatar" aria-hidden="true"></span>';
+   quickAccess.querySelector(".v5-mobile-avatar").textContent=initial;
+ }else{
+   quickAccess.href="acceso.html";
+   quickAccess.classList.add("v5-mobile-login");
+   quickAccess.textContent=tx("Entrar","Sign in","Anmelden");
+ }
+ row.insertBefore(quickAccess,button);
  row.append(button);
  const shade=document.createElement("div");shade.id="v5-menu-backdrop";shade.className="v5-menu-backdrop";shade.hidden=true;
  const menu=document.createElement("section");menu.id="v5-mobile-menu";menu.className="v5-mobile-menu";menu.hidden=true;menu.setAttribute("aria-label",tx("Opciones del visitante","Visitor options","Besucheroptionen"));
@@ -37,7 +55,7 @@ function build(){
  try{const p=JSON.parse(localStorage.getItem("asloxp-demo-location")||"null");if(areaMap[p?.country]?.[p?.state]?.includes(p?.city))place=p}catch(e){}
  const locationOpts=(entries,chosen)=>entries.map(x=>`<option value="${x}" ${x===chosen?"selected":""}>${x}</option>`).join("");
  const mobileLocation=`<div class="v5-menu-section v5-menu-geo"><strong>⌖ ${tx("Ubicación de muestra","Sample location","Demo-Standort")}</strong><label>${tx("País","Country","Land")} <select id="v5-geo-country">${locationOpts(Object.keys(areaMap),place.country)}</select></label><label>${tx("Región","Region","Region")} <select id="v5-geo-state">${locationOpts(Object.keys(areaMap[place.country]),place.state)}</select></label><label>${tx("Ciudad","City","Stadt")} <select id="v5-geo-city">${locationOpts(areaMap[place.country][place.state],place.city)}</select></label></div>`;
- const items=`<h2>${tx("Tu experiencia","Your experience","Dein Erlebnis")}</h2><div class="v5-menu-grid">${sports.map(s=>`<button type="button" data-v5-sport="${s[0]}" aria-pressed="${getSport()===s[0]}"><span aria-hidden="true">${s[1]}</span>${sname(s)}</button>`).join("")}</div>${mobileLocation}<div class="v5-menu-section"><label>${tx("Idioma","Language","Sprache")}<select id="v5-mobile-language" aria-label="${tx("Idioma","Language","Sprache")}"><option value="es" ${lang()==="es"?"selected":""}>Español</option><option value="en" ${lang()==="en"?"selected":""}>English</option><option value="de" ${lang()==="de"?"selected":""}>Deutsch</option></select></label><button type="button" id="v5-mobile-theme">${tx("Cambiar tema claro/oscuro","Switch light/dark theme","Hell/Dunkel wechseln")} ◐</button></div><div class="v5-menu-section">${user?`<strong>${tx("Cuenta","Account","Konto")}: ${uname.replace(/[<>]/g,"")}</strong><a href="cuenta.html?tab=perfil">${tx("Mi perfil","My profile","Mein Profil")}</a><a href="cuenta.html?tab=seguridad">${tx("Seguridad","Security","Sicherheit")}</a><a href="modos.html">${tx("Cambiar modo","Switch mode","Modus wechseln")}</a><button type="button" id="v5-mobile-signout">${tx("Cerrar sesión","Sign out","Abmelden")}</button>`:`<a class="v5-menu-primary" href="acceso.html">${tx("Iniciar sesión","Sign in","Anmelden")}</a><a href="registro.html">${tx("Crear cuenta","Create account","Konto erstellen")}</a>`}</div>`;
+ const items=`<h2>${tx("Tu experiencia","Your experience","Dein Erlebnis")}</h2><div class="v5-menu-grid">${sports.map(s=>`<button type="button" data-v5-sport="${s[0]}" aria-pressed="${getSport()===s[0]}"><span aria-hidden="true">${s[1]}</span>${sname(s)}</button>`).join("")}</div>${mobileLocation}<div class="v5-menu-section"><label>${tx("Idioma","Language","Sprache")}<select id="v5-mobile-language" aria-label="${tx("Idioma","Language","Sprache")}"><option value="es" ${lang()==="es"?"selected":""}>Español</option><option value="en" ${lang()==="en"?"selected":""}>English</option><option value="de" ${lang()==="de"?"selected":""}>Deutsch</option></select></label><button type="button" id="v5-mobile-theme">${tx("Cambiar tema claro/oscuro","Switch light/dark theme","Hell/Dunkel wechseln")} ◐</button></div><div class="v5-menu-section">${user?`<strong>${tx("Cuenta","Account","Konto")}: ${uname.replace(/[<>]/g,"")}</strong><a href="cuenta.html?tab=perfil">${tx("Mi perfil","My profile","Mein Profil")}</a><a href="cuenta.html?tab=seguridad">${tx("Seguridad","Security","Sicherheit")}</a><a href="modos.html">${tx("Cambiar modo","Switch mode","Modus wechseln")}</a><button type="button" id="v5-mobile-signout">${tx("Cerrar sesión","Sign out","Abmelden")}</button>`:`<a class="v5-menu-primary" href="acceso.html">${tx("Iniciar sesión","Sign in","Anmelden")}</a>`}</div>`;
  menu.innerHTML=items;
  document.body.append(shade,menu);
  const bottom=document.createElement("nav");bottom.className="v5-bottomnav";bottom.setAttribute("aria-label",tx("Navegación principal","Main navigation","Hauptnavigation"));
