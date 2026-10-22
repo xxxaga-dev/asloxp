@@ -1,0 +1,175 @@
+
+/* ASLO sports design system — isolated authentication screens (v7).
+   Public login/registration use the same cinematic navy/blue visual language as visitor pages.
+   Forms are demo-only; no authentication backend is installed. */
+body.aslo-auth-v7{
+  --auth-bg:#051326;--auth-panel:#0a2038;--auth-border:#2a5a83;--auth-blue:#128aff;--auth-soft:#b5cee2;
+  background:#041323;color:#f2faff;color-scheme:dark;
+}
+body.aslo-auth-v7 .sitehead{
+  background:#06172c;border-bottom:1px solid #2e7bb0;position:relative;z-index:15;
+}
+body.aslo-auth-v7 .sitehead .headrow{max-width:1450px;min-height:68px;gap:18px;padding:8px clamp(16px,3vw,38px)}
+body.aslo-auth-v7 .sitehead .brand{
+  font-size:clamp(24px,2.5vw,30px);font-weight:920;letter-spacing:-.045em;color:#fff;
+  white-space:nowrap;
+}
+body.aslo-auth-v7 .sitehead .brand:hover{color:white}
+.aslo-auth-header-icon{color:#248eff;display:inline-block;transform:skew(-14deg);margin-right:4px;font-size:29px;text-shadow:0 0 20px #008bff66}
+body.aslo-auth-v7 .sitehead .publicnav{margin-left:auto}
+body.aslo-auth-v7 .sitehead .publicnav a{color:#bfd7ec;background:transparent;font-size:13px}
+body.aslo-auth-v7 .sitehead .publicnav a:hover{color:#fff;background:#184468}
+body.aslo-auth-v7 .sitehead .account-actions{margin-left:0}
+body.aslo-auth-v7 .sitehead .loginlink{display:none}
+body.aslo-auth-v7 .header-lang select{background:#102b48;border:1px solid #346c94;color:#e4f4ff;border-radius:9px}
+body.aslo-auth-v7 .notice{display:none}
+body.aslo-auth-v7 main{min-height:calc(100vh - 140px);background:radial-gradient(ellipse at 90% 15%,#12386848,transparent 44%),radial-gradient(ellipse at 5% 85%,#03416f3f,transparent 46%),#041323}
+body.aslo-auth-v7 .foot{background:#061629;border-top:1px solid #143b5b;color:#789bb7;padding:11px 0}
+body.aslo-auth-v7 .foot .shell{font-size:11px}
+.aslo-auth-stage{
+  width:min(1490px,100%);min-height:min(770px,calc(100svh - 125px));margin:auto;
+  padding:clamp(16px,2.5vw,35px);display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(390px,.79fr);
+  gap:clamp(14px,2vw,28px);align-items:stretch;
+}
+.aslo-auth-scene{
+  position:relative;isolation:isolate;overflow:hidden;border:1px solid #255d89;
+  border-radius:20px;min-height:650px;display:flex;align-items:flex-end;padding:clamp(26px,4vw,58px);
+  background-image:linear-gradient(180deg,#04112213 10%,#0514257a 40%,#04101eF5 97%),
+    linear-gradient(90deg,#071e43b0,transparent 82%),
+    url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1500&q=82');
+  background-size:cover;background-position:center;
+}
+.aslo-auth-scene:before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  box-shadow:inset 0 0 90px #001526a0;
+}
+.aslo-auth-scene:after{
+  content:"";position:absolute;right:-50px;top:-50px;width:290px;height:290px;border:1px solid #6fd2ff2b;border-radius:50%;
+  box-shadow:0 0 0 45px #38b4fc0c,0 0 0 90px #38b4fc09;
+}
+.aslo-auth-scene-inner{position:relative;z-index:1;width:min(620px,100%)}
+.aslo-auth-kicker{display:inline-flex;align-items:center;gap:10px;letter-spacing:.13em;font-size:11px;color:#a8e4ff;font-weight:900;margin-bottom:20px}
+.aslo-auth-kicker-dot{background:#1ad4fa;width:8px;height:8px;border-radius:50%;box-shadow:0 0 13px #13b7ff}
+.aslo-auth-scene h1{font-size:clamp(42px,4.8vw,78px);line-height:.99;letter-spacing:-.064em;font-weight:1000;color:#fff;margin:0 0 17px;text-shadow:0 5px 22px #001526}
+.aslo-auth-scene p{font-size:clamp(14px,1.5vw,19px);max-width:560px;line-height:1.5;color:#d8eafb;margin:0 0 22px}
+.aslo-auth-scene-highlights{display:flex;gap:7px;flex-wrap:wrap}
+.aslo-auth-scene-highlights span{display:inline-flex;align-items:center;gap:5px;background:#071f35dd;border:1px solid #4a799d;color:#ddf3ff;border-radius:8px;padding:9px 13px;font-size:12px;font-weight:780;backdrop-filter:blur(5px)}
+.aslo-auth-back{display:inline-flex;margin-top:32px;align-items:center;font-size:13px;color:#71cfff!important;font-weight:840;gap:5px}
+.aslo-auth-back:hover{text-decoration:underline}
+.aslo-auth-card{
+  background:linear-gradient(165deg,#0c2a48 0%,#081e34 55%,#071727 100%);
+  border:1px solid #35688e;border-radius:20px;padding:clamp(24px,3vw,49px);
+  align-self:center;box-shadow:0 18px 60px #0008;position:relative;
+}
+.aslo-auth-card:before{content:"";position:absolute;height:3px;left:10%;right:10%;top:0;background:linear-gradient(90deg,transparent,#41baff,transparent);box-shadow:0 0 24px #349cff6b}
+.aslo-auth-brand{font-weight:940;font-size:23px;letter-spacing:-.055em;color:#fff;margin-bottom:28px}
+.aslo-auth-brand-mark{font-size:26px;display:inline-block;margin-right:5px;color:#2094ff;transform:skew(-14deg)}
+.aslo-auth-brand-suffix{color:#57bbff;font-size:14px;letter-spacing:0;margin-left:1px}
+.aslo-auth-eyebrow{font-size:11px;color:#75d5ff;letter-spacing:.17em;font-weight:900;margin-bottom:9px}
+.aslo-auth-card h2{font-size:clamp(28px,2.7vw,42px);line-height:1.06;letter-spacing:-.052em;color:#fff;font-weight:960;margin:0 0 10px}
+.aslo-auth-description{font-size:14px;color:#afc9df;margin:0 0 20px}
+.aslo-auth-demo-alert{display:flex;align-items:start;gap:9px;padding:12px 13px;background:#123554;border:1px solid #346d96;border-radius:9px;color:#c6e4f5;font-size:11px;line-height:1.45;margin-bottom:20px}
+.aslo-auth-demo-alert span{font-size:18px;line-height:1;color:#70d1ff}
+.aslo-auth-form{display:flex;flex-direction:column;gap:8px}
+.aslo-auth-form>label{margin-top:10px;font-size:12px;font-weight:850;color:#d8f0ff}
+.aslo-auth-form>input,.aslo-auth-password>input{
+  display:block;min-height:49px;border:1px solid #36668a;border-radius:10px;width:100%;
+  background:#06182b;color:#fff;padding:13px 14px;font-size:14px;outline:none;box-shadow:none;
+}
+.aslo-auth-form input::placeholder{color:#829bb2}
+.aslo-auth-form input:focus-visible{border-color:#55bdff;box-shadow:0 0 0 3px #0d9dff27}
+.aslo-auth-password{position:relative;display:flex;align-items:center}
+.aslo-auth-password>input{padding-right:89px}
+.aslo-auth-password button{position:absolute;right:7px;border:0;background:transparent;padding:9px;color:#6ac9ff;font-size:12px;font-weight:850;cursor:pointer}
+.aslo-auth-password button:focus-visible{outline:2px solid #83d0ff;outline-offset:1px;border-radius:5px}
+.aslo-auth-submit{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;
+  margin-top:15px;background:linear-gradient(95deg,#0874e8,#149eff);border:1px solid #61baff;border-radius:10px;
+  box-shadow:0 7px 20px #007af53b;color:#fff;font-size:15px;font-weight:940;cursor:pointer;
+}
+.aslo-auth-submit:hover{background:linear-gradient(95deg,#0964c4,#2da9fa);box-shadow:0 9px 24px #0089ff52}
+.aslo-auth-submit span{font-size:20px}
+.aslo-auth-alt{margin-top:19px;padding-top:17px;border-top:1px solid #315675}
+.aslo-auth-alt p{margin:0 0 10px;font-size:12px;color:#a6c5d9;text-align:center}
+.aslo-auth-secondary{
+  display:flex;align-items:center;justify-content:center;min-height:47px;width:100%;background:#0d3554;color:#e9f9ff!important;
+  font-size:14px;font-weight:890;text-decoration:none;border:1px solid #3c85b3;border-radius:10px;
+}
+.aslo-auth-secondary:hover{background:#154f7d;border-color:#6acbff}
+.aslo-auth-demo-entry{margin-top:15px}
+.aslo-auth-divider{display:flex;align-items:center;gap:12px;color:#8fb2cd;font-size:12px;margin-bottom:10px}
+.aslo-auth-divider:before,.aslo-auth-divider:after{content:"";height:1px;background:#2b506d;flex:1}
+.aslo-auth-demo-entry button{width:100%;border:1px solid #2c617f;border-radius:9px;padding:11px;background:#0b253c;color:#bdd9ec;font-size:12px;font-weight:780;cursor:pointer}
+.aslo-auth-demo-entry button:hover{color:#fff;background:#184464}
+.aslo-auth-card-footer{font-size:10px;text-align:center;color:#6f96b1;margin-top:20px}
+.aslo-auth-safe-ad{width:min(970px,calc(100% - 40px));margin:0 auto 35px;padding:10px;border:1px dashed #2a5274;border-radius:8px;text-align:center;color:#699bbf;background:#082039;font-size:9px;letter-spacing:.12em}
+body.aslo-auth-v7 a:focus-visible,body.aslo-auth-v7 button:focus-visible,body.aslo-auth-v7 select:focus-visible{outline:3px solid #9be3ff;outline-offset:2px}
+@media(max-width:1000px){
+ .aslo-auth-stage{grid-template-columns:minmax(0,.92fr) minmax(0,1fr);gap:13px;padding:15px}
+ .aslo-auth-scene{min-height:620px;padding:22px;background-position:54% center}
+ .aslo-auth-scene h1{font-size:clamp(36px,4vw,56px)}
+ .aslo-auth-card{padding:26px}
+}
+@media(max-width:720px){
+ body.aslo-auth-v7 .sitehead .headrow{min-height:56px;padding:7px 15px}
+ body.aslo-auth-v7 .sitehead .brand{font-size:25px}
+ body.aslo-auth-v7 .sitehead .publicnav{display:none}
+ body.aslo-auth-v7 .sitehead .account-actions{margin-left:auto}
+ body.aslo-auth-v7 .foot{padding:8px 0}
+ .aslo-auth-stage{display:flex;flex-direction:column;min-height:0;padding:0 0 15px;gap:0}
+ .aslo-auth-scene{
+   min-height:177px;padding:24px 18px;border:0;border-radius:0 0 14px 14px;
+   background-position:center 40%;background-image:linear-gradient(90deg,#041123d9,#071b3a5e),linear-gradient(0deg,#041123f7,transparent 90%),
+     url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=900&q=70');
+ }
+ .aslo-auth-kicker{font-size:9px;margin-bottom:10px;letter-spacing:.1em}
+ .aslo-auth-scene h1{font-size:clamp(29px,7.5vw,43px);letter-spacing:-.052em;line-height:1.04;margin-bottom:7px;max-width:350px}
+ .aslo-auth-scene p{font-size:12px;line-height:1.4;margin-bottom:0;max-width:355px}
+ .aslo-auth-scene-highlights,.aslo-auth-back{display:none}
+ .aslo-auth-card{width:calc(100% - 26px);margin:-9px auto 0;padding:21px 18px 20px;border-radius:14px;align-self:center;box-shadow:0 12px 38px #0008}
+ .aslo-auth-brand{display:none}
+ .aslo-auth-eyebrow{font-size:10px}
+ .aslo-auth-card h2{font-size:29px;margin:0 0 6px}
+ .aslo-auth-description{font-size:12px;margin-bottom:12px}
+ .aslo-auth-demo-alert{margin-bottom:13px;font-size:10px;padding:8px 10px}
+ .aslo-auth-form{gap:5px}
+ .aslo-auth-form>label{font-size:12px;margin-top:8px}
+ .aslo-auth-form>input,.aslo-auth-password>input{min-height:44px;padding:10px 12px}
+ .aslo-auth-password>input{padding-right:86px}
+ .aslo-auth-submit{min-height:47px;margin-top:12px}
+ .aslo-auth-alt{margin-top:13px;padding-top:13px}
+ .aslo-auth-alt p{margin-bottom:8px}
+ .aslo-auth-secondary{min-height:43px}
+ .aslo-auth-demo-entry{margin-top:12px}
+ .aslo-auth-card-footer{margin-top:13px}
+ .aslo-auth-safe-ad{margin:3px auto 18px;width:calc(100% - 26px)}
+}
+@media(max-width:380px){.aslo-auth-scene{min-height:158px}.aslo-auth-scene h1{font-size:27px}.aslo-auth-card{padding:17px 14px}.aslo-auth-demo-alert{font-size:10px}}
+@media(prefers-reduced-motion:reduce){body.aslo-auth-v7 *{animation:none!important;transition:none!important}}
+/* Light mode still retains sports blue branding and good form contrast. */
+html[data-theme=light] body.aslo-auth-v7{background:#e7f1fb;color:#173e64;color-scheme:light}
+html[data-theme=light] body.aslo-auth-v7 main{background:radial-gradient(ellipse at 10% 90%,#b8d4f5,transparent 50%),#e7f1fb}
+html[data-theme=light] body.aslo-auth-v7 .sitehead{background:#fff;border-color:#b0cce2}
+html[data-theme=light] body.aslo-auth-v7 .sitehead .brand{color:#164468}
+html[data-theme=light] body.aslo-auth-v7 .sitehead .publicnav a{color:#325a79}
+html[data-theme=light] body.aslo-auth-v7 .sitehead .header-lang select{background:#edf7ff;color:#214b68;border-color:#8dbbdd}
+html[data-theme=light] body.aslo-auth-v7 .foot{background:#e4eff9;color:#45708e}
+html[data-theme=light] .aslo-auth-card{background:#fff;border-color:#b4d0e7;box-shadow:0 12px 35px #2c678828}
+html[data-theme=light] .aslo-auth-card h2{color:#103657}
+html[data-theme=light] .aslo-auth-brand{color:#174064}
+html[data-theme=light] .aslo-auth-eyebrow{color:#0865bd}
+html[data-theme=light] .aslo-auth-description{color:#4d7290}
+html[data-theme=light] .aslo-auth-demo-alert{background:#e7f4ff;border-color:#bbdbf2;color:#365f7d}
+html[data-theme=light] .aslo-auth-form>label{color:#244e6b}
+html[data-theme=light] .aslo-auth-form>input,html[data-theme=light] .aslo-auth-password>input{background:#f3f9ff;border-color:#aac5db;color:#173650}
+html[data-theme=light] .aslo-auth-form input::placeholder{color:#69869c}
+html[data-theme=light] .aslo-auth-alt{border-top-color:#c8dded}
+html[data-theme=light] .aslo-auth-alt p{color:#536e84}
+html[data-theme=light] .aslo-auth-secondary{background:#e9f4ff;border-color:#9fc4e0;color:#154d76!important}
+html[data-theme=light] .aslo-auth-secondary:hover{background:#d5edff}
+html[data-theme=light] .aslo-auth-divider{color:#6988a2}
+html[data-theme=light] .aslo-auth-divider:before,html[data-theme=light] .aslo-auth-divider:after{background:#c0d7e9}
+html[data-theme=light] .aslo-auth-demo-entry button{background:#e5f1f9;color:#2c5674;border-color:#b9d5e9}
+html[data-theme=light] .aslo-auth-card-footer{color:#7296ae}
+html[data-theme=light] .aslo-auth-safe-ad{background:#dcecf8;color:#4c7a9f;border-color:#adc7dc}
