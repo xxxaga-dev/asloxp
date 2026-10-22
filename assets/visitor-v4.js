@@ -97,7 +97,7 @@ function render(){
  const main=`<div class="v4-root">${sponsorUI()}<div class="v4-sport-row" id="v4-expand-sports" hidden>${sportItems()}</div><div class="v4-main-grid"><div class="v4-hero-slot">${heroNews()}</div><div class="v4-live-slot">${matchPanel()}</div>${asideAd()}</div><div class="v4-featured-row">${featuredMatch()}</div><div class="v4-secondary-grid"><div>${newsGrid()}</div><div class="v4-results-aside"><div class="v4-section-title"><h2>${tx("Resultados destacados","Featured results","Top-Ergebnisse")}</h2></div>${rankedMatches().filter(m=>m.kind==="finished").slice(0,3).map(m=>miniMatch(m,m.kind)).join("")}</div></div>${leagueStrip()}${adBottom()}${floatingNotice()}</div>`;
  document.body.classList.add("v4-visitor");
  document.body.innerHTML=window.asloAuth.chrome(main,"inicio");
- buildHeader();window.asloAuth.attachChrome();bindControls();
+ buildHeader();window.asloAuth.attachChrome();bindControls();window.asloVisitorNavRefresh?.();
  document.title="asloXP · "+tx("Noticias y deporte","News & sport","Sport und Nachrichten");
 }
 function buildHeader(){
