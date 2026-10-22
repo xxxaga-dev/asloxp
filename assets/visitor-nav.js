@@ -45,8 +45,8 @@ function build(){
    quickAccess.classList.add("v5-mobile-login");
    quickAccess.textContent=tx("Entrar","Sign in","Anmelden");
  }
- row.insertBefore(quickAccess,button);
- row.append(button);
+ // Both nodes must be appended in DOM order: quick access, then menu.
+ row.append(quickAccess,button);
  const shade=document.createElement("div");shade.id="v5-menu-backdrop";shade.className="v5-menu-backdrop";shade.hidden=true;
  const menu=document.createElement("section");menu.id="v5-mobile-menu";menu.className="v5-mobile-menu";menu.hidden=true;menu.setAttribute("aria-label",tx("Opciones del visitante","Visitor options","Besucheroptionen"));
  const user=account(),uname=user?.name||"";
