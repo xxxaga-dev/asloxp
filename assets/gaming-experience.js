@@ -4,7 +4,7 @@
 "use strict";
 var fine=window.matchMedia&&window.matchMedia("(pointer: fine) and (hover: hover) and (prefers-reduced-motion: no-preference)");
 var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-var cards=".v4-news-card,.v4-sponsor,.v4-feature-card,.v5-card,.v5-tile,.v5-item,.arena-card,.arena-sponsor,.arena-match,.arena-shortcut";
+var cards=".v4-news-card,.v4-sponsor,.v4-feature-card,.v5-card,.v5-tile,.v5-item,.arena-card,.arena-sponsor,.arena-match,.arena-shortcut,.mode-tile,.lm-league-card,.arena-info-tile,.arena-award-card";
 var observed=new WeakSet(),intersector=null;
 if(!reduce&&"IntersectionObserver" in window){
  intersector=new IntersectionObserver(function(items){items.forEach(function(item){if(item.isIntersecting){item.target.classList.add("aslo-fx-visible");intersector.unobserve(item.target)}})},{threshold:.08,rootMargin:"0px 0px 35px 0px"});
