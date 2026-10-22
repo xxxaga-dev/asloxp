@@ -64,6 +64,7 @@ function renderDirectory(){
  if(!(chosen||newItem))return;
  const frm=root.querySelector("#lm-form");
  const draw=()=>{root.querySelector("#lm-categories").innerHTML=rows.map(categoryRow).join("")};
+ const syncRows=()=>{rows=[...root.querySelectorAll("[data-category-row]")].map(x=>({id:x.querySelector('[name="catId"]').value,min:+x.querySelector('[name="min"]').value,max:+x.querySelector('[name="max"]').value}))};
  frm.addEventListener("change",e=>{
  if(e.target.name==="sport"){
  const sport=e.target.value;
@@ -71,6 +72,7 @@ function renderDirectory(){
  }
  });
  root.querySelector("#lm-add-category").addEventListener("click",()=>{
+ syncRows();
  const opts=sports[frm.elements.sport.value]?.options||[];
  if(rows.length>=opts.length){err(tx("Ya seleccionaste todas las categorías de ejemplo de este deporte.","All sample categories have been added.","Alle Beispielkategorien wurden hinzugefügt."));return}
  const first=opts.find(o=>!rows.some(r=>r.id===o[0]));
@@ -78,7 +80,7 @@ function renderDirectory(){
  });
  root.querySelector("#lm-categories").addEventListener("click",e=>{
  const btn=e.target.closest("[data-remove-category]");if(!btn)return;
- rows.splice(+btn.dataset.removeCategory,1);draw();
+ syncRows();rows.splice(+btn.dataset.removeCategory,1);draw();
  });
  function err(msg){root.querySelector("#lm-form-error").textContent=msg}
  frm.addEventListener("submit",e=>{
