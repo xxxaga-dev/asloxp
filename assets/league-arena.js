@@ -202,7 +202,7 @@ const tt=e.target.closest("[data-tour-tab]");if(tt){state.tourTab=tt.dataset.tou
 const sponsor=e.target.closest("[data-sponsor]");if(sponsor){e.preventDefault();const s=sponsors.find(x=>x.id===sponsor.dataset.sponsor);if(s){state.view="patrocinadores";history.pushState({vista:"patrocinadores"},"",lm?.leagueLink?.(league.id,"patrocinadores")||"liga-admin.html?vista=patrocinadores");render();const cards=root.querySelectorAll(".arena-sponsor-grid .arena-sponsor");const c=[...cards].find(x=>x.dataset.sponsor===s.id);if(c){c.classList.add("arena-highlight");c.scrollIntoView({block:"center",behavior:"smooth"})}}return}
 if(e.target.closest("[data-new-tournament]")){state.modal="tour";render();setTimeout(()=>root.querySelector(".arena-modal input")?.focus(),0);return}
 if(e.target.closest("[data-capacity-modal]")){state.modal="capacity";render();return}
-if(e.target.closest("[data-replace-modal]")){state.modal="replacement";render();return}
+if(e.target.closest("[data-replace-modal]")){if(selected()?.state==="Finalizado")return;state.modal="replacement";render();return}
 if(e.target.closest("[data-cancel-replacement]")){const t=selected(),o=tourOps(t);if(o){o.pending=null;persistOps(t,o)}render();return}
 if(e.target.closest("[data-simulate-accept]")){
  const t=selected(),o=tourOps(t),p=o?.pending;
@@ -227,7 +227,7 @@ if(e.target.id==="arena-capacity-form"){
 }else if(e.target.id==="arena-replacement-form"){
  e.preventDefault();const f=new FormData(e.target),t=selected(),o=tourOps(t),i=+f.get("from"),slot=o.slots[i];
  const to=String(f.get("to")||""),mode=String(f.get("mode")||""),reason=String(f.get("reason")||"").trim();
- if(o.pending){alert(tr("Primero resuelve la invitación pendiente.","Resolve the pending invitation first.","Zuerst die offene Einladung klären."));return}
+ if(t.state==="Finalizado"||o.pending){alert(tr("Torneo finalizado o invitación pendiente.","Tournament finished or invitation pending.","Turnier beendet oder Einladung offen."));return}
  if(!slot||!DEMO_TEAMS.includes(to)||o.slots.some(x=>x.team===to)||!["inherit","zero"].includes(mode)||reason.length<8)return;
  o.pending={slot:slot.id,from:slot.team,to,mode,reason};persistOps(t,o);state.modal=false;render();return;
 }else if(e.target.id==="arena-new-tour-form"){
