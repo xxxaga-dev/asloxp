@@ -64,10 +64,48 @@ function attachChrome(){
 function render(body,section=""){document.body.innerHTML=chrome(body,section);attachChrome()}
 function signin(a){try{sessionStorage.setItem(ACCOUNT,JSON.stringify({name:a.name,roles:a.roles}));sessionStorage.setItem(MODE,a.roles[0])}catch(e){}location.assign("modos.html")}
 function loginForm(isRegister){
- const title=isRegister?tr("welcome"):tr("hello");
- render(`<div class="auth-layout shell"><section class="auth-pitch"><span class="eyebrow">${tr("introModes")}</span><h1>${title}</h1><p>${tr("introAuth")}</p><a class="link" href="index.html">← ${tr("continueGuest")}</a><div class="auth-illustration"><span class="role-illus">⚽</span><span class="role-illus">🏆</span><span class="role-illus">◇</span><p>${tr("modeDescription")}</p></div></section><section class="auth-panel"><span class="eyebrow">${isRegister?tr("signup"):tr("login")}</span><h2>${isRegister?tr("signup"):tr("login")}</h2><p class="fineprint">${tr("sampleOnly")}</p><form id="demo-form">${isRegister?`<label for="demo-name">${tr("displayName")}</label><input id="demo-name" required maxlength="40" autocomplete="off" placeholder="Alex">`:""}<label for="demo-email">${tr("email")}</label><input id="demo-email" type="email" required autocomplete="off" placeholder="demo@example.test"><label for="demo-pass">${tr("password")}</label><input id="demo-pass" type="password" required minlength="4" autocomplete="off" placeholder="••••••••"><button type="submit" class="btn primary full">${isRegister?tr("registerDemo"):tr("loginDemo")}</button></form>${isRegister?"":`<div class="or">${tr("or")}</div><button id="demo-login" class="btn full demo-button" type="button">${tr("multiDemo")}</button>`}${isRegister?`<p class="fineprint">${tr("newFan")}</p><p class="fineprint">${tr("askLogin")} <a class="link" href="acceso.html">${tr("login")}</a></p>`:`<div class="auth-create-account"><p class="fineprint">${tr("askRegister")}</p><a class="btn auth-register-btn" href="registro.html">${tr("signup")} →</a></div>`}</section></div>`);
- document.querySelector("#demo-form").addEventListener("submit",e=>{e.preventDefault();if(!e.target.reportValidity())return;let name=isRegister?document.querySelector("#demo-name").value.trim():"Demo";signin({name:name||"Demo",roles:isRegister?["aficionado"]:DEMO})});
- const b=document.querySelector("#demo-login");if(b)b.addEventListener("click",()=>signin({name:"Alex",roles:DEMO}));
+ const tt=(es,en,de)=>({es,en,de})[lang()]||es;
+ const heading=isRegister?tt("Tu próxima historia comienza aquí.","Your next chapter starts here.","Deine nächste Geschichte beginnt hier."):tt("La pasión continúa contigo.","The game continues with you.","Das Spiel geht mit dir weiter.");
+ const subheading=isRegister?tt("Únete a la experiencia deportiva de ASLO.","Join the ASLO sports experience.","Werde Teil der ASLO-Sportwelt."):tt("Accede a tus espacios y descubre todo lo que mueve al deporte.","Enter your spaces and follow the world of sport.","Entdecke deine Sportwelt und deine Bereiche.");
+ const label=isRegister?tt("CREA TU PERFIL","CREATE YOUR PROFILE","ERSTELLE DEIN PROFIL"):tt("TU MUNDO DEPORTIVO","YOUR SPORTS WORLD","DEINE SPORTWELT");
+ const btnText=isRegister?tt("Crear cuenta","Create account","Konto erstellen"):tt("Entrar en ASLO","Sign in to ASLO","Bei ASLO anmelden");
+ document.body.classList.add("aslo-auth-v7");
+ render(`<div class="aslo-auth-stage">
+  <section class="aslo-auth-scene" aria-label="${tt("Escena deportiva de ASLO","ASLO sports imagery","ASLO-Sportmotiv")}">
+   <div class="aslo-auth-scene-inner">
+    <div class="aslo-auth-kicker"><span class="aslo-auth-kicker-dot"></span>${tt("ASLO · EL DEPORTE NOS CONECTA","ASLO · SPORT CONNECTS US","ASLO · SPORT VERBINDET UNS")}</div>
+    <h1>${heading}</h1>
+    <p>${subheading}</p>
+    <div class="aslo-auth-scene-highlights">
+     <span>⚽ ${tt("Ligas","Leagues","Ligen")}</span>
+     <span>🏆 ${tt("Torneos","Tournaments","Turniere")}</span>
+     <span>◉ ${tt("Resultados","Results","Ergebnisse")}</span>
+    </div>
+    <a class="aslo-auth-back" href="index.html">← ${tt("Volver a noticias","Back to news","Zurück zu Nachrichten")}</a>
+   </div>
+  </section>
+  <section class="aslo-auth-card" aria-labelledby="aslo-auth-title">
+   <div class="aslo-auth-brand"><span class="aslo-auth-brand-mark">▲</span> ASLO <span class="aslo-auth-brand-suffix">XP</span></div>
+   <div class="aslo-auth-eyebrow">${label}</div>
+   <h2 id="aslo-auth-title">${isRegister?tt("Crea tu cuenta","Create your account","Konto erstellen"):tt("Bienvenido de nuevo","Welcome back","Willkommen zurück")}</h2>
+   <p class="aslo-auth-description">${isRegister?tt("Completa los datos para crear una cuenta de demostración.","Enter your details to create a demo account.","Gib deine Daten für ein Demo-Konto ein."):tt("Ingresa a la experiencia deportiva de ASLO.","Sign in to the ASLO sports experience.","Melde dich bei ASLO an.")}</p>
+   <div class="aslo-auth-demo-alert" role="note"><span aria-hidden="true">ⓘ</span> ${tt("Prototipo de demostración. No utilices credenciales ni contraseñas reales.","Demo prototype. Do not use real passwords or credentials.","Demo-Prototyp. Keine echten Passwörter oder Zugangsdaten verwenden.")}</div>
+   <form id="demo-form" class="aslo-auth-form">
+    ${isRegister?`<label for="demo-name">${tr("displayName")}</label><input id="demo-name" name="name" required maxlength="40" autocomplete="off" placeholder="${tt("Tu nombre","Your name","Dein Name")}">`:""}
+    <label for="demo-email">${tr("email")}</label><input id="demo-email" name="email" type="email" required autocomplete="off" placeholder="demo@example.test">
+    <label for="demo-pass">${tr("password")}</label><div class="aslo-auth-password"><input id="demo-pass" name="password" type="password" required minlength="4" autocomplete="off" placeholder="••••••••"><button id="aslo-auth-show-password" type="button" aria-controls="demo-pass" aria-pressed="false">${tt("Mostrar","Show","Anzeigen")}</button></div>
+    <button type="submit" class="aslo-auth-submit">${btnText}<span aria-hidden="true"> →</span></button>
+   </form>
+   ${isRegister?`<div class="aslo-auth-alt"><p>${tr("askLogin")}</p><a class="aslo-auth-secondary" href="acceso.html">${tt("Entrar","Sign in","Anmelden")} →</a></div>`:`<div class="aslo-auth-alt"><p>${tr("askRegister")}</p><a class="aslo-auth-secondary" href="registro.html">${tt("Crear cuenta","Create account","Konto erstellen")} →</a></div><div class="aslo-auth-demo-entry"><div class="aslo-auth-divider"><span>${tr("or")}</span></div><button id="demo-login" type="button">${tt("Explorar con usuario demo","Explore with demo account","Mit Demo-Konto erkunden")}</button></div>`}
+   <div class="aslo-auth-card-footer">${tt("ASLO · Experiencia deportiva de demostración","ASLO · Demo sports experience","ASLO · Demo-Sporterlebnis")}</div>
+  </section>
+ </div>
+ <aside class="aslo-auth-safe-ad" aria-label="${tt("Panel publicitario reservado","Reserved advertising panel","Reservierte Werbefläche")}">${tt("PUBLICIDAD · ESPACIO RESERVADO","ADVERTISING · RESERVED SPACE","WERBUNG · RESERVIERTER PLATZ")}</aside>`);
+ const brand=document.querySelector(".sitehead .brand");if(brand)brand.innerHTML='<span class="aslo-auth-header-icon" aria-hidden="true">▲</span> ASLO';
+ const form=document.querySelector("#demo-form");
+ form.addEventListener("submit",e=>{e.preventDefault();if(!e.target.reportValidity())return;const name=isRegister?document.querySelector("#demo-name").value.trim():"Demo";signin({name:name||"Demo",roles:isRegister?["aficionado"]:DEMO})});
+ const demo=document.querySelector("#demo-login");if(demo)demo.addEventListener("click",()=>signin({name:"Alex",roles:DEMO}));
+ const show=document.querySelector("#aslo-auth-show-password");if(show)show.addEventListener("click",()=>{const field=document.querySelector("#demo-pass"),reveal=field.type==="password";field.type=reveal?"text":"password";show.setAttribute("aria-pressed",String(reveal));show.textContent=reveal?tt("Ocultar","Hide","Verbergen"):tt("Mostrar","Show","Anzeigen")});
 }
 function choose(){
  const a=account();if(!a){location.replace("acceso.html");return}
