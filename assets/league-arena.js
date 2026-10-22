@@ -46,7 +46,7 @@ return '<div class="arena-league-shortcuts"><a class="arena-action arena-action-
 }
 
 /* Operational demonstration per league / per tournament: registrations, capacity, substitutions. */
-const DEMO_TEAMS=["Halcones FC","Tigres FC","Águilas FC","Leones FC","Dragones FC","Panteras FC","Raptors FC","Real Bogotá","Unión FC","Estrellas FC","Andes FC","Campeones FC","Fortaleza FC","Juventud FC","Olimpo FC","Titanes FC"];
+const DEMO_TEAMS=["Halcones FC","Tigres FC","Águilas FC","Leones FC","Dragones FC","Panteras FC","Raptors FC","Real Bogotá","Unión FC","Estrellas FC","Andes FC","Campeones FC","Fortaleza FC","Juventud FC","Olimpo FC","Titanes FC","Nueva Esperanza FC","Deportivo Sol FC","Atletas FC","Academia Horizonte FC","Barrio Unido FC","Club Deportivo Norte"];
 function tourKey(t){return "aslo-tour-operations:"+league.id+":"+(t?.id||"none")}
 function tourOps(t=selected()){
  if(!t)return null;
