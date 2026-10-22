@@ -58,3 +58,11 @@ html[data-theme=light] .statline span{background:#edf6ef;border-color:#c1d4c5}
 @media(max-width:950px){.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.auth-layout{grid-template-columns:1fr 380px;gap:24px}.account-trigger-copy{display:none}}
 @media(max-width:760px){.headrow{flex-wrap:wrap;gap:8px;padding-top:8px;padding-bottom:8px}.publicnav{order:3;width:100%;justify-content:flex-start}.account-actions{margin-left:auto}.settings-grid{grid-template-columns:1fr}.settings-tabs{flex-direction:row;overflow:auto;gap:4px}.settings-tabs a{flex-shrink:0;padding:10px 14px}.auth-layout{grid-template-columns:1fr;gap:24px;padding:28px 0}.auth-illustration{display:none}}
 @media(max-width:530px){.shell{padding-left:14px;padding-right:14px}.mode-grid{grid-template-columns:1fr}.auth-panel,.settings-main{padding:20px}.registerlink,.loginlink{padding:8px;font-size:12px}.account-trigger{padding:4px;gap:4px}.account-trigger .avatar{height:31px;width:31px;min-width:31px}.header-lang select{padding:7px 24px 7px 8px}.account-actions{gap:6px}.security-line{align-items:flex-start;flex-direction:column}.settings-tabs{margin-right:-14px}}
+
+/* Account conversion: registration is intentionally offered inside sign-in, not in the public header. */
+.auth-create-account{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.auth-create-account .fineprint{margin:0}
+.auth-register-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;width:100%;border:1px solid #72b698;border-radius:11px;background:#1b3e37;color:#e8fff0;font-size:14px;font-weight:850;text-decoration:none}
+.auth-register-btn:hover{background:#285d4a;color:#fff}
+html[data-theme=light] .auth-register-btn{border-color:#49966f;background:#e5f2e9;color:#1b623b}
+html[data-theme=light] .auth-register-btn:hover{background:#d4e9da;color:#14522e}
