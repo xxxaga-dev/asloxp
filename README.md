@@ -4,6 +4,17 @@
 
 Este repositorio **público** es únicamente para maquetas navegables HTML, CSS y JavaScript. La documentación y las decisiones del proyecto ASLO están en un repositorio privado independiente.
 
+
+## Revisión 5 — coherencia entre vistas públicas y navegación móvil
+
+- **Seis rutas públicas con estilo coherente:** [Noticias](index.html), [Ligas](ligas.html), [detalle de liga](liga.html?id=metropolitana), [Torneos](torneos.html), [detalle de torneo](torneo.html?id=apertura), [Resultados](resultados.html).
+- **Móvil:** logo ASLO y botón de menú compacto arriba; navegación **Noticias, Ligas, Torneos, Resultados** fija abajo. El menú agrupa deporte, idioma, tema, ubicación de muestra, inicio de sesión/registro o cuenta/cambio de modo/cerrar sesión.
+- **Escritorio:** navegación principal visible en la cabecera; selector de deporte y preferencias disponibles.
+- Recursos: `assets/visitor-pages.js`, `assets/visitor-nav.js`, `assets/visitor-v5.css`. Portada continúa en `assets/visitor-v4.js` y `assets/visitor-v4.css`.
+- Datos, localización, noticias, resultados y ligas **simulados**, no servicios en vivo.
+
+**Probar en móvil:** https://xxxaga-dev.github.io/asloxp/?revision=5
+
 ## Referencia aprobada: «Panel deportivo ASLO en tiempo real»
 
 La portada `index.html` refleja la propuesta visual seleccionada por el propietario. Su código nuevo está en `assets/visitor-v4.js` y `assets/visitor-v4.css`.
