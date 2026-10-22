@@ -102,6 +102,8 @@ function loginForm(isRegister){
  </div>
  <aside class="aslo-auth-safe-ad" aria-label="${tt("Panel publicitario reservado","Reserved advertising panel","Reservierte Werbefläche")}">${tt("PUBLICIDAD · ESPACIO RESERVADO","ADVERTISING · RESERVED SPACE","WERBUNG · RESERVIERTER PLATZ")}</aside>`);
  const brand=document.querySelector(".sitehead .brand");if(brand)brand.innerHTML='<span class="aslo-auth-header-icon" aria-hidden="true">▲</span> ASLO';
+ const nav=document.querySelector(".sitehead .publicnav");
+ if(nav)nav.innerHTML=`<a href="index.html">${tt("Noticias","News","Nachrichten")}</a><a href="ligas.html">${tt("Ligas","Leagues","Ligen")}</a><a href="torneos.html">${tt("Torneos","Tournaments","Turniere")}</a><a href="resultados.html">${tt("Resultados","Results","Ergebnisse")}</a>`;
  const form=document.querySelector("#demo-form");
  form.addEventListener("submit",e=>{e.preventDefault();if(!e.target.reportValidity())return;const name=isRegister?document.querySelector("#demo-name").value.trim():"Demo";signin({name:name||"Demo",roles:isRegister?["aficionado"]:DEMO})});
  const demo=document.querySelector("#demo-login");if(demo)demo.addEventListener("click",()=>signin({name:"Alex",roles:DEMO}));
