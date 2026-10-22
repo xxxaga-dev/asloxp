@@ -1,0 +1,32 @@
+
+/* Original ASLO interactive UX inspired by observed interaction patterns, not copied assets. */
+:root{--aslo-neon:#26b9ff;--aslo-flare:#00d7ff}
+body.aslo-fx-running{--fx-glow:#18b1ff}
+@media(pointer:fine) and (hover:hover) and (prefers-reduced-motion:no-preference){
+ body.aslo-fx-running,body.aslo-fx-running a,body.aslo-fx-running button,body.aslo-fx-running summary,
+ body.aslo-fx-running [role="button"],body.aslo-fx-running select{cursor:none!important}
+ body.aslo-fx-running input,body.aslo-fx-running textarea{cursor:text!important}
+ .aslo-cursor-outer,.aslo-cursor-inner{pointer-events:none;position:fixed;z-index:10000;left:0;top:0;border-radius:50%;transform:translate3d(-80px,-80px,0);will-change:transform;opacity:0;transition:opacity .17s,background .17s,box-shadow .17s,border-color .17s}
+ .aslo-cursor-outer{width:38px;height:38px;border:1px solid #6ad2ffad;box-shadow:0 0 18px #129dfa52,inset 0 0 10px #38b6f324}
+ .aslo-cursor-inner{width:7px;height:7px;background:#dff7ff;box-shadow:0 0 14px 3px #28b4ff96}
+ body.aslo-fx-running .aslo-cursor-outer,body.aslo-fx-running .aslo-cursor-inner{opacity:1}
+ body.aslo-fx-over .aslo-cursor-outer{border-color:#70e7ff;background:#33baff22;box-shadow:0 0 20px #00c5ff8a;width:50px;height:50px}
+ body.aslo-fx-over .aslo-cursor-inner{background:#45daff}
+ .aslo-fx-tilt{--aslo-x:50%;--aslo-y:50%;--aslo-rotate-x:0deg;--aslo-rotate-y:0deg;transform:perspective(950px) rotateX(var(--aslo-rotate-x)) rotateY(var(--aslo-rotate-y)) translateZ(0);transition:transform .23s ease,border-color .22s,box-shadow .25s;backface-visibility:hidden}
+ .aslo-fx-tilt:hover{box-shadow:0 12px 36px #0062b32d,0 0 0 1px #40bbff64;border-color:#33aaff!important}
+ .aslo-fx-tilt:before{content:"";position:absolute;z-index:0;inset:0;pointer-events:none;background:radial-gradient(290px circle at var(--aslo-x) var(--aslo-y),#26b5ff24,transparent 68%);opacity:0;transition:opacity .22s;border-radius:inherit}
+ .aslo-fx-tilt:hover:before{opacity:1}
+ .aslo-fx-tilt>*{position:relative}
+ .aslo-fx-hero{--aslo-par-x:0px;--aslo-par-y:0px}
+ .aslo-fx-hero .aslo-fx-depth{transform:translate3d(var(--aslo-par-x),var(--aslo-par-y),0);transition:transform .3s ease;will-change:transform}
+ .aslo-fx-ready .aslo-fx-reveal{opacity:0;transform:translate3d(0,22px,0);transition:opacity .58s cubic-bezier(.15,.6,.3,1),transform .58s cubic-bezier(.15,.6,.3,1)}
+ .aslo-fx-ready .aslo-fx-reveal.aslo-fx-visible{opacity:1;transform:translate3d(0,0,0)}
+}
+.aslo-fx-click{position:relative;overflow:hidden}
+.aslo-fx-ripple{position:absolute;pointer-events:none;width:12px;height:12px;border:1px solid #bdeeffb0;border-radius:50%;transform:translate(-50%,-50%) scale(0);animation:aslo-fx-pulse .52s ease-out forwards;z-index:15}
+@keyframes aslo-fx-pulse{to{opacity:0;transform:translate(-50%,-50%) scale(22)}}
+@media(pointer:coarse),(prefers-reduced-motion:reduce){
+ .aslo-cursor-outer,.aslo-cursor-inner{display:none!important}
+ .aslo-fx-tilt,.aslo-fx-reveal,.aslo-fx-hero .aslo-fx-depth{transform:none!important;opacity:1!important;transition:none!important}
+ .aslo-fx-ripple{display:none}
+}
