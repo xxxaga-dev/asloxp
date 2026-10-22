@@ -20,6 +20,10 @@ function normalizeHeader(){
  }
 }
 function build(){
+ const previous=document.getElementById("v5-mobile-menu");if(previous)previous.remove();
+ document.getElementById("v5-menu-backdrop")?.remove();
+ document.querySelector(".v5-bottomnav")?.remove();
+ document.getElementById("v5-mobile-hamburger")?.remove();
  normalizeHeader();
  const row=document.querySelector(".sitehead .headrow");if(!row)return;
  const button=document.createElement("button");
@@ -39,10 +43,11 @@ function build(){
  button.addEventListener("click",()=>menu.hidden?open():close());
  shade.addEventListener("click",close);
  window.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
- document.addEventListener("click",e=>{const sport=e.target.closest("[data-v5-sport]");if(!sport)return;try{sessionStorage.setItem("asloxp-demo-sport",sport.dataset.v5Sport)}catch(e){}location.reload()});
+ if(!window.__asloV5SportClickBound){window.__asloV5SportClickBound=true;document.addEventListener("click",e=>{const sport=e.target.closest("[data-v5-sport]");if(!sport)return;try{sessionStorage.setItem("asloxp-demo-sport",sport.dataset.v5Sport)}catch(e){}location.reload()});}
  const language=document.getElementById("v5-mobile-language");language?.addEventListener("change",e=>{try{localStorage.setItem("asloxp-language",e.target.value)}catch(err){}location.reload()});
  document.getElementById("v5-mobile-theme")?.addEventListener("click",()=>{try{localStorage.setItem("asloxp-theme",document.documentElement.getAttribute("data-theme")==="light"?"dark":"light")}catch(e){}location.reload()});
  document.getElementById("v5-mobile-signout")?.addEventListener("click",()=>window.asloAuth?.logout?.());
 }
+window.asloVisitorNavRefresh=build;
 build();
 })();
