@@ -288,3 +288,52 @@ body[data-page="liga-admin"] button:focus-visible,body[data-page="liga-admin"] a
 @media(prefers-reduced-motion:reduce){.arena-beacon{animation:none}.arena-action{transition:none}.arena-sponsor{transition:none}}
 /* Theme light keeps the arena as an intentional dark sports stage, with correct contrast. */
 html[data-theme=light] body[data-page="liga-admin"]{background:#041525;color:#fff;color-scheme:dark}
+
+/* Multi-league and independently configurable competition operations */
+.arena-league-name{color:#eaf8ff;min-width:0;text-decoration:none}
+.arena-league-name:hover{color:#67caff}
+.arena-league-name strong{max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.arena-side-head strong{overflow-wrap:anywhere}
+.arena-league-shortcuts{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:15px 0}
+.arena-empty-league{margin:20px 0 25px;padding:clamp(26px,4vw,54px);min-height:230px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background:linear-gradient(110deg,#0b3354,#061b30)}
+.arena-empty-league h2{font-size:clamp(26px,3.7vw,45px);margin:13px 0}
+.arena-empty-league p{max-width:620px}
+.arena-league-config{margin:15px 0 20px}
+.arena-league-config h2{font-size:clamp(28px,4vw,49px);margin:10px 0}
+.arena-league-config-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.arena-league-category-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:15px 0 8px}
+.arena-league-category-list>div{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;background:#102f4b;border:1px solid #2e6587;border-radius:9px;font-size:12px}
+.arena-league-category-list span{color:#8fdbff;white-space:nowrap;font-weight:800}
+.arena-operations{margin:23px 0 10px}
+.arena-operations h3{color:#e9f8ff;font-size:18px;margin:23px 0 13px}
+.arena-operations-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:12px 0 17px}
+.arena-operations-summary>div{background:#0d3556;border:1px solid #336d99;border-radius:11px;padding:17px}
+.arena-operations-summary small{display:block;color:#a6c9e2;font-size:11px;margin-bottom:7px}
+.arena-operations-summary strong{display:block;color:#fff;font-size:clamp(19px,2.7vw,30px);font-weight:930;letter-spacing:-.05em}
+.arena-operations-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:13px 0}
+.arena-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.arena-slots>div{display:flex;align-items:center;gap:9px;background:#0c2a45;border:1px solid #275a7c;border-radius:8px;padding:12px;min-width:0}
+.arena-slots strong{flex:1;min-width:0;font-size:12px;overflow-wrap:anywhere}
+.arena-slots small{font-size:10px;color:#82c8f7;text-align:right;white-space:nowrap}
+.arena-slot-index{font-size:10px;color:#63caff;font-weight:950}
+.arena-pending-replacement{background:#153a4b;border:1px solid #d3a75e;color:#eff8ff;border-radius:11px;padding:18px;margin-top:20px}
+.arena-pending-replacement h3{color:#fff6d6;margin:0 0 12px}
+.arena-pending-replacement p{font-size:12px;color:#e0d5b9}
+.arena-replacement-log{border-top:1px solid #285775;padding-top:10px;margin-top:24px}
+.arena-replacement-log>div{display:flex;align-items:center;gap:12px;padding:13px;background:#0b2944;border:1px solid #205172;border-radius:8px;margin-bottom:8px;flex-wrap:wrap}
+.arena-replacement-log>div span{color:#54c5ff;font-size:21px}
+.arena-replacement-log>div strong{font-size:13px}
+.arena-replacement-log>div small{flex-basis:100%;padding-left:33px;color:#9bc4e1;font-size:11px}
+.arena-operations .arena-fine{max-width:840px;line-height:1.6}
+@media(max-width:760px){
+ .arena-league-name strong{display:none}
+ .arena-league-name small{display:none}
+ .arena-league-category-list,.arena-slots{grid-template-columns:1fr}
+ .arena-operations-summary{gap:6px}
+ .arena-operations-summary>div{padding:11px 9px}
+ .arena-operations-summary small{font-size:10px}
+ .arena-operations-summary strong{font-size:19px}
+ .arena-operations-actions{flex-direction:column;align-items:stretch}
+ .arena-operations-actions>.arena-action{width:100%}
+ .arena-league-shortcuts .arena-action{flex:1}
+}
