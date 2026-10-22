@@ -173,3 +173,40 @@ html[data-theme=light] .aslo-auth-divider:before,html[data-theme=light] .aslo-au
 html[data-theme=light] .aslo-auth-demo-entry button{background:#e5f1f9;color:#2c5674;border-color:#b9d5e9}
 html[data-theme=light] .aslo-auth-card-footer{color:#7296ae}
 html[data-theme=light] .aslo-auth-safe-ad{background:#dcecf8;color:#4c7a9f;border-color:#adc7dc}
+
+/* D-105: auth screens retain the same visitor navigation as all public pages. */
+body.aslo-auth-v7 .sitehead .publicnav{gap:2px;margin-left:auto;align-items:center}
+body.aslo-auth-v7 .sitehead .publicnav a{font-weight:760;padding:11px 12px;border-radius:0;border-bottom:2px solid transparent;white-space:nowrap}
+body.aslo-auth-v7 .sitehead .publicnav a:hover{border-bottom-color:#31a5ff}
+body.aslo-auth-v7 .sitehead .v4-header-tools{margin-left:0}
+body.aslo-auth-v7 .sitehead .v4-sports-menu summary{font-size:12px;padding:10px}
+body.aslo-auth-v7 .v5-mobile-menu,
+body.aslo-auth-v7 .v5-mobile-menu .v5-menu-section,
+body.aslo-auth-v7 .v5-mobile-menu p{color:#eaf7ff}
+body.aslo-auth-v7 .v5-mobile-menu .v5-menu-section a{color:#fff}
+@media(max-width:760px){
+ body.aslo-auth-v7 .sitehead{position:sticky;top:0;z-index:80}
+ body.aslo-auth-v7 .sitehead .headrow{
+   display:flex!important;flex-wrap:nowrap!important;
+   justify-content:space-between;align-items:center;gap:6px!important;
+   min-height:57px!important;height:57px!important;padding:6px 14px!important;
+ }
+ body.aslo-auth-v7 .sitehead .brand{font-size:25px!important;max-width:170px;min-width:0}
+ body.aslo-auth-v7 .sitehead .headrow>.publicnav,
+ body.aslo-auth-v7 .sitehead .headrow>.account-actions,
+ body.aslo-auth-v7 .sitehead .headrow>.v4-header-tools{display:none!important}
+ body.aslo-auth-v7 .v5-mobile-account-link{
+   display:inline-flex!important;align-items:center;justify-content:center;
+   flex-shrink:0;margin-left:auto;min-height:41px;padding:8px 14px;
+   background:#1173cf;color:#fff!important;border:1px solid #3a83bc;
+   border-radius:10px;font-size:13px;font-weight:900;text-decoration:none;
+ }
+ body.aslo-auth-v7 .v5-mobile-account-link:not(.v5-mobile-login){padding:6px;background:#123e59}
+ body.aslo-auth-v7 .v5-mobile-hamburger{display:flex!important;flex-shrink:0;margin-left:0}
+ body.aslo-auth-v7 .v5-mobile-menu{display:block}
+ body.aslo-auth-v7 .v5-mobile-menu[hidden],body.aslo-auth-v7 .v5-menu-backdrop[hidden]{display:none!important}
+ body.aslo-auth-v7 .v5-menu-backdrop{display:block}
+ body.aslo-auth-v7 .v5-bottomnav{display:grid!important}
+ body.aslo-auth-v7 main{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+ body.aslo-auth-v7 .foot{padding-bottom:calc(75px + env(safe-area-inset-bottom))}
+}
