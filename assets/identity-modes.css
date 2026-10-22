@@ -1,0 +1,138 @@
+
+/* ASLO sports identity for legacy account/modes surfaces. Contextual navigation stays separated from visitor tools. */
+body[data-page="modos"],body[data-page="modo"],body[data-page="cuenta"]{
+ --bg:#051426;--panel:#0a223a;--line:#275777;--muted:#abc8dd;--green:#4cc0ff;--text:#f2f9ff;
+ background:radial-gradient(ellipse at 85% 5%,#153f7380,transparent 50%),#051426;color:#f3faff;color-scheme:dark;
+}
+body[data-page="modos"] .sitehead,body[data-page="modo"] .sitehead,body[data-page="cuenta"] .sitehead{
+ background:#06182eea;position:sticky;top:0;z-index:80;border-bottom:1px solid #2875ad;backdrop-filter:blur(15px)
+}
+body[data-page="modos"] .shell,body[data-page="modo"] .shell,body[data-page="cuenta"] .shell{max-width:1500px}
+body[data-page="modos"] .headrow,body[data-page="modo"] .headrow,body[data-page="cuenta"] .headrow{min-height:68px;gap:14px}
+body[data-page="modos"] .brand,body[data-page="modo"] .brand,body[data-page="cuenta"] .brand{
+ font-size:28px;font-weight:950;letter-spacing:-.075em;color:white;white-space:nowrap
+}
+body[data-page="modos"] .brand i,body[data-page="modo"] .brand i,body[data-page="cuenta"] .brand i{font-style:normal;color:#4ebdff}
+body[data-page="modos"] .brand .brand-symbol,body[data-page="modo"] .brand .brand-symbol,body[data-page="cuenta"] .brand .brand-symbol{
+ display:inline-block;color:#1889ff;transform:skew(-15deg);padding-right:4px;filter:drop-shadow(0 0 12px #1489ff9c)
+}
+body[data-page="modos"] .publicnav,body[data-page="modo"] .publicnav,body[data-page="cuenta"] .publicnav{gap:5px;margin-left:auto}
+body[data-page="modos"] .publicnav a,body[data-page="modo"] .publicnav a,body[data-page="cuenta"] .publicnav a{
+ color:#bddcf2;background:transparent;font-size:12px;font-weight:830;border-radius:9px;padding:10px 12px
+}
+body[data-page="modos"] .publicnav a:hover,body[data-page="modo"] .publicnav a:hover,body[data-page="cuenta"] .publicnav a:hover{background:#164c76;color:white}
+body[data-page="modos"] .account-actions,body[data-page="modo"] .account-actions,body[data-page="cuenta"] .account-actions{margin-left:0}
+body[data-page="modos"] .header-lang select,body[data-page="modo"] .header-lang select,body[data-page="cuenta"] .header-lang select{
+ background:#0d3050;color:#eef8ff;border-color:#467d9c;border-radius:9px
+}
+body[data-page="modos"] .account-trigger,body[data-page="modo"] .account-trigger,body[data-page="cuenta"] .account-trigger{
+ background:#0f3657;border-color:#377ba7;color:white;border-radius:10px
+}
+body[data-page="modos"] .account-menu .account-popover,body[data-page="modo"] .account-menu .account-popover,body[data-page="cuenta"] .account-menu .account-popover{
+ background:#09263f;border-color:#3680ad;color:white;box-shadow:0 20px 60px #000b
+}
+body[data-page="modos"] .notice,body[data-page="modo"] .notice,body[data-page="cuenta"] .notice{
+ color:#9fd5f7;background:#0b2a47;font-size:11px;border-bottom:1px solid #1d4f75
+}
+body[data-page="modos"] .notice b,body[data-page="modo"] .notice b,body[data-page="cuenta"] .notice b{color:#71cfff}
+body[data-page="modos"] main,body[data-page="modo"] main,body[data-page="cuenta"] main{min-height:70vh}
+body[data-page="modos"] .pagehead,body[data-page="modo"] .pagehead,body[data-page="cuenta"] .pagehead{
+ position:relative;overflow:hidden;isolation:isolate;min-height:260px;margin:18px 0 20px;
+ padding:clamp(30px,5vw,70px)!important;border-radius:17px;border:1px solid #3478a6;
+ background-image:linear-gradient(90deg,#051326f2 0%,#092c4fc2 60%,#06152899),url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1600&q=82');
+ background-position:center;background-size:cover;box-shadow:0 20px 65px #0005
+}
+body[data-page="modos"] .pagehead:after,body[data-page="modo"] .pagehead:after,body[data-page="cuenta"] .pagehead:after{
+ content:"ASLO / EXPERIENCE";position:absolute;right:24px;bottom:17px;font-size:10px;font-weight:900;letter-spacing:.2em;color:#92dfff
+}
+body[data-page="modos"] .pagehead h1,body[data-page="modo"] .pagehead h1,body[data-page="cuenta"] .pagehead h1{
+ color:#fff;font-size:clamp(38px,5vw,70px);font-weight:1000;letter-spacing:-.058em;line-height:1.01;margin:12px 0 12px;max-width:900px
+}
+body[data-page="modos"] .pagehead .intro,body[data-page="modo"] .pagehead .intro,body[data-page="cuenta"] .pagehead .intro{color:#d4e8f9;font-size:clamp(13px,1.3vw,17px);max-width:800px}
+body[data-page="modos"] .pagehead .crumb,body[data-page="modo"] .pagehead .crumb,body[data-page="cuenta"] .pagehead .crumb{color:#86d3ff;font-weight:800}
+body[data-page="modos"] .pagehead .crumb a,body[data-page="modo"] .pagehead .crumb a,body[data-page="cuenta"] .pagehead .crumb a{color:#bbeaff}
+body[data-page="modos"] .eyebrow,body[data-page="modo"] .eyebrow,body[data-page="cuenta"] .eyebrow{color:#55ccff;font-size:11px;letter-spacing:.18em}
+body[data-page="modos"] .modes-view>h2,body[data-page="modo"] .mode-workspace>h2{font-size:clamp(23px,2.4vw,34px);color:#fff;letter-spacing:-.04em;margin:20px 0}
+body[data-page="modos"] .mode-grid,body[data-page="modo"] .mode-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+body[data-page="modos"] .mode-tile,body[data-page="modo"] .mode-tile{
+ position:relative;overflow:hidden;isolation:isolate;min-height:250px;display:flex;flex-direction:column;align-items:flex-start;
+ border:1px solid #2f6488;background:linear-gradient(135deg,#103556,#071b30 80%);border-radius:14px;padding:26px;
+ box-shadow:0 10px 35px #0003;transition:border-color .22s,background .22s,transform .2s
+}
+body[data-page="modos"] .mode-tile:after,body[data-page="modo"] .mode-tile:after{
+ content:"";position:absolute;right:-105px;bottom:-125px;width:230px;height:230px;border-radius:50%;border:1px solid #2093e65e;
+ box-shadow:0 0 0 30px #1474e914,0 0 0 60px #1474e90b;pointer-events:none
+}
+body[data-page="modos"] .mode-tile:hover,body[data-page="modo"] .mode-tile:hover{
+ background:linear-gradient(145deg,#15578a,#09273f);border-color:#5bc9ff;transform:translateY(-3px)
+}
+body[data-page="modos"] .mode-icon{font-size:36px;padding:13px;background:#154872;border:1px solid #3b96ca;border-radius:13px;color:#c7eaff}
+body[data-page="modos"] .mode-tile h3,body[data-page="modo"] .mode-tile h3{font-size:25px;color:#fff;margin:18px 0 8px;z-index:1}
+body[data-page="modos"] .mode-tile p,body[data-page="modo"] .mode-tile p{color:#b8d5e8;font-size:13px;z-index:1}
+body[data-page="modos"] .mode-tile .link,body[data-page="modo"] .mode-tile .link{color:#5fd2ff;font-size:13px;font-weight:880;z-index:1;margin-top:auto}
+body[data-page="modos"] .role-tags .role-tag{background:#0a263e;border:1px solid #285877;color:#aac9dd;border-radius:9px}
+body[data-page="modos"] .other-modes{border-top:1px solid #265477;margin:33px 0;padding-top:23px}
+body[data-page="modos"] .other-modes h2{color:white}
+body[data-page="modos"] .other-modes p{color:#b2c9db}
+body[data-page="modos"] .account-bottom,body[data-page="modo"] .account-bottom{margin:30px 0}
+body[data-page="modos"] .btn,body[data-page="modo"] .btn,body[data-page="cuenta"] .btn{
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#123a5b;color:#cfeeff;border:1px solid #397bad;border-radius:10px;padding:11px 17px;font-weight:880
+}
+body[data-page="modos"] .btn:hover,body[data-page="modo"] .btn:hover,body[data-page="cuenta"] .btn:hover{background:#19669e;color:#fff}
+body[data-page="modo"] .mode-workspace{background:#081d33;border:1px solid #2a587e;padding:24px;border-radius:14px}
+body[data-page="cuenta"] .settings-grid{grid-template-columns:240px minmax(0,1fr);gap:18px}
+body[data-page="cuenta"] .settings-tabs{display:flex;flex-direction:column;gap:7px}
+body[data-page="cuenta"] .settings-tabs a{color:#b7d4e9;background:#0a263f;border:1px solid #295f83;border-radius:10px;font-weight:830;padding:15px}
+body[data-page="cuenta"] .settings-tabs a.selected{background:#0c65aa;border-color:#42aeec;color:#fff}
+body[data-page="cuenta"] .settings-main{background:linear-gradient(130deg,#092d4c,#061b30);border:1px solid #30688f;border-radius:14px;padding:clamp(20px,3vw,33px);min-height:400px}
+body[data-page="cuenta"] .settings-main h2{color:white}
+body[data-page="cuenta"] .settings-main label{color:#c9e5fa}
+body[data-page="cuenta"] .settings-main input[type=text],body[data-page="cuenta"] .settings-main input:not([type]){
+ background:#061c32;color:#fff;border:1px solid #417fa7;border-radius:9px
+}
+body[data-page="cuenta"] .pref-option{background:#0b2b49;border-color:#3477a0;color:#d5edfc}
+body[data-page="cuenta"] .pref-option input{accent-color:#168cf4}
+body[data-page="cuenta"] .profile-preview{background:#0b2942;border:1px solid #275a78;border-radius:12px}
+body[data-page="cuenta"] .security-warning{background:#103552;border:1px solid #3f7b99;color:#cbe8f9}
+body[data-page="modos"] .foot,body[data-page="modo"] .foot,body[data-page="cuenta"] .foot{border-color:#2c5a79;background:#051323;color:#8caabd}
+body[data-page="modos"] .mode-workspace,body[data-page="cuenta"] .settings-shell{padding-bottom:50px}
+body[data-page="modos"] .mode-tile.aslo-fx-tilt,body[data-page="modo"] .mode-tile.aslo-fx-tilt{transform-origin:center}
+@media(max-width:820px){
+ body[data-page="modos"] .mode-grid,body[data-page="modo"] .mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body[data-page="cuenta"] .settings-grid{grid-template-columns:1fr}
+ body[data-page="cuenta"] .settings-tabs{flex-direction:row;overflow-x:auto}
+ body[data-page="cuenta"] .settings-tabs a{flex:0 0 auto;white-space:nowrap}
+}
+@media(max-width:640px){
+ body[data-page="modos"] .shell,body[data-page="modo"] .shell,body[data-page="cuenta"] .shell{padding:0 13px}
+ body[data-page="modos"] .headrow,body[data-page="modo"] .headrow,body[data-page="cuenta"] .headrow{min-height:58px;gap:6px}
+ body[data-page="modos"] .brand,body[data-page="modo"] .brand,body[data-page="cuenta"] .brand{font-size:24px}
+ body[data-page="modos"] .headrow .publicnav,body[data-page="modo"] .headrow .publicnav,body[data-page="cuenta"] .headrow .publicnav{display:none}
+ body[data-page="modos"] .account-actions,body[data-page="modo"] .account-actions,body[data-page="cuenta"] .account-actions{margin-left:auto;gap:4px}
+ body[data-page="modos"] .account-trigger-copy,body[data-page="modo"] .account-trigger-copy,body[data-page="cuenta"] .account-trigger-copy{display:none}
+ body[data-page="modos"] .account-trigger,body[data-page="modo"] .account-trigger,body[data-page="cuenta"] .account-trigger{padding:5px}
+ body[data-page="modos"] .pagehead,body[data-page="modo"] .pagehead,body[data-page="cuenta"] .pagehead{margin:13px 0 18px;padding:25px 19px!important;min-height:240px}
+ body[data-page="modos"] .pagehead h1,body[data-page="modo"] .pagehead h1,body[data-page="cuenta"] .pagehead h1{font-size:clamp(34px,9vw,49px)}
+ body[data-page="modos"] .pagehead .intro,body[data-page="modo"] .pagehead .intro,body[data-page="cuenta"] .pagehead .intro{font-size:12px}
+ body[data-page="modos"] .mode-grid,body[data-page="modo"] .mode-grid{grid-template-columns:1fr;gap:10px}
+ body[data-page="modos"] .mode-tile,body[data-page="modo"] .mode-tile{min-height:190px;padding:20px}
+ body[data-page="modos"] .mode-icon{font-size:26px}
+ body[data-page="modos"] .mode-tile h3{font-size:22px;margin:11px 0}
+ body[data-page="cuenta"] .settings-main{padding:19px}
+ body[data-page="cuenta"] .settings-tabs a{font-size:12px;padding:10px 12px}
+}
+html[data-theme=light] body[data-page="modos"],html[data-theme=light] body[data-page="modo"],html[data-theme=light] body[data-page="cuenta"]{
+ --bg:#e6f2ff;--panel:#fff;--line:#a5c9e3;--muted:#416883;--green:#086fbd;--text:#133651;background:#e7f2fb;color:#183d5d;color-scheme:light
+}
+html[data-theme=light] body[data-page="modos"] .mode-tile,html[data-theme=light] body[data-page="modo"] .mode-tile{
+ background:linear-gradient(130deg,#f5fbff,#dbedff);border-color:#9fc7e8
+}
+html[data-theme=light] body[data-page="modos"] .mode-tile h3,html[data-theme=light] body[data-page="modo"] .mode-tile h3{color:#19466a}
+html[data-theme=light] body[data-page="modos"] .mode-tile p,html[data-theme=light] body[data-page="modo"] .mode-tile p{color:#4a6982}
+html[data-theme=light] body[data-page="modos"] .mode-tile .link{color:#0967af}
+html[data-theme=light] body[data-page="cuenta"] .settings-main{background:#fff;border-color:#a9cde9;color:#153e60}
+html[data-theme=light] body[data-page="cuenta"] .settings-main h2{color:#153e60}
+html[data-theme=light] body[data-page="cuenta"] .settings-main label{color:#204d6e}
+html[data-theme=light] body[data-page="cuenta"] .settings-main input[type=text],html[data-theme=light] body[data-page="cuenta"] .settings-main input:not([type]){background:#f5faff;color:#163d58}
+html[data-theme=light] body[data-page="cuenta"] .settings-tabs a{background:#e7f3fe;color:#214a68}
+html[data-theme=light] body[data-page="cuenta"] .settings-tabs a.selected{background:#096fc5;color:#fff}
