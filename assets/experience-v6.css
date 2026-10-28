@@ -108,3 +108,48 @@ body[data-page="liga-admin"] .arena-sponsor:hover{transform:translateY(-6px);box
 @media(max-width:660px){.v4-root .v4-hero-news{min-height:440px}.v4-root .v4-hero-news h1{font-size:clamp(37px,9vw,58px)}.v4-root .v4-live-slot{grid-template-columns:1fr}.v4-root .v4-hero-news-content{padding:28px 22px!important}.v4-root .v4-featured-match{min-height:0}.aslo-v6-signal{grid-template-columns:minmax(0,1fr) auto;padding:13px;gap:7px}.aslo-v6-signal-head{grid-column:1/-1;border-right:0;border-bottom:1px solid #4b91bd80;padding:0 0 9px}.aslo-v6-live{gap:8px}.aslo-v6-live-teams b{font-size:12px;max-width:22ch}.aslo-v6-live-teams strong{font-size:18px}.aslo-v6-badge{font-size:8px;padding:5px}.aslo-v6-controls button{width:31px;height:31px}.aslo-v6-controls span{display:none}body[data-page="liga-admin"] .arena-hero{min-height:420px;padding:28px 19px 55px}body[data-page="liga-admin"] .arena-hero h1{font-size:clamp(43px,10vw,66px)}.aslo-v6-hud{left:18px;right:auto;bottom:16px;font-size:9px}.aslo-v6-hud:before{width:19px}}
 @media(prefers-reduced-motion:reduce){.aslo-v6-signal.aslo-v6-pulse .aslo-v6-live{animation:none}.v4-root .v4-hero-news::before,body[data-page="liga-admin"] .arena-hero::before{transform:scale(1.03)!important;transition:none!important;will-change:auto}.v4-root .v4-sponsor:after{display:none}body[data-page="liga-admin"] .arena-sponsor,.v4-root .v4-news-card{transition:none!important}}
 @media(forced-colors:active){.aslo-v6-signal,.v4-root .v4-hero-news,body[data-page="liga-admin"] .arena-hero{border:2px solid CanvasText}.aslo-v6-badge{color:ButtonText;background:ButtonFace}}
+
+
+/* v6.1: same identity on personal account/mode and league directory, no shared entity login. */
+body[data-page="mis-ligas"] .lm-page{max-width:1800px;padding-inline:clamp(15px,2.4vw,44px)}
+body[data-page="mis-ligas"] .lm-hero{min-height:clamp(330px,31vw,490px);border:1px solid #71c9ed87;border-radius:14px;box-shadow:0 24px 60px #0009;background-image:linear-gradient(90deg,#041224f5,#07273ed0 60%,#163d4f73),url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1600&q=80")}
+body[data-page="mis-ligas"] .lm-hero h1{font:900 clamp(39px,5vw,75px)/1.02 Impact,"Arial Narrow",system-ui,sans-serif;text-transform:uppercase;letter-spacing:.006em;text-shadow:0 12px 25px #00111e}
+body[data-page="mis-ligas"] .lm-overline{color:var(--xp-lime);font-weight:950;letter-spacing:.17em}
+body[data-page="mis-ligas"] .lm-league-card{border-color:#4182a7a0;border-radius:12px;box-shadow:0 16px 30px #0007;transition:transform .26s,box-shadow .26s,border .26s}
+body[data-page="mis-ligas"] .lm-league-card:hover{transform:translateY(-6px);border-color:#d9ff63;box-shadow:0 27px 52px #0009}
+body[data-page="mis-ligas"] .lm-league-picture{min-height:200px}
+body[data-page="mis-ligas"] .lm-primary{background:var(--xp-lime);color:#051c2a;border-color:var(--xp-lime);font-weight:950}
+body[data-page="mis-ligas"] .lm-top{box-shadow:0 14px 38px #010812aa}
+body[data-page="modos"] .pagehead,body[data-page="modo"] .pagehead,body[data-page="cuenta"] .pagehead{min-height:clamp(275px,25vw,380px);border:1px solid #72bddd8c;border-radius:14px;box-shadow:0 26px 52px #0008}
+body[data-page="modos"] .pagehead h1,body[data-page="modo"] .pagehead h1,body[data-page="cuenta"] .pagehead h1{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(36px,4.6vw,72px);font-weight:900;letter-spacing:.015em;text-transform:uppercase}
+body[data-page="modos"] .eyebrow,body[data-page="modo"] .eyebrow,body[data-page="cuenta"] .eyebrow{color:var(--xp-lime);letter-spacing:.17em;font-weight:950}
+body[data-page="modos"] .mode-tile,body[data-page="modo"] .mode-tile{border:1px solid #5b94bc99;box-shadow:0 16px 40px #0007;border-radius:12px;min-height:260px;transition:transform .24s,border .24s,box-shadow .24s}
+body[data-page="modos"] .mode-tile:hover,body[data-page="modo"] .mode-tile:hover{transform:translateY(-7px);border-color:var(--xp-lime);box-shadow:0 24px 54px #0009}
+body[data-page="modos"] .mode-icon,body[data-page="modo"] .mode-icon{color:var(--xp-electric);filter:drop-shadow(0 0 14px #28aeef66)}
+body[data-page="cuenta"] .settings-main,body[data-page="cuenta"] .mode-workspace{border:1px solid #5189af7a;box-shadow:0 15px 33px #0006;border-radius:12px}
+body[data-page="cuenta"] .settings-tabs a.selected{background:#174d64;border-color:var(--xp-lime);color:var(--xp-lime)}
+body.aslo-auth-v7 .aslo-auth-scene{border:1px solid #73bfe7ad;border-radius:15px;box-shadow:0 23px 60px #0009}
+body.aslo-auth-v7 .aslo-auth-scene h1{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(43px,4.5vw,80px);letter-spacing:.01em;text-transform:uppercase}
+body.aslo-auth-v7 .aslo-auth-card{border-radius:15px;box-shadow:0 20px 52px #0009;border-color:#5fa7cc85}
+body.aslo-auth-v7 .aslo-auth-submit{background:var(--xp-lime);color:#0a2030;border:1px solid var(--xp-lime);font-weight:950}
+body.aslo-auth-v7 .aslo-auth-submit:hover{background:#eeffb0;box-shadow:0 14px 33px #d9ff6340}
+/* The user's explicit light theme remains legible. Sports imagery stays cinematic, information cards become light. */
+html[data-theme="light"] body.v4-visitor{background:#e5eef6}
+html[data-theme="light"] body.v4-visitor .v4-root{background:radial-gradient(ellipse at top left,#c8e6f7,transparent 65%),linear-gradient(150deg,#e8f5ff,#f0f7fb);color:#12304a}
+html[data-theme="light"] .v4-root .v4-match-block{background:linear-gradient(130deg,#f8fcff,#e0f1fa);border-color:#81b3d0}
+html[data-theme="light"] .v4-root .v4-match-body strong{color:#114970!important}
+html[data-theme="light"] .v4-root .v4-section-title h2{color:#14374d}
+html[data-theme="light"] .v4-root .v4-news-card{background:#f7fcff;border-color:#aacde0;color:#12304a}
+html[data-theme="light"] .v4-root .v4-news-card h3{color:#12304a}
+html[data-theme="light"] .v4-root .v4-sponsor-zone{background:#dceef9;border-color:#aacbdf}
+html[data-theme="light"] .v4-root .v4-featured-match{background:linear-gradient(110deg,#e0f1fd,#b9e2f8);border-color:#7eb3d3;color:#112d41}
+html[data-theme="light"] .v4-root .v4-featured-values strong{color:#16466d!important}
+html[data-theme="light"] .v4-root .v4-featured-match span,html[data-theme="light"] .v4-root .v4-featured-match small{color:#16384f}
+html[data-theme="light"] .aslo-v6-signal{background:linear-gradient(110deg,#d9f0fc,#eaf8ff);border-color:#90bad1}
+html[data-theme="light"] .aslo-v6-signal-head strong,html[data-theme="light"] .aslo-v6-live-teams b{color:#0c3551}
+html[data-theme="light"] .aslo-v6-live-teams strong{color:#12618c}
+html[data-theme="light"] .aslo-v6-live-meta,html[data-theme="light"] .aslo-v6-controls span{color:#336480}
+html[data-theme="light"] .aslo-v6-signal-head small{color:#17678a}
+html[data-theme="light"] .aslo-v6-controls button{background:#d0eafb;color:#145075;border-color:#86bad7}
+html[data-theme="light"] .aslo-v6-badge{background:#d1f36a;color:#133240}
+@media(max-width:760px){body[data-page="mis-ligas"] .lm-hero{min-height:315px}body[data-page="mis-ligas"] .lm-hero h1{font-size:clamp(35px,9vw,58px)}body[data-page="modos"] .mode-tile,body[data-page="modo"] .mode-tile{min-height:190px}body.aslo-auth-v7 .aslo-auth-scene h1{font-size:clamp(38px,11vw,57px)}}
