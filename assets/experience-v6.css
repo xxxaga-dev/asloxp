@@ -1,0 +1,110 @@
+/* ASLO · Visual evolution v6. Original CSS — visual principles studied from reference ZIPs,
+   no third-party theme code, graphics or imagery copied. */
+/* Tokens: sporting broadcast, illuminated arena, navigation as an interactive layer. */
+:root{--xp-ink:#03101e;--xp-night:#06192b;--xp-deep:#071326;--xp-line:rgba(101,189,234,.27);--xp-electric:#31cfff;--xp-lime:#d9ff63;--xp-white:#f4faff;--xp-muted:#a8c5df}
+body.v4-visitor,body[data-page="liga-admin"]{background:var(--xp-ink);overflow-x:clip}
+body.v4-visitor::before,body[data-page="liga-admin"]::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.32;background-image:repeating-linear-gradient(90deg,transparent 0 88px,rgba(47,168,253,.036) 89px 90px),radial-gradient(ellipse at 86% -20%,rgba(33,134,255,.22),transparent 56%)}
+body.v4-visitor .sitehead,body[data-page="liga-admin"] .arena-top{border-bottom:1px solid #4278a45e;box-shadow:0 12px 42px #01070eaa}
+body.v4-visitor .brand,body[data-page="liga-admin"] .arena-logo{font-weight:1000;letter-spacing:-.085em}
+body.v4-visitor .v4-logo,body[data-page="liga-admin"] .arena-logo-mark{color:var(--xp-electric)!important;filter:drop-shadow(0 0 10px #20c7ff77)}
+body.v4-visitor .v4-root{position:relative;background:radial-gradient(ellipse at 12% 12%,rgba(15,106,181,.22),transparent 46%),radial-gradient(ellipse at 90% 66%,rgba(6,90,151,.15),transparent 40%),linear-gradient(172deg,#061322,#05101c 72%,#08192d);padding-inline:clamp(12px,1.75vw,32px)}
+.v4-root .v4-sponsor-zone{position:relative;margin-top:3px;padding:13px 16px;border:1px solid rgba(54,142,207,.2);background:linear-gradient(100deg,#06182b,#0d2640);border-radius:12px}
+.v4-root .v4-sponsor{border-radius:10px;isolation:isolate;overflow:hidden;min-height:clamp(100px,10.5vw,152px);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.v4-root .v4-sponsor:hover{transform:translateY(-5px);border-color:#5edfff;box-shadow:0 19px 34px #0009,0 0 18px #00b4ff28}
+.v4-root .v4-sponsor:after{content:"";pointer-events:none;position:absolute;inset:0;background:linear-gradient(110deg,transparent 26%,rgba(255,255,255,.1) 46%,transparent 64%);transform:translateX(-140%);transition:transform .55s ease}
+.v4-root .v4-sponsor:hover:after{transform:translateX(140%)}
+.v4-root .v4-sponsor-brand{letter-spacing:-.045em}
+.v4-root .v4-sponsor-cta{font-weight:950;letter-spacing:.12em}
+.v4-root .v4-main-grid{grid-template-columns:minmax(0,1.4fr) minmax(315px,1fr) minmax(180px,.45fr);gap:13px;margin-top:15px}
+.v4-root .v4-hero-news{min-height:510px;height:100%;border:1px solid #5fa3ce77;border-radius:15px;background-image:none!important;box-shadow:0 23px 58px #0009;isolation:isolate;justify-content:flex-end}
+.v4-root .v4-hero-news::before{content:"";position:absolute;inset:-2%;z-index:-2;background-image:linear-gradient(0deg,#02111f 3%,rgba(3,16,32,.88) 22%,rgba(3,24,44,.28) 71%,rgba(0,6,15,.1) 100%),var(--hero-photo);background-position:center;background-size:cover;transform:scale(1.08) translate3d(var(--xp-scene-x,0px),var(--xp-scene-y,0px),0);transition:transform .28s ease-out;will-change:transform}
+.v4-root .v4-hero-news::after{content:"01 / ASLO NEWS";position:absolute;right:20px;top:24px;z-index:-1;color:#e2faff6b;font-size:11px;font-weight:950;letter-spacing:.25em;border-top:1px solid #71cfff87;padding-top:8px}
+.v4-root .v4-hero-news-content{position:relative;z-index:2;padding:clamp(22px,3vw,48px)!important;max-width:760px}
+.v4-root .v4-hero-news h1{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(40px,4.1vw,72px);font-stretch:condensed;text-transform:uppercase;font-weight:900;line-height:1.04;letter-spacing:.005em;text-wrap:balance;text-shadow:0 7px 22px #00101a}
+.v4-root .v4-hero-news-content p{max-width:590px;font-size:clamp(14px,1.3vw,18px);color:#e7f3ff}
+.v4-root .v4-hero-badge{letter-spacing:.17em;background:#d9ff63!important;color:#0b202c!important;border-radius:3px;font-weight:950}
+.v4-root .v4-read-news{border-radius:5px!important;background:#d9ff63!important;border:1px solid #d9ff63!important;color:#0a1e2b!important;letter-spacing:.085em;font-weight:950!important;box-shadow:0 8px 27px #d9ff6322}
+.v4-root .v4-read-news:hover{background:#f0ffaa!important;box-shadow:0 10px 31px #d9ff635e}
+.v4-root .v4-hero-dots{gap:8px}
+.v4-root .v4-live-slot{display:grid;grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:13px}
+.v4-root .v4-match-block{position:relative;padding:clamp(14px,1.5vw,23px);background:linear-gradient(137deg,#102f49,#071827 62%,#051527);border:1px solid #407da16e;border-radius:13px;min-width:0;box-shadow:inset 0 1px 0 #ffffff0b}
+.v4-root .v4-match-block:first-child{border-top:3px solid #d9ff63}
+.v4-root .v4-match-block:nth-child(2){border-top:3px solid #30bdfc}
+.v4-root .v4-panel-title h2{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(17px,1.6vw,25px);font-weight:850;letter-spacing:.02em;text-transform:uppercase}
+.v4-root .v4-match{border-radius:7px;padding:9px 8px;transition:background .2s ease,transform .2s ease}
+.v4-root .v4-match:hover{transform:translateX(3px);background:#19496a75}
+.v4-root .v4-match-body strong{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(17px,1.55vw,25px);letter-spacing:.035em;color:#e8ffae!important}
+.v4-root .v4-match-meta small.onair{color:var(--xp-lime);font-weight:900}
+.v4-root .v4-side-ad{border-radius:13px;position:relative;overflow:hidden;background:linear-gradient(160deg,#123e5b,#071422 75%)}
+.v4-root .v4-side-ad::after{content:"";position:absolute;inset:10px;border:1px solid #ffffff26;pointer-events:none}
+.v4-root .v4-featured-row{margin-top:15px}
+.v4-root .v4-featured-match{position:relative;overflow:hidden;min-height:125px;padding:23px clamp(18px,2vw,33px);border:1px solid #6ca9cd84;border-left:4px solid var(--xp-lime);border-radius:12px;background:radial-gradient(ellipse at 90% 45%,#27689280,transparent 60%),linear-gradient(94deg,#091b2c,#0f3b61 70%,#0a1e30);box-shadow:0 15px 32px #0007}
+.v4-root .v4-featured-match:before{content:"";pointer-events:none;position:absolute;right:-13px;top:-150px;width:330px;height:400px;border:60px solid rgba(55,182,247,.08);border-radius:50%}
+.v4-root .v4-featured-values strong{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(31px,4vw,55px)!important;letter-spacing:.06em;color:var(--xp-lime)!important}
+.v4-root .v4-section-title h2{font-family:Impact,"Arial Narrow",system-ui,sans-serif;letter-spacing:.01em;text-transform:uppercase;font-size:clamp(23px,2.1vw,34px)}
+.v4-root .v4-news-card{border:1px solid #3b779c7a;background:linear-gradient(145deg,#0b2a43,#071927);border-radius:12px;box-shadow:0 9px 28px #0006;transition:transform .3s,border .3s,box-shadow .3s}
+.v4-root .v4-news-card:hover{transform:translateY(-7px);border-color:#8adbf5;box-shadow:0 23px 42px #0009}
+.v4-root .v4-news-card-photo{min-height:clamp(120px,10.5vw,180px);background-position:center;transition:background-size .4s ease}
+.v4-root .v4-news-card h3{font-size:clamp(14px,1.06vw,19px);line-height:1.22;letter-spacing:-.02em}
+.v4-root .v4-league-chip{border-radius:10px;transition:transform .25s,box-shadow .25s,border-color .25s}
+.v4-root .v4-league-chip:hover{transform:translateY(-5px);box-shadow:0 17px 32px #0008;border-color:var(--xp-lime)}
+/* Interactive broadcast rail: derived from the same existing demo match elements. */
+.aslo-v6-signal{position:relative;display:grid;grid-template-columns:minmax(155px,200px) minmax(0,1fr) auto;gap:14px;align-items:center;margin:14px 0 0;padding:10px 16px;background:linear-gradient(105deg,#08243e,#0c2940 60%,#082038);border:1px solid #3f8db67b;border-radius:12px;box-shadow:0 16px 34px #0005;isolation:isolate;overflow:hidden}
+.aslo-v6-signal::after{content:"";position:absolute;right:15%;top:-80px;width:220px;height:200px;background:radial-gradient(circle,#15b8ff2b,transparent 70%);pointer-events:none;z-index:-1}
+.aslo-v6-signal-head{display:grid;gap:3px;border-right:1px solid #68c9ed54;padding-right:12px}
+.aslo-v6-signal-head small{color:var(--xp-lime);font-size:10px;font-weight:950;letter-spacing:.17em;text-transform:uppercase}
+.aslo-v6-signal-head strong{color:#fff;font:900 19px/1.1 Impact,"Arial Narrow",system-ui,sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.aslo-v6-live{display:flex;align-items:center;min-width:0;gap:16px;color:#eafaff;text-decoration:none}
+.aslo-v6-live[aria-disabled="true"]{pointer-events:none}
+.aslo-v6-badge{flex:none;display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:.13em;font-weight:900;color:#0a1e27;background:var(--xp-lime);border-radius:3px;padding:6px 7px}
+.aslo-v6-badge::before{content:"";width:5px;height:5px;border-radius:50%;background:#124f38}
+.aslo-v6-live-teams{display:flex;min-width:0;flex-wrap:wrap;gap:7px;align-items:baseline}
+.aslo-v6-live-teams b{color:#fff;font-size:clamp(13px,1.1vw,19px);font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:33ch}
+.aslo-v6-live-teams strong{color:var(--xp-lime);font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(17px,1.8vw,28px);letter-spacing:.045em}
+.aslo-v6-live-meta{color:#9fcfe7;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aslo-v6-controls{display:flex;align-items:center;gap:7px}
+.aslo-v6-controls button{height:34px;width:34px;border:1px solid #5d9abb8c;border-radius:6px;background:#123d58;color:#fff;font-size:19px;cursor:pointer}
+.aslo-v6-controls button:hover{background:#2e99cb;color:#07182b}
+.aslo-v6-controls span{color:#a6d3ec;font-weight:850;min-width:30px;text-align:center;font-size:11px}
+.aslo-v6-signal a:focus-visible,.aslo-v6-signal button:focus-visible{outline:3px solid var(--xp-lime);outline-offset:3px}
+.aslo-v6-signal.aslo-v6-pulse .aslo-v6-live{animation:aslo-v6-enter .34s ease both}
+@keyframes aslo-v6-enter{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+/* Organizer arena — no CRUD look, same sport language and navigation semantics. */
+body[data-page="liga-admin"] .arena-shell{--cyan:#39d0ff;background:radial-gradient(ellipse at 67% -9%,#0b488046,transparent 40%),linear-gradient(175deg,#061525,#03101f)}
+body[data-page="liga-admin"] .arena-sidebar{background:linear-gradient(180deg,#051525,#09233b 70%,#07182b);border-right-color:#4c8cbb4f}
+body[data-page="liga-admin"] .arena-side-kicker{color:var(--xp-lime);letter-spacing:.24em}
+body[data-page="liga-admin"] .arena-side-nav button.active,body[data-page="liga-admin"] .arena-side-nav button[aria-current="page"]{border-left:3px solid var(--xp-lime);background:linear-gradient(90deg,#194a64,#122d476b)}
+body[data-page="liga-admin"] .arena-main{max-width:1850px}
+body[data-page="liga-admin"] .arena-hero{min-height:clamp(370px,39vw,630px);height:auto;position:relative;background-image:none!important;border-radius:14px;border:1px solid #7bc8fb87;box-shadow:0 24px 70px #0009;overflow:hidden}
+body[data-page="liga-admin"] .arena-hero::before{content:"";position:absolute;inset:-2%;z-index:-2;background-image:linear-gradient(90deg,#02101ef5 0%,#031828de 40%,#05182b9c 66%,#0c365654 100%),var(--arena-photo);background-position:center;background-size:cover;transform:scale(1.08) translate3d(var(--xp-scene-x,0px),var(--xp-scene-y,0px),0);transition:transform .22s ease-out;will-change:transform}
+body[data-page="liga-admin"] .arena-hero::after{z-index:-1;background:repeating-linear-gradient(90deg,#57ddff09 0 1px,transparent 1px 92px);pointer-events:none}
+body[data-page="liga-admin"] .arena-hero-copy{max-width:790px;padding-block:35px;position:relative;z-index:3}
+body[data-page="liga-admin"] .arena-hero h1{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(47px,5.8vw,102px);font-weight:900;line-height:.99;letter-spacing:.004em;text-transform:uppercase;text-shadow:0 14px 24px #010811b0}
+body[data-page="liga-admin"] .arena-hero h1 em{color:var(--xp-lime);font-style:normal;text-shadow:0 0 28px #abed313a}
+body[data-page="liga-admin"] .arena-hero-kicker{letter-spacing:.22em;color:#b0f0ff;font-size:11px}
+body[data-page="liga-admin"] .arena-action-solid{background:var(--xp-lime);color:#092333;border:1px solid var(--xp-lime);font-weight:950;box-shadow:0 11px 28px #e2ff572c}
+body[data-page="liga-admin"] .arena-action-solid:hover{background:#efffb1;box-shadow:0 15px 36px #e2ff5755}
+body[data-page="liga-admin"] .arena-overline{color:var(--xp-lime);letter-spacing:.19em}
+body[data-page="liga-admin"] .arena-section-heading h2{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(26px,2.8vw,43px);letter-spacing:.01em;text-transform:uppercase;font-weight:850}
+body[data-page="liga-admin"] .arena-stats>div{background:linear-gradient(140deg,#0b3049,#071a2f);border-top:2px solid #2ac5ff75;box-shadow:0 13px 27px #0006}
+body[data-page="liga-admin"] .arena-stats strong{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-size:clamp(28px,3vw,48px);letter-spacing:.02em}
+body[data-page="liga-admin"] .arena-feature-photo{border:1px solid #5ebefc87;box-shadow:0 20px 45px #0008;overflow:hidden}
+body[data-page="liga-admin"] .arena-tournament-mini{transition:transform .25s,border .25s,background .25s;box-shadow:0 9px 20px #0003}
+body[data-page="liga-admin"] .arena-tournament-mini:hover{transform:translateX(5px);border-color:var(--xp-lime)}
+body[data-page="liga-admin"] .arena-tournament-mini.is-selected{border-left:4px solid var(--xp-lime)}
+body[data-page="liga-admin"] .arena-sponsor{box-shadow:0 13px 30px #0008;transition:transform .28s,box-shadow .28s}
+body[data-page="liga-admin"] .arena-sponsor:hover{transform:translateY(-6px);box-shadow:0 25px 45px #000a}
+.aslo-v6-hud{position:absolute;right:clamp(16px,2vw,34px);bottom:clamp(14px,2vw,28px);z-index:4;display:flex;align-items:center;gap:12px;color:#f1faff;font-size:10px;font-weight:950;letter-spacing:.17em;text-transform:uppercase;pointer-events:none}
+.aslo-v6-hud:before{content:"";display:block;width:48px;height:2px;background:var(--xp-lime);box-shadow:0 0 20px #d9ff63}
+.aslo-v6-hud b{color:var(--xp-lime)}
+/* Subpages, league directories, account modes: editorial treatment stays consistent. */
+.v5-root .v5-hero{border-bottom:2px solid #90e0f8;isolation:isolate;box-shadow:inset 0 -30px 70px #02101a}
+.v5-root .v5-hero h1{font-family:Impact,"Arial Narrow",system-ui,sans-serif;text-transform:uppercase;font-weight:850;letter-spacing:.015em}
+.v5-root .v5-card{border-radius:12px;border-color:#3d87b17b;box-shadow:0 12px 30px #0006;transition:transform .3s,box-shadow .3s}
+.v5-root .v5-card:hover{transform:translateY(-6px);box-shadow:0 25px 48px #0009}
+.v5-root .v5-section-head h2{font-family:Impact,"Arial Narrow",system-ui,sans-serif;text-transform:uppercase;letter-spacing:.01em}
+@media(max-width:1400px){.v4-root .v4-main-grid{grid-template-columns:minmax(0,1.35fr) minmax(300px,1fr)}.v4-root .v4-side-ad{grid-column:1/-1;min-height:140px}.v4-root .v4-side-ad-copy{max-width:650px}.v4-root .v4-hero-news{min-height:490px}}
+@media(max-width:980px){.v4-root .v4-main-grid{grid-template-columns:minmax(0,1fr)}.v4-root .v4-hero-news{min-height:460px}.v4-root .v4-live-slot{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto}.v4-root .v4-side-ad{grid-column:1/-1}.aslo-v6-signal{grid-template-columns:155px minmax(0,1fr) auto}.aslo-v6-live-meta{display:none}}
+@media(max-width:660px){.v4-root .v4-hero-news{min-height:440px}.v4-root .v4-hero-news h1{font-size:clamp(37px,9vw,58px)}.v4-root .v4-live-slot{grid-template-columns:1fr}.v4-root .v4-hero-news-content{padding:28px 22px!important}.v4-root .v4-featured-match{min-height:0}.aslo-v6-signal{grid-template-columns:minmax(0,1fr) auto;padding:13px;gap:7px}.aslo-v6-signal-head{grid-column:1/-1;border-right:0;border-bottom:1px solid #4b91bd80;padding:0 0 9px}.aslo-v6-live{gap:8px}.aslo-v6-live-teams b{font-size:12px;max-width:22ch}.aslo-v6-live-teams strong{font-size:18px}.aslo-v6-badge{font-size:8px;padding:5px}.aslo-v6-controls button{width:31px;height:31px}.aslo-v6-controls span{display:none}body[data-page="liga-admin"] .arena-hero{min-height:420px;padding:28px 19px 55px}body[data-page="liga-admin"] .arena-hero h1{font-size:clamp(43px,10vw,66px)}.aslo-v6-hud{left:18px;right:auto;bottom:16px;font-size:9px}.aslo-v6-hud:before{width:19px}}
+@media(prefers-reduced-motion:reduce){.aslo-v6-signal.aslo-v6-pulse .aslo-v6-live{animation:none}.v4-root .v4-hero-news::before,body[data-page="liga-admin"] .arena-hero::before{transform:scale(1.03)!important;transition:none!important;will-change:auto}.v4-root .v4-sponsor:after{display:none}body[data-page="liga-admin"] .arena-sponsor,.v4-root .v4-news-card{transition:none!important}}
+@media(forced-colors:active){.aslo-v6-signal,.v4-root .v4-hero-news,body[data-page="liga-admin"] .arena-hero{border:2px solid CanvasText}.aslo-v6-badge{color:ButtonText;background:ButtonFace}}
