@@ -1,0 +1,190 @@
+/* ASLO / UX visual iteration 7
+   Original design layer based on composition principles, not third-party template assets.
+   Preserves existing UX flows, the approved blue arena identity and personal accounts. */
+:root{
+  --a7-ink:#04101d;--a7-night:#071a2e;--a7-panel:#0c263d;
+  --a7-edge:#27607d;--a7-accent:#49d2ff;--a7-sport:#d9ff6e;
+  --a7-muted:#a8c6d8;--a7-paper:#f4fbff;--a7-radius:16px;
+}
+body{font-feature-settings:"kern";-webkit-font-smoothing:antialiased}
+body.v4-visitor,body[data-page="modos"],body[data-page="modo"],
+body[data-page="cuenta"],body.aslo-auth-v7,body[data-page="mis-ligas"],
+body[data-page="liga-admin"]{background-color:var(--a7-ink)}
+body.v4-visitor .sitehead,body[data-page="modos"] .sitehead,
+body[data-page="modo"] .sitehead,body[data-page="cuenta"] .sitehead,
+body.aslo-auth-v7 .sitehead{
+  background:#041426ee;backdrop-filter:blur(24px) saturate(140%);
+  border-bottom:1px solid #59b2e955;box-shadow:0 14px 38px #0005;
+}
+body.v4-visitor .sitehead .brand,
+body[data-page="modos"] .sitehead .brand,
+body[data-page="modo"] .sitehead .brand,
+body[data-page="cuenta"] .sitehead .brand,
+body.aslo-auth-v7 .sitehead .brand{font-weight:950;letter-spacing:-.065em}
+body.v4-visitor .sitehead .publicnav a,
+body[data-page="modos"] .publicnav a,
+body[data-page="modo"] .publicnav a,
+body[data-page="cuenta"] .publicnav a{
+  border-radius:7px;transition:color .18s ease,background .18s ease;
+  font-size:12px;font-weight:850;letter-spacing:.045em;
+}
+body.v4-visitor .sitehead .publicnav a.sel,
+body.v4-visitor .sitehead .publicnav a:hover{background:#183c56;color:#e9fbff}
+body.v4-visitor .sitehead .publicnav a.sel{box-shadow:inset 0 -2px var(--a7-sport)}
+body.v4-visitor .v4-root{background:radial-gradient(ellipse at 6% 0%,#15517b42,transparent 38%),radial-gradient(ellipse at 88% 45%,#0876b81b,transparent 45%),linear-gradient(165deg,#071829,#05111e 75%)}
+body.v4-visitor .v4-root,body.v4-visitor .v5-root{max-width:1920px;margin-inline:auto}
+.v4-root .v4-sponsor-zone{margin-top:14px;margin-bottom:19px;padding:17px 20px 20px;border:1px solid #4fa4c942;border-radius:var(--a7-radius);background:linear-gradient(112deg,#0b2137,#0b2739 58%,#081a30);box-shadow:0 16px 36px #0004}
+.v4-root .v4-sponsor-header{padding-bottom:11px}
+.v4-root .v4-sponsor-header strong{font-size:12px!important;letter-spacing:.22em!important;color:var(--a7-sport)!important}
+.v4-root .v4-sponsor{border-radius:11px;min-height:130px;box-shadow:inset 0 0 0 1px #e5ffff0f}
+.v4-root .v4-sponsor:hover{transform:translateY(-4px)}
+.v4-root .v4-main-grid{gap:17px;align-items:stretch}
+.v4-root .v4-hero-news{position:relative;min-height:clamp(510px,42vw,650px);border:1px solid #5aa9d182;border-radius:var(--a7-radius);overflow:hidden;box-shadow:0 25px 56px #0009,inset 0 0 90px #00182990;isolation:isolate}
+.v4-root .v4-hero-news::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(0deg,#030c19e8 0%,#03162aa0 45%,#05203e28 100%);opacity:1}
+.v4-root .v4-hero-news::after{content:"";position:absolute;z-index:1;pointer-events:none;right:0;top:0;width:30%;height:38%;border-top:4px solid #d9ff6e9c;border-right:4px solid #d9ff6e9c;clip-path:polygon(40% 0,100% 0,100% 100%,92% 100%,92% 8%,40% 8%);opacity:.75}
+.v4-root .v4-hero-news-content{position:relative;z-index:2;max-width:900px;padding:clamp(27px,4vw,62px)!important}
+.v4-root .v4-hero-news h1{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-weight:900;font-size:clamp(48px,5.4vw,100px);line-height:.98;letter-spacing:.018em;text-transform:uppercase;text-wrap:balance;text-shadow:0 10px 40px #010912a8;margin-block:18px 20px}
+.v4-root .v4-hero-news-content p{font-size:clamp(14px,1.1vw,18px);line-height:1.65;max-width:660px;color:#d6ebf9}
+.v4-root .v4-hero-badge,.v4-root .v4-news-sport{letter-spacing:.16em;font-size:11px;font-weight:900}
+.v4-root .v4-read-news{min-height:48px;padding-inline:22px;border-radius:8px;font-weight:950;letter-spacing:.055em;background:var(--a7-sport);color:#092235;border:1px solid var(--a7-sport);box-shadow:0 12px 34px #d9ff6e24}
+.v4-root .v4-read-news:hover{background:#f1ffbc;box-shadow:0 16px 36px #d9ff6e40;transform:translateY(-2px)}
+.a7-hero-label{display:inline-flex;align-items:center;gap:9px;color:#c9f5ff;letter-spacing:.22em;font-size:10px;font-weight:900;text-transform:uppercase}
+.a7-hero-label::before{content:"";width:26px;height:2px;background:var(--a7-sport)}
+.a7-hero-vertical{position:absolute;right:19px;bottom:20px;z-index:3;font:900 12px/1 Impact,"Arial Narrow",sans-serif;writing-mode:vertical-rl;letter-spacing:.2em;color:#d6faffb8;pointer-events:none}
+.v4-root .v4-live-slot>*{border-radius:var(--a7-radius)}
+.v4-root .v4-match-block{background:linear-gradient(145deg,#0e2b46,#08182b);border:1px solid #4b91ad7d;border-radius:13px;box-shadow:0 12px 28px #0006}
+.v4-root .v4-match-body strong{color:var(--a7-sport)}
+.v4-root .v4-featured-row{margin-top:22px}
+.v4-root .v4-featured-match{border-radius:var(--a7-radius);border:1px solid #3e8fa77a;box-shadow:0 20px 44px #0007}
+.v4-root .v4-section-title{margin-block:30px 16px}
+.v4-root .v4-section-title h2,.v5-root .v5-section-head h2,
+body[data-page="modos"] .modes-view>h2,
+body[data-page="modo"] .mode-workspace>h2{
+  font-family:Impact,"Arial Narrow",system-ui,sans-serif;letter-spacing:.025em;
+  text-transform:uppercase;font-size:clamp(28px,2.4vw,45px);
+}
+.v4-root .v4-news-grid{gap:16px}
+.v4-root .v4-news-card{border:1px solid #4d8eae70;border-radius:14px;overflow:hidden;background:linear-gradient(165deg,#0d2a43,#081728);box-shadow:0 12px 30px #0006;transition:border-color .2s,transform .2s,box-shadow .2s}
+.v4-root .v4-news-card:hover{border-color:var(--a7-sport);transform:translateY(-6px);box-shadow:0 24px 44px #0008}
+.v4-root .v4-news-card-photo{min-height:175px}
+.v4-root .v4-news-card h3{font-size:clamp(19px,1.5vw,26px);line-height:1.16;letter-spacing:-.025em}
+.v4-root .v4-news-card small{color:#a9c7d9}
+.v5-root .v5-hero{min-height:clamp(390px,34vw,540px);border:1px solid #4b93b36d;border-radius:0 0 18px 18px;overflow:hidden;background-position:center 42%;box-shadow:0 21px 42px #0006;isolation:isolate}
+.v5-root .v5-hero::before{content:"";position:absolute;pointer-events:none;inset:0;background:linear-gradient(90deg,#031325c7 0%,#042a4c60 65%,#07263e24),linear-gradient(0deg,#04131de0,transparent 64%);z-index:0}
+.v5-root .v5-hero>div{z-index:1;position:relative;max-width:960px}
+.v5-root .v5-hero h1{font-size:clamp(50px,6.2vw,103px);letter-spacing:.005em;line-height:.96;text-wrap:balance;text-shadow:0 12px 36px #000a}
+.v5-root .v5-hero p{font-size:clamp(15px,1.35vw,19px);line-height:1.6;max-width:640px;color:#e0eef9}
+.v5-root .v5-watermark{font-family:Impact,"Arial Narrow",sans-serif;letter-spacing:.055em;opacity:.13}
+.v5-root .v5-content{max-width:1680px;margin-inline:auto;padding-inline:clamp(17px,2.7vw,44px)}
+.v5-root .v5-columns{gap:clamp(16px,2vw,34px)}
+.v5-root .v5-card-grid{gap:clamp(15px,1.8vw,27px)}
+.v5-root .v5-photo-card{position:relative;border:1px solid #4d8ab27a;background:linear-gradient(160deg,#0d2a46,#08182a);border-radius:15px;overflow:hidden;box-shadow:0 16px 33px #0007;transition:transform .25s,border-color .25s,box-shadow .25s}
+.v5-root .v5-photo-card:hover{transform:translateY(-7px);border-color:var(--a7-sport);box-shadow:0 27px 47px #0009}
+.v5-root .v5-photo{min-height:200px;background-position:center;background-size:cover}
+.v5-root .v5-card-info{padding:22px 22px 20px}
+.v5-root .v5-card-info h3{font-size:clamp(21px,1.8vw,29px);line-height:1.15;letter-spacing:-.034em;text-wrap:balance}
+.v5-root .v5-section-head{padding-bottom:12px;border-bottom:1px solid #4a92b64f;margin-bottom:20px}
+.v5-root .v5-section-head>div>span{color:var(--a7-sport)!important;letter-spacing:.18em;font-weight:900}
+.v5-root .v5-tabs a.active{box-shadow:inset 0 -3px var(--a7-sport)}
+.v5-root .v5-filters{background:linear-gradient(120deg,#0b2640,#0a1d33);border:1px solid #4a8bb17a;border-radius:13px;padding:16px}
+.v5-root .v5-ad{border:1px dashed #4a708887;border-radius:12px}
+.v5-root .v5-empty{border-radius:12px}
+.a7-wayfinder{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:22px 0 26px;position:relative;z-index:2}
+.a7-wayfinder a{display:flex;min-height:112px;align-items:center;gap:14px;position:relative;padding:20px 19px;overflow:hidden;border:1px solid #377d9b8c;border-radius:12px;background:linear-gradient(115deg,#112e46,#091b2e);color:#f0faff;box-shadow:0 13px 29px #0005;transition:transform .2s,border-color .2s,background .2s}
+.a7-wayfinder a::after{content:"↗";position:absolute;top:15px;right:16px;font-size:17px;color:#b9d3e6;transition:transform .2s}
+.a7-wayfinder a:hover{color:white;transform:translateY(-4px);border-color:var(--a7-sport);background:linear-gradient(115deg,#174363,#0b293d)}
+.a7-wayfinder a:hover::after{transform:translate(3px,-3px)}
+.a7-wayfinder a[aria-current="page"]{border-color:var(--a7-sport);box-shadow:inset 0 3px var(--a7-sport),0 14px 30px #0006}
+.a7-wayfinder-icon{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;border-radius:12px;background:#1d4c65;color:var(--a7-sport);font-size:24px}
+.a7-wayfinder-label{display:block;min-width:0}
+.a7-wayfinder-label strong{display:block;font-weight:950;font-size:14px;letter-spacing:.035em}
+.a7-wayfinder-label small{display:block;margin-top:5px;color:#a9c9db;font-size:11px;line-height:1.35}
+.a7-wayfinder.a7-subnav{max-width:1680px;margin:0 auto 16px;padding:18px clamp(17px,2.7vw,44px) 0;gap:10px}
+.a7-wayfinder.a7-subnav a{min-height:92px}
+.a7-wayfinder.a7-subnav .a7-wayfinder-icon{height:36px;width:36px;flex-basis:36px;font-size:19px}
+.a7-skip{position:fixed;left:16px;top:-70px;z-index:10003;padding:12px 19px;border-radius:9px;background:var(--a7-sport);color:#051727;font-weight:900;box-shadow:0 8px 24px #0009}
+.a7-skip:focus{top:12px;color:#051727}
+body[data-page="modos"] .pagehead,
+body[data-page="modo"] .pagehead,
+body[data-page="cuenta"] .pagehead{
+  min-height:clamp(300px,28vw,430px);padding:clamp(33px,5vw,70px)!important;
+  background-image:linear-gradient(90deg,#03101eef 0%,#062d4ddc 56%,#06172881 100%),url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1600&q=82");
+  background-position:center 44%;border:1px solid #57b0d395;border-radius:18px;box-shadow:0 26px 58px #0009;
+}
+body[data-page="modos"] .pagehead::before,
+body[data-page="modo"] .pagehead::before,
+body[data-page="cuenta"] .pagehead::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(var(--a7-sport),#46caff);
+}
+body[data-page="modos"] .pagehead h1,
+body[data-page="modo"] .pagehead h1,
+body[data-page="cuenta"] .pagehead h1{font-size:clamp(49px,5.2vw,86px);text-transform:uppercase;letter-spacing:.012em;line-height:1}
+body[data-page="modos"] .mode-grid,body[data-page="modo"] .mode-grid{gap:18px}
+body[data-page="modos"] .mode-tile,body[data-page="modo"] .mode-tile{
+  min-height:275px;background:linear-gradient(148deg,#0d2f4b,#071b30);
+  border:1px solid #478dae95;border-radius:16px;padding:clamp(22px,2.7vw,34px);
+  box-shadow:0 17px 35px #0006;transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+body[data-page="modos"] .mode-tile::before,body[data-page="modo"] .mode-tile::before{
+  content:"";position:absolute;top:0;left:0;height:4px;width:100%;background:linear-gradient(90deg,var(--a7-sport),#37c6ff 50%,transparent 98%);z-index:2;opacity:.8;
+}
+body[data-page="modos"] .mode-tile:hover,body[data-page="modo"] .mode-tile:hover{transform:translateY(-7px);border-color:var(--a7-sport);box-shadow:0 25px 48px #0009}
+body[data-page="modos"] .mode-icon{display:grid;place-items:center;width:72px;height:72px;border-radius:15px;background:#164a6b;border:1px solid #5aadd8;color:#dcf9ff;font-size:38px}
+body[data-page="modos"] .mode-tile h3,body[data-page="modo"] .mode-tile h3{font-size:clamp(25px,2vw,32px);text-transform:uppercase;letter-spacing:.005em}
+body[data-page="modos"] .mode-tile .link,body[data-page="modo"] .mode-tile .link{color:var(--a7-sport);font-weight:900;letter-spacing:.025em}
+body[data-page="cuenta"] .settings-main,body[data-page="cuenta"] .mode-workspace{border:1px solid #4b97b276;background:linear-gradient(140deg,#0d2a43,#071729);border-radius:16px;box-shadow:0 17px 40px #0006}
+body.aslo-auth-v7 .aslo-auth-scene{background-position:center;background-size:cover;border-color:#65a9d888;border-radius:18px;box-shadow:0 23px 55px #000a}
+body.aslo-auth-v7 .aslo-auth-card{border-color:#5e9fbc86;border-radius:18px;box-shadow:0 20px 45px #0008}
+body.aslo-auth-v7 .aslo-auth-submit{min-height:51px;border-radius:9px;background:var(--a7-sport);color:#071f2e}
+body[data-page="mis-ligas"] .lm-hero,body[data-page="liga-admin"] .arena-hero{border-radius:18px;border-color:#4daacf80;box-shadow:0 24px 55px #0008}
+body[data-page="mis-ligas"] .lm-league-card,body[data-page="liga-admin"] .arena-card{border-radius:15px;box-shadow:0 18px 38px #0007;transition:transform .2s,border-color .2s}
+body[data-page="mis-ligas"] .lm-league-card:hover,body[data-page="liga-admin"] .arena-card:hover{transform:translateY(-5px);border-color:var(--a7-sport)}
+/* Theme parity: bright content surfaces remain readable when the visitor selects light. */
+html[data-theme="light"] .a7-wayfinder a{background:linear-gradient(125deg,#f4fbff,#dceffa);color:#123950;border-color:#8ab7d0;box-shadow:0 10px 26px #153c5822}
+html[data-theme="light"] .a7-wayfinder a[aria-current="page"]{border-color:#2974a3;box-shadow:inset 0 3px #2a89be}
+html[data-theme="light"] .a7-wayfinder-icon{background:#d0eafb;color:#176b9c}
+html[data-theme="light"] .a7-wayfinder-label small{color:#426c83}
+html[data-theme="light"] .a7-wayfinder a::after{color:#32729c}
+html[data-theme="light"] body.v4-visitor .v4-hero-news-content p,
+html[data-theme="light"] body.v4-visitor .v5-hero p{color:#e6f4ff}
+html[data-theme="light"] body.v4-visitor .v4-sponsor-header strong{color:#1d5e80!important}
+html[data-theme="light"] body.v4-visitor .v4-news-card{background:#f1f9fe;color:#13394f}
+html[data-theme="light"] body.v4-visitor .v5-photo-card{background:#edf7fd;color:#13394f}
+html[data-theme="light"] body.v4-visitor .v5-card-info h3{color:#13394f}
+@media(max-width:1200px){
+ .a7-wayfinder{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .v4-root .v4-hero-news{min-height:485px}
+ .v5-root .v5-hero{min-height:410px}
+}
+@media(max-width:760px){
+ body.v4-visitor .v4-root{padding-inline:13px}
+ .v4-root .v4-sponsor-zone{margin-top:9px;padding:12px}
+ .v4-root .v4-hero-news{min-height:490px}
+ .v4-root .v4-hero-news h1{font-size:clamp(42px,9.6vw,70px)}
+ .v4-root .v4-hero-news-content{padding:28px 24px!important}
+ .v4-root .v4-hero-news-content p{font-size:14px;line-height:1.5}
+ .v5-root .v5-hero{min-height:350px;border-radius:0 0 13px 13px;padding:44px 22px}
+ .v5-root .v5-hero h1{font-size:clamp(45px,10vw,73px)}
+ .a7-wayfinder.a7-subnav{padding:14px 14px 0}
+ body[data-page="modos"] .pagehead,body[data-page="modo"] .pagehead,body[data-page="cuenta"] .pagehead{min-height:280px;padding:29px!important}
+ body[data-page="modos"] .pagehead h1,body[data-page="modo"] .pagehead h1,body[data-page="cuenta"] .pagehead h1{font-size:clamp(43px,9vw,62px)}
+ body[data-page="modos"] .mode-grid,body[data-page="modo"] .mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body[data-page="modos"] .mode-tile,body[data-page="modo"] .mode-tile{min-height:225px;padding:19px}
+}
+@media(max-width:510px){
+ .a7-wayfinder,.a7-wayfinder.a7-subnav{display:flex;gap:10px;overflow-x:auto;padding:0 4px 14px;margin:18px 0 15px;scroll-snap-type:x mandatory;scrollbar-width:thin;overscroll-behavior-inline:contain}
+ .a7-wayfinder.a7-subnav{margin:0;padding:13px 16px 16px}
+ .a7-wayfinder a,.a7-wayfinder.a7-subnav a{flex:0 0 76%;min-height:84px;padding:16px;scroll-snap-align:start}
+ .a7-wayfinder-icon{flex-basis:38px;width:38px;height:38px;font-size:21px}
+ .v4-root .v4-hero-news{min-height:445px}
+ .v4-root .v4-hero-news h1{font-size:clamp(38px,10vw,55px)}
+ .a7-hero-vertical{display:none}
+ .v4-root .v4-sponsor-header strong{font-size:10px!important}
+ body[data-page="modos"] .mode-grid,body[data-page="modo"] .mode-grid{grid-template-columns:1fr}
+ body[data-page="modos"] .mode-tile,body[data-page="modo"] .mode-tile{min-height:205px}
+ body[data-page="modos"] .mode-icon{width:62px;height:62px}
+}
+@media(prefers-reduced-motion:reduce){
+ .a7-wayfinder a,.v5-root .v5-photo-card,.v4-root .v4-news-card,
+ body[data-page="modos"] .mode-tile,body[data-page="modo"] .mode-tile{transition:none;transform:none!important}
+}
