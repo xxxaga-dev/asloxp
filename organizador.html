@@ -6,83 +6,13 @@
 <meta name="theme-color" content="#061524">
 <meta name="description" content="ASLO · Espacio de trabajo del organizador. Prototipo interactivo con búsquedas, filtros y navegación directa.">
 <title>ASLO · Organizador</title>
-<link rel="stylesheet" href="assets/organizer-workspace.css?v=121">
+<link rel="stylesheet" href="assets/organizer-workspace.css?v=13">
+<link rel="stylesheet" href="assets/aslo-shell.css?v=1">
 <link rel="stylesheet" href="assets/motion-xp10.css?v=1">
 </head>
 <body data-page="organizador">
 <a class="ow-skip" href="#ow-main">Saltar al contenido</a>
-<div id="ow-app">
- <header class="ow-top"><a href="organizador.html?vista=inicio" class="ow-brand"><span aria-hidden="true">▲</span> ASLO</a><span class="ow-top-division" aria-hidden="true"></span><span class="ow-workspace-title">Espacio del organizador</span><button type="button" id="ow-find-task" class="ow-find-task" aria-haspopup="dialog" aria-controls="ow-task-dialog"><span aria-hidden="true">⌕</span> <span>Buscar función</span> <kbd>Ctrl K</kbd></button><span class="ow-demo">PROTOTIPO · DATOS DE MUESTRA</span><details class="ow-account-menu" id="ow-account-menu">
- <summary class="ow-account-trigger" id="ow-account-trigger" aria-label="Abrir opciones de cuenta">
-  <span class="ow-profile-copy"><strong id="ow-account-name">Invitado</strong><small id="ow-account-mode">Organizador</small></span>
-  <span class="ow-profile-visual" id="ow-account-image" aria-hidden="true"></span>
-  <span class="ow-account-chevron" aria-hidden="true"></span>
- </summary>
- <div class="ow-account-panel" aria-label="Opciones de cuenta">
-  <div class="ow-account-panel-head">
-   <span class="ow-panel-avatar" id="ow-panel-avatar" aria-hidden="true"></span>
-   <div><strong id="ow-panel-name">Invitado</strong><small id="ow-panel-mode">Organizador</small></div>
-  </div>
-  <div class="ow-account-personal" id="ow-account-personal">
-   <a href="cuenta.html?tab=perfil" data-account-label="profile"><span aria-hidden="true">♙</span><span>Mi perfil y avatar</span><b aria-hidden="true">›</b></a>
-   <a href="cuenta.html?tab=apariencia" data-account-label="appearance"><span aria-hidden="true">◐</span><span>Apariencia</span><b aria-hidden="true">›</b></a>
-   <a href="cuenta.html?tab=seguridad" data-account-label="security"><span aria-hidden="true">◇</span><span>Seguridad</span><b aria-hidden="true">›</b></a>
-   <a href="modos.html" data-account-label="switch"><span aria-hidden="true">⇄</span><span>Mis modos</span><b aria-hidden="true">›</b></a>
-  </div>
-  <label class="ow-account-language" for="ow-account-language">
-   <span><span aria-hidden="true">文</span> <span id="ow-language-label">Idioma</span></span>
-   <select id="ow-account-language" aria-label="Idioma de la interfaz"><option value="es">Español</option><option value="en">English</option><option value="de">Deutsch</option></select>
-  </label>
-  <button class="ow-account-logout" id="ow-account-logout" type="button"><span aria-hidden="true">↪</span><span>Cerrar sesión</span></button>
-  <a class="ow-account-signin" id="ow-account-signin" href="acceso.html" hidden>Iniciar sesión</a>
-  <small class="ow-account-hint" id="ow-account-hint">Cuenta personal · opciones disponibles en todos tus modos</small>
- </div>
- </details></header>
- <div class="ow-shell">
- <aside class="ow-sidebar" aria-label="Navegación del organizador">
-  <div class="ow-nav-groups">
-   <section class="ow-nav-group"><h2 class="ow-sidelabel">MI ESPACIO</h2><nav class="ow-nav" aria-label="Mi espacio">
-    <a href="organizador.html?vista=inicio" data-view="inicio"><span class="ow-icon" aria-hidden="true">⌂</span><span>Inicio</span></a>
-    <a href="organizador.html?vista=ligas" data-view="ligas"><span class="ow-icon" aria-hidden="true">⬡</span><span>Mis ligas</span></a>
-    <a href="organizador.html?vista=torneos" data-view="torneos"><span class="ow-icon" aria-hidden="true">▦</span><span>Torneos</span></a>
-   </nav></section>
-   <section class="ow-nav-group"><h2 class="ow-sidelabel">OPERACIÓN</h2><nav class="ow-nav" aria-label="Operación deportiva">
-    <a href="organizador.html?vista=agenda" data-view="agenda"><span class="ow-icon" aria-hidden="true">▤</span><span>Agenda y jornadas</span></a>
-    <a href="organizador.html?vista=solicitudes" data-view="solicitudes"><span class="ow-icon" aria-hidden="true">✉</span><span>Solicitudes y avisos</span></a>
-    <a href="organizador.html?vista=recursos" data-view="recursos"><span class="ow-icon" aria-hidden="true">♧</span><span>Jueces y escenarios</span></a>
-   </nav></section>
-   <section class="ow-nav-group"><h2 class="ow-sidelabel">SEGUIMIENTO</h2><nav class="ow-nav" aria-label="Seguimiento y comunicación">
-    <a href="organizador.html?vista=resultados" data-view="resultados"><span class="ow-icon" aria-hidden="true">◉</span><span>Resultados</span></a>
-    <a href="organizador.html?vista=comunicaciones" data-view="comunicaciones"><span class="ow-icon" aria-hidden="true">◈</span><span>Comunicaciones</span></a>
-   </nav></section>
-  </div>
-  <div class="ow-sidebottom"><a href="mis-ligas.html?nueva=1">＋ Crear liga</a></div>
- </aside>
- <main class="ow-main" id="ow-main" tabindex="-1">
- <div id="ow-content" aria-live="off"><div class="ow-initial">Preparando el espacio del organizador…</div></div>
- </main>
- </div>
- <nav class="ow-mobile-nav aslo-shell-mobile-nav" aria-label="Accesos del organizador">
-  <a data-view="inicio" href="organizador.html?vista=inicio"><span class="aslo-nav-symbol" aria-hidden="true">⌂</span><span class="aslo-nav-caption">Inicio</span></a>
-  <a data-view="torneos" href="organizador.html?vista=torneos"><span class="aslo-nav-symbol" aria-hidden="true">▦</span><span class="aslo-nav-caption">Torneos</span></a>
-  <a data-view="agenda" href="organizador.html?vista=agenda"><span class="aslo-nav-symbol" aria-hidden="true">▤</span><span class="aslo-nav-caption">Agenda</span></a>
-  <button type="button" class="ow-mobile-more" id="ow-mobile-more" aria-expanded="false" aria-controls="ow-mobile-drawer"><span class="aslo-nav-symbol" aria-hidden="true">☰</span><span class="aslo-nav-caption">Más</span></button>
- </nav>
- <div class="ow-drawer-backdrop" id="ow-drawer-backdrop" hidden></div>
- <aside class="ow-mobile-drawer" id="ow-mobile-drawer" aria-label="Todas las funciones del organizador" hidden>
- <div class="ow-drawer-heading"><strong>Espacio del organizador</strong><button id="ow-drawer-close" type="button" aria-label="Cerrar menú">×</button></div>
- <nav class="ow-drawer-links" aria-label="Todas las secciones">
-  <a data-view="inicio" href="organizador.html?vista=inicio">⌂ Inicio</a>
-  <a data-view="ligas" href="organizador.html?vista=ligas">⬡ Mis ligas</a>
-  <a data-view="torneos" href="organizador.html?vista=torneos">▦ Torneos</a>
-  <a data-view="agenda" href="organizador.html?vista=agenda">▤ Agenda y jornadas</a>
-  <a data-view="solicitudes" href="organizador.html?vista=solicitudes">✉ Solicitudes y avisos</a>
-  <a data-view="recursos" href="organizador.html?vista=recursos">♧ Jueces y escenarios</a>
-  <a data-view="resultados" href="organizador.html?vista=resultados">◉ Resultados</a>
-  <a data-view="comunicaciones" href="organizador.html?vista=comunicaciones">◈ Comunicaciones</a>
- </nav>
- </aside>
-</div>
+<div id="ow-app"><main class="ow-initial">Activa JavaScript para abrir el espacio del organizador.</main></div>
 <dialog class="ow-task-dialog" id="ow-task-dialog" aria-labelledby="ow-task-heading">
  <div class="ow-task-dialog-head"><div><span class="ow-eyebrow">NAVEGACIÓN POR TAREA</span><h2 id="ow-task-heading">¿Qué necesitas hacer?</h2></div><button type="button" class="ow-task-close" id="ow-task-close" aria-label="Cerrar búsqueda">×</button></div>
  <label class="ow-task-search-label" for="ow-task-search">Buscar una función</label>
@@ -90,10 +20,12 @@
  <div id="ow-task-results" class="ow-task-results" role="status" aria-live="polite"></div>
  <p class="ow-task-foot">Selecciona una tarea. ASLO te llevará a elegir la liga o el torneo adecuado.</p>
 </dialog>
-<script src="assets/auth-v2.js?v=14"></script>
+<script src="assets/auth-v2.js?v=15"></script>
 <script src="assets/league-manager.js?v=2"></script>
-<script src="assets/organizer-workspace.js?v=111"></script>
+<script src="assets/aslo-shell.js?v=1"></script>
+<script src="assets/organizer-shell-init.js?v=1"></script>
+<script src="assets/organizer-workspace.js?v=13"></script>
 <script src="assets/organizer-task-finder.js?v=1"></script>
-<script src="assets/organizer-account.js?v=121"></script><script src="assets/motion-xp10.js?v=1"></script>
+<script src="assets/organizer-account.js?v=13"></script><script src="assets/motion-xp10.js?v=1"></script>
 </body>
 </html>
