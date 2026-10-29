@@ -1,0 +1,76 @@
+/* ASLO shared application layout v1.
+   The same responsive chrome is used by organizer and generic sport modes.
+   Each mode supplies only navigation and its workspace content. */
+:root{--aslo-chrome-height:72px;--aslo-tabbar-height:69px;--aslo-chrome-focus:#d1ff97}
+.aslo-shell-header,.aslo-shell-frame,.aslo-shell-sidebar,.aslo-shell-main,
+.aslo-shell-mobile-nav,.aslo-account-slot{min-width:0}
+.aslo-shell-header{isolation:isolate}
+.aslo-account-slot{margin-left:auto;display:flex;justify-content:flex-end;align-items:center;flex:none}
+.aslo-shell-header:has(.aslo-account-slot) .ow-demo{margin-left:auto}
+.aslo-shell-header:has(.aslo-account-slot) .aslo-account-slot{margin-left:0}
+.aslo-shell-mobile-nav .aslo-nav-symbol{display:block;font-size:23px;line-height:1.1;flex:none}
+.aslo-shell-mobile-nav .aslo-nav-caption{display:block;width:100%;max-width:100%;min-width:0;
+ font-size:11px;line-height:1.2;font-weight:830;white-space:normal;
+ text-align:center;text-wrap:balance;overflow-wrap:normal;word-break:normal;
+ flex:none;padding-inline:3px}
+.aslo-shell-mobile-nav a,.aslo-shell-mobile-nav .ow-mobile-more{
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+ text-align:center;vertical-align:middle;min-width:0;width:100%;margin:0;box-sizing:border-box;
+ padding:8px 3px calc(8px + env(safe-area-inset-bottom));
+}
+.aslo-shell-mobile-nav .ow-mobile-more{font:inherit;color:#a9c8d8;border:0;background:transparent;cursor:pointer}
+.aslo-shell-mobile-nav .ow-mobile-more .aslo-nav-caption{font-size:11px}
+.aslo-shell-mobile-nav a:focus-visible,.aslo-shell-mobile-nav .ow-mobile-more:focus-visible{
+ outline:2px solid var(--aslo-chrome-focus);outline-offset:-3px}
+.aslo-shell-mobile-nav a.is-active,.aslo-shell-mobile-nav .ow-mobile-more[aria-expanded="true"]{
+ box-shadow:inset 0 3px #c3fd83}
+.aslo-shell-header .ow-account-chevron,.arena-account-slot .ow-account-chevron{display:none!important}
+.aslo-shell-header .ow-account-trigger,.arena-account-slot .ow-account-trigger{padding-right:10px!important}
+.aslo-shell-header .ow-account-trigger[aria-expanded="true"],.aslo-shell-header .ow-account-menu[open] .ow-account-trigger{
+ box-shadow:0 0 0 1px #bfffab!important}
+.aslo-shell-header .ow-account-panel,.arena-account-slot .ow-account-panel{max-height:min(75dvh,650px);overflow:auto;overscroll-behavior:contain}
+.aslo-shell-header .ow-account-panel a,.arena-account-slot .ow-account-panel a{min-height:40px}
+.aslo-shell-header .ow-account-personal[hidden],.arena-account-slot .ow-account-personal[hidden]{display:none!important}
+/* Common mode workspace uses organizer typography, cards and HUD; functionality varies. */
+.aslo-generic-workspace{max-width:1550px}
+.aslo-generic-workspace .ow-hero{margin-bottom:19px}
+.aslo-generic-workspace .aslo-preview-group{margin-top:25px}
+.aslo-generic-workspace .aslo-preview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.aslo-generic-workspace .aslo-preview-card{position:relative;display:flex;flex-direction:column;min-height:180px;padding:22px;
+ background:linear-gradient(145deg,#102d40,#081d30);border:1px solid #3d7188;
+ border-radius:13px;scroll-margin-top:92px;transition:border-color .2s,transform .22s,box-shadow .22s}
+.aslo-generic-workspace .aslo-preview-card:target{border-color:#c4fc86;box-shadow:0 0 0 1px #9bf5a76d,0 8px 35px #0006}
+.aslo-generic-workspace .aslo-preview-card:hover{transform:translateY(-2px);border-color:#80d5ed}
+.aslo-generic-workspace .aslo-preview-card h2{font-size:20px;margin:12px 0 7px}
+.aslo-generic-workspace .aslo-preview-card p{font-size:12px;color:#adc9d8;line-height:1.55}
+.aslo-generic-workspace .aslo-preview-card .ow-eyebrow{font-size:10px;color:#cfffa5}
+.aslo-generic-workspace .aslo-preview-note{margin-top:20px;padding:14px 17px;
+ background:#14364a;border-left:3px solid #b6f17d;border-radius:3px 10px 10px 3px;
+ color:#c1dce9;font-size:12px}
+.aslo-shell-sidebar .ow-nav a{min-height:42px}
+.aslo-shell-mobile-nav .ow-mobile-more{line-height:normal}
+html[data-theme="light"] .aslo-generic-workspace .aslo-preview-card{background:#fff;color:#1e455b;border-color:#b1cbda}
+html[data-theme="light"] .aslo-generic-workspace .aslo-preview-card p{color:#4d7285}
+html[data-theme="light"] .aslo-generic-workspace .aslo-preview-note{background:#e6f3f9;color:#284d61}
+html[data-theme="light"] .aslo-shell-mobile-nav .ow-mobile-more{color:#395e72}
+@media(max-width:1000px){.aslo-generic-workspace .aslo-preview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ :root{--aslo-chrome-height:62px}
+ .aslo-shell-mobile-nav{grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  align-items:stretch;min-height:68px;padding-bottom:0!important}
+ .aslo-shell-mobile-nav a,.aslo-shell-mobile-nav .ow-mobile-more{min-height:66px!important;min-width:0;padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom))}
+ .aslo-shell-mobile-nav .aslo-nav-caption{font-size:11px!important;line-height:1.2!important}
+ .aslo-shell-mobile-nav .aslo-nav-symbol{font-size:23px!important;line-height:1.1!important}
+ .aslo-generic-workspace .aslo-preview-grid{grid-template-columns:1fr}
+ .aslo-generic-workspace .aslo-preview-card{min-height:145px}
+ .aslo-shell-header .ow-brand{font-size:24px}
+ .aslo-shell-header .aslo-account-slot{margin-left:auto}
+ .aslo-shell-header .ow-demo{display:none}
+ .aslo-shell-header:has(.ow-account-menu[open]){z-index:95}
+}
+@media(max-width:390px){
+ .aslo-shell-mobile-nav .aslo-nav-caption{font-size:10px!important}
+ .aslo-shell-mobile-nav .aslo-nav-symbol{font-size:21px!important}
+ .aslo-shell-header .ow-brand{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){.aslo-generic-workspace .aslo-preview-card{transition:none}.aslo-generic-workspace .aslo-preview-card:hover{transform:none}}
