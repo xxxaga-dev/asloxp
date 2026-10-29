@@ -65,3 +65,48 @@ body[data-page="liga-admin"] .arena-tour-footer a:hover{
 body[data-page="liga-admin"] .arena-tour-head-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 body[data-page="liga-admin"] .arena-tour-head-actions .arena-action{min-height:43px}
 @media(max-width:680px){body[data-page="liga-admin"] .arena-tour-head-actions{width:100%}body[data-page="liga-admin"] .arena-tour-head-actions .arena-action{flex:1}}
+
+
+/* Contextual league and tournament navigation: clear groupings, one active task. */
+.arena-league-crumb{display:flex;align-items:center;flex-wrap:wrap;gap:9px;color:#a8c5d8;font-size:12px;margin:5px 0 18px}
+.arena-league-crumb a{color:#7bd0ef;font-weight:800}
+.arena-league-sections{display:flex;gap:7px;overflow-x:auto;padding:8px 2px 12px;margin:0 0 15px;border-bottom:1px solid #426b83;scrollbar-width:thin}
+.arena-league-sections button{flex:none;border:1px solid #41697d;border-radius:9px;background:#132e43;color:#b9d6e5;padding:12px 16px;font-size:12px;font-weight:810;transition:background .2s,border-color .2s}
+.arena-league-sections button:hover{background:#1a4358;color:white}
+.arena-league-sections button.active{border-color:#baf775;background:#284631;color:#d9fbc0}
+.arena-league-section-body{min-height:220px;animation:ow-tournament-panel .34s ease-out both}
+.arena-league-section-body>.arena-block{margin:0}
+.arena-league-data-title{display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap}
+.arena-league-data-title h2{margin:0}
+.arena-league-key-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0}
+.arena-league-key-values>div{min-width:0;padding:17px;border:1px solid #3b6981;background:#0b2639;border-radius:11px}
+.arena-league-key-values span{display:block;color:#9fc4d6;font-size:11px;font-weight:750;margin-bottom:8px}
+.arena-league-key-values strong{display:block;font-size:14px;overflow-wrap:anywhere}
+.arena-league-preview{border:1px solid #3b647c;background:linear-gradient(135deg,#0f293b,#081c2d);padding:clamp(20px,3vw,32px);border-radius:14px}
+.arena-league-preview h2{margin:8px 0}
+.arena-league-preview-points{display:grid;gap:11px;margin:22px 0}
+.arena-league-preview-points>div{border-left:2px solid #5db8c7;padding:8px 12px;background:#18405255;border-radius:0 8px 8px 0;font-size:13px;color:#d2e9f6}
+.arena-league-news>.arena-news{margin:0}
+.arena-tourney-sections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0 20px}
+.arena-tourney-group{min-width:0;padding:13px;background:#0c2435;border:1px solid #38667f;border-radius:12px}
+.arena-tourney-group>strong{display:block;font-size:10px;color:#b9f091;letter-spacing:.16em;margin:3px 0 12px}
+.arena-tourney-group>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.arena-tourney-group button{min-width:0;text-align:left;background:#16364b;color:#c4dbe8;border:1px solid #335971;border-radius:8px;padding:10px 11px;font-size:11px;font-weight:770;transition:background .18s,border-color .18s,transform .18s}
+.arena-tourney-group button:hover{background:#24506a;color:white;transform:translateY(-1px)}
+.arena-tourney-group button.active{border-color:#c5fa8e;background:#304f34;color:#e2ffc9;box-shadow:inset 3px 0 #baf775}
+.arena-function-preview{margin:0;min-height:240px;border:1px solid #3b6980;border-radius:12px;background:linear-gradient(145deg,#0c2a3d,#081a2d);padding:clamp(20px,3vw,32px)}
+.arena-function-preview h2{margin:13px 0 14px;font-size:clamp(24px,2.5vw,34px)}
+.arena-function-preview p{color:#c7dce8;max-width:820px;line-height:1.7}
+.arena-preview-boundary{margin-top:20px;border:1px solid #826e43;border-radius:10px;background:#2e2c20;color:#f1d9a6;font-size:12px;padding:13px 16px}
+@media(max-width:1180px){.arena-tourney-sections{grid-template-columns:1fr 1fr}.arena-tourney-group:last-child{grid-column:1/-1}}
+@media(max-width:760px){
+ .arena-tourney-sections{grid-template-columns:1fr;gap:8px}
+ .arena-tourney-group:last-child{grid-column:auto}
+ .arena-tourney-group>div{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .arena-league-key-values{grid-template-columns:1fr}
+ .arena-league-sections button{padding:10px 13px}
+ .arena-league-data-title{flex-direction:column;align-items:flex-start}
+ .arena-function-preview{min-height:0}
+}
+@media(max-width:400px){.arena-tourney-group>div{grid-template-columns:1fr 1fr}.arena-tourney-group button{font-size:10px;padding:10px 8px}}
+@media(prefers-reduced-motion:reduce){.arena-league-section-body{animation:none!important}.arena-tourney-group button{transition:none!important;transform:none!important}}
