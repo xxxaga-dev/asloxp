@@ -8,7 +8,7 @@ const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&
 function row(item,cls){
  const href=esc(item.href||"#");
  const iv=esc(item.key||"");
- return '<a class="'+(cls||"")+'" href="'+href+'" data-view="'+iv+'"'+(item.active?' aria-current="page" class="is-active"':'')+'>'+
+ return '<a class="'+(cls||"")+(item.active?' is-active':'')+'" href="'+href+'" data-view="'+iv+'"'+(item.active?' aria-current="page"':'')+'>'+
  '<span class="aslo-nav-symbol" aria-hidden="true">'+(item.icon||"◈")+'</span>'+
  '<span class="aslo-nav-caption">'+esc(item.short||item.label)+'</span></a>';
 }
