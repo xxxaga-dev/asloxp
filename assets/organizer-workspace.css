@@ -216,3 +216,5 @@ html[data-theme="light"] .ow-mobile-nav a.is-active{background:#d5edf8;color:#16
  html[data-theme="light"] .ow-mobile-result dt{color:#50758a}
  html[data-theme="light"] .ow-mobile-result dd{color:#274f64}
 }
+
+@media(max-width:760px){.ow-home-table{display:none}.ow-home-mobile{display:grid;gap:12px}}
