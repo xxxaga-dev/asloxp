@@ -28,7 +28,7 @@ No crear una nueva cabecera, avatar, menú de cuenta, barra inferior o panel Má
 
 ## Variante de visitante / consulta pública
 
-**Regla declarada por el propietario:** el visitante también utiliza el layout estándar, pero no requiere sesión de usuario y solo puede navegar información pública. No hay cuenta, roles ni contraseñas de visitante; iniciar sesión se ofrece desde el menú personal, no para desbloquear la consulta.
+**Regla declarada por el propietario:** el visitante también utiliza el layout estándar, pero no requiere sesión de usuario y solo puede navegar información pública. No hay cuenta, roles ni contraseñas de visitante; **sin sesión el encabezado muestra directamente «Iniciar sesión», sin nombre/avatar ficticio ni desplegable de perfil**. Si existe sesión real, el encabezado muestra el menú personal del usuario autenticado. En ningún caso se exige autenticación para consultar información pública.
 
 El prototipo público reutiliza el mismo shell mediante `assets/visitor-shell.js` y `assets/visitor-shell.css`, con contenidos existentes de noticias, ligas, torneos y resultados y sus detalles en `index.html`, `ligas.html`, `torneos.html`, `resultados.html`, `liga.html` y `torneo.html`. La navegación inferior de referencia muestra Inicio, Torneos, Resultados y Más; Ligas queda visible en el lateral y dentro de Más. Deporte y ubicación de demostración se seleccionan desde Más sin geolocalización ni acceso. **Estas opciones concretas de menú están EN ANÁLISIS hasta revisión del propietario**, aunque el layout compartido ya está aprobado.
 
