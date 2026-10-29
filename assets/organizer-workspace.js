@@ -78,8 +78,8 @@ function allTournaments(){
 function leagueLink(l){return manager?.leagueLink?.(l.id,"liga")||("liga-admin.html?liga="+encodeURIComponent(l.id)+"&vista=inicio")}
 
 var taskSelection={
- liga:{general:"Información general",participacion:"Categorías y participación",reglas:"Reglamentos y versiones",responsables:"Administradores y asistentes",noticias:"Noticias de liga"},
- torneo:{inscripciones:"Equipos, cupos y sustituciones",fases:"Fases, grupos y cruces",partidos:"Calendario y encuentros",solicitudes:"Solicitudes de reprogramación",oficiales:"Arbitraje y designaciones",escenarios:"Escenarios y franjas",planillas:"Planillas y actas",disciplina:"Disciplina y decisiones",clasificacion:"Clasificación y resultados",premios:"Premiación",noticias:"Noticias del torneo",cierre:"Estado y cierre"}
+ liga:{general:"Información general",participacion:"Categorías y participación",reglas:"Reglamentos y versiones",responsables:"Administradores y asistentes",noticias:"Noticias de liga",reconocimiento:"Reconocimiento ASLO"},
+ torneo:{inscripciones:"Equipos, cupos y sustituciones",fases:"Fases, grupos y cruces",interligas:"Competiciones interligas",partidos:"Calendario y encuentros",solicitudes:"Solicitudes de reprogramación",oficiales:"Arbitraje y designaciones",escenarios:"Escenarios y franjas",planillas:"Planillas y actas",disciplina:"Disciplina y decisiones",clasificacion:"Clasificación y resultados",premios:"Premiación",noticias:"Noticias del torneo",cierre:"Estado y cierre"}
 };
 function taskTarget(item,league){
  if(!state.action||!taskSelection[league?"liga":"torneo"][state.action])return league?leagueLink(item):tournamentLink(item);
