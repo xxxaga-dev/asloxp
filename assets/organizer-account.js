@@ -11,8 +11,9 @@ function mount(){
  if(slot&&!document.getElementById("ow-account-menu"))slot.innerHTML=markup;
  const node=document.getElementById("ow-account-menu");
  if(!node)return;
- if(control!==node){
-  control=node;
+ control=node;
+ if(!node.dataset.accountReady){
+  node.dataset.accountReady="1";
   node.addEventListener("toggle",()=>{
    if(node.open)node.querySelector(".ow-account-panel a:not([hidden]),.ow-account-panel select")?.focus({preventScroll:true});
   });
