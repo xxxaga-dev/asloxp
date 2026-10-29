@@ -64,7 +64,7 @@ var VIEWS=["inicio","ligas","torneos","agenda","solicitudes","recursos","resulta
 var isView=v=>VIEWS.includes(v);
 var escape=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 var params=new URLSearchParams(location.search);
-var state={view:isView(params.get("vista"))?params.get("vista"):"inicio",search:params.get("buscar")||"",sport:params.get("deporte")||"all",league:params.get("liga")||"all",status:params.get("estado")||"all",size:[2,5,10].includes(Number(params.get("limite")))?Number(params.get("limite")):2,page:Math.max(1,Math.min(999,Number(params.get("pagina"))||1))};
+var state={view:isView(params.get("vista"))?params.get("vista"):"inicio",action:params.get("accion")||"",search:params.get("buscar")||"",sport:params.get("deporte")||"all",league:params.get("liga")||"all",status:params.get("estado")||"all",size:[2,5,10].includes(Number(params.get("limite")))?Number(params.get("limite")):2,page:Math.max(1,Math.min(999,Number(params.get("pagina"))||1))};
 function allLeagues(){try{return manager?.all?.()||[]}catch(e){return []}}
 function savedTournaments(id){
  try{var data=JSON.parse(sessionStorage.getItem("aslo-arena-tournaments:"+id));return Array.isArray(data)?data:[]}catch(e){return []}
@@ -76,6 +76,25 @@ function allTournaments(){
  });
 }
 function leagueLink(l){return manager?.leagueLink?.(l.id,"liga")||("liga-admin.html?liga="+encodeURIComponent(l.id)+"&vista=inicio")}
+
+var taskSelection={
+ liga:{general:"Información general",participacion:"Categorías y participación",reglas:"Reglamentos y versiones",responsables:"Administradores y asistentes",noticias:"Noticias de liga"},
+ torneo:{inscripciones:"Equipos, cupos y sustituciones",fases:"Fases, grupos y cruces",partidos:"Calendario y encuentros",solicitudes:"Solicitudes de reprogramación",oficiales:"Arbitraje y designaciones",escenarios:"Escenarios y franjas",planillas:"Planillas y actas",disciplina:"Disciplina y decisiones",clasificacion:"Clasificación y resultados",premios:"Premiación",noticias:"Noticias del torneo",cierre:"Estado y cierre"}
+};
+function taskTarget(item,league){
+ if(!state.action||!taskSelection[league?"liga":"torneo"][state.action])return league?leagueLink(item):tournamentLink(item);
+ if(league){
+  var base=manager?.leagueLink?.(item.id,"liga")||("liga-admin.html?liga="+encodeURIComponent(item.id)+"&vista=liga");
+  return base+"&seccion="+encodeURIComponent(state.action);
+ }
+ return tournamentLink(item)+"&tab="+encodeURIComponent(state.action);
+}
+function taskLabel(isLeague){return taskSelection[isLeague?"liga":"torneo"][state.action]||""}
+function taskStep(isLeague){
+ if(!state.action||!taskLabel(isLeague))return "";
+ return '<div class="ow-task-selection"><span class="ow-step">1 / 2</span><div><strong>'+escape(isLeague?"Selecciona la liga":"Selecciona el torneo")+'</strong><p>Para acceder a <b>'+escape(taskLabel(isLeague))+'</b>, elige primero dónde vas a trabajar. Se abrirá directamente esa función.</p></div><button type="button" data-clear-task>✕ Limpiar tarea</button></div>';
+}
+
 function tournamentLink(x){
  var base=manager?.leagueLink?.(x.leagueId,"torneos")||("liga-admin.html?liga="+encodeURIComponent(x.leagueId)+"&vista=torneos");
  return base+"&torneo="+encodeURIComponent(x.id);
@@ -111,12 +130,12 @@ function updateStatic(){
 function resetFilters(){state.search="";state.sport="all";state.league="all";state.status="all";state.page=1}
 function writeUrl(replace){
  var url=new URL(location.href);url.searchParams.set("vista",state.view);
- [["buscar",state.search],["deporte",state.sport==="all"?"":state.sport],["liga",state.league==="all"?"":state.league],["estado",state.status==="all"?"":state.status],["pagina",state.page===1?"":state.page],["limite",state.size===2?"":state.size]].forEach(function(pair){if(pair[1])url.searchParams.set(pair[0],pair[1]);else url.searchParams.delete(pair[0])});
+ [["buscar",state.search],["deporte",state.sport==="all"?"":state.sport],["liga",state.league==="all"?"":state.league],["estado",state.status==="all"?"":state.status],["pagina",state.page===1?"":state.page],["limite",state.size===2?"":state.size],["accion",(state.view==="ligas"||state.view==="torneos")?state.action:""]].forEach(function(pair){if(pair[1])url.searchParams.set(pair[0],pair[1]);else url.searchParams.delete(pair[0])});
  history[replace?"replaceState":"pushState"]({}, "", url.pathname+url.search+url.hash);
 }
 function navigate(view){
  if(!isView(view))return;
- state.view=view;resetFilters();writeUrl(false);render();
+ state.view=view;state.action="";resetFilters();writeUrl(false);render();
  window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
  root.querySelector("h1")?.focus({preventScroll:true});
 }
@@ -181,7 +200,7 @@ function filtered(){
 }
 function tableRow(item,i){
  var league=state.view==="ligas";
- var link=league?leagueLink(item):tournamentLink(item);
+ var link=taskTarget(item,league);
  return '<tr class="ow-row-appear" style="--ow-delay:'+Math.min(i*48,350)+'ms">'+
  (league?'<td><span class="ow-item-name">'+escape(item.name)+'</span><span class="ow-item-sub">'+escape(sportName(item.sport))+'</span></td><td>'+escape(locationText(item))+'</td><td>'+escape((item.categories||[]).length)+'</td>':
  '<td><span class="ow-item-name">'+escape(item.name)+'</span><span class="ow-item-sub">'+escape(item.sub||sportName(item.sport))+'</span></td><td>'+escape(item.leagueName)+'</td><td>'+badge(item.state)+'</td><td>'+escape(String(item.teams))+'</td>')+
@@ -189,7 +208,7 @@ function tableRow(item,i){
 }
 
 function mobileRow(item,i){
- var isLeague=state.view==="ligas",url=isLeague?leagueLink(item):tournamentLink(item);
+ var isLeague=state.view==="ligas",url=taskTarget(item,isLeague);
  var details=isLeague?[
   [t("sport"),sportName(item.sport)],[t("location"),locationText(item)]
  ]:[
@@ -218,7 +237,7 @@ function resultList(){
 function renderList(){
  var league=state.view==="ligas";
  return '<div class="ow-appear"><div class="ow-breadcrumb"><a href="organizador.html?vista=inicio" data-nav="inicio">'+escape(t("breadcrumb"))+'</a> / '+escape(t(league?"leagues":"tournaments"))+'</div>'+
- heading(t(league?"leagueTitle":"tourTitle"),t(league?"leagueDesc":"tourDesc"),league?'<a class="ow-btn ow-btn-primary" href="mis-ligas.html?nueva=1">＋ '+escape(t("createLeague"))+'</a>':"")+
+ taskStep(league)+heading(t(league?"leagueTitle":"tourTitle"),t(league?"leagueDesc":"tourDesc"),league?'<a class="ow-btn ow-btn-primary" href="mis-ligas.html?nueva=1">＋ '+escape(t("createLeague"))+'</a>':"")+
  filters(league)+'<div id="ow-data-region">'+resultList()+'</div><p class="ow-caption">'+escape(t("onlyDemo"))+'</p></div>';
 }
 
@@ -319,6 +338,7 @@ function setDrawer(open){
  else if(drawer.contains(document.activeElement))button.focus();
 }
 document.addEventListener("click",function(e){
+ if(e.target.closest("[data-clear-task]")){state.action="";writeUrl(true);render();return;}
  if(e.target.closest("#ow-mobile-more")){setDrawer(document.getElementById("ow-mobile-drawer").hidden);return;}
  if(e.target.closest("#ow-drawer-close,#ow-drawer-backdrop")){setDrawer(false);return;}
  var nav=e.target.closest("[data-nav],.ow-nav a[data-view],.ow-mobile-nav a[data-view],.ow-drawer-links a[data-view]");
@@ -348,7 +368,7 @@ window.addEventListener("popstate",function(){
  setDrawer(false);
  params=new URLSearchParams(location.search);
  state.view=isView(params.get("vista"))?params.get("vista"):"inicio";
- state.search=params.get("buscar")||"";state.sport=params.get("deporte")||"all";state.league=params.get("liga")||"all";state.status=params.get("estado")||"all";
+ state.action=params.get("accion")||"";state.search=params.get("buscar")||"";state.sport=params.get("deporte")||"all";state.league=params.get("liga")||"all";state.status=params.get("estado")||"all";
  state.page=Math.max(1,Number(params.get("pagina"))||1);
  state.size=[2,5,10].includes(Number(params.get("limite")))?Number(params.get("limite")):2;
  render();
