@@ -150,3 +150,49 @@ button:disabled{opacity:.42;cursor:not-allowed}
  .ow-btn,.ow-shortcut,.ow-nav a,.ow-mode-switch{transition:none!important}
  .ow-btn:hover,.ow-shortcut:hover{transform:none!important}
 }
+
+
+/* Respect the existing user light-theme preference without losing sports imagery. */
+html[data-theme="light"] body[data-page="organizador"]{
+ --ow-bg:#eaf2f7;--ow-top:#f9fcff;--ow-side:#f0f6fa;--ow-panel:#f6fbfe;
+ --ow-elev:#deebf4;--ow-line:#aec8d8;--ow-text:#123246;--ow-sub:#416477;
+ --ow-blue:#16668f;--ow-focus:#036a95;background:#edf5fa;color:#15374d;color-scheme:light;
+}
+html[data-theme="light"] .ow-top{background:#f7fcfff2;border-color:#afcbdc}
+html[data-theme="light"] .ow-workspace-title,html[data-theme="light"] .ow-nav a,html[data-theme="light"] .ow-mode-switch{color:#244c62}
+html[data-theme="light"] .ow-top-division{background:#afcbdc}
+html[data-theme="light"] .ow-demo{background:#dcecf5;color:#37637b;border-color:#aacbdc}
+html[data-theme="light"] .ow-sidebar{background:#f0f7fc;border-color:#c2d8e5}
+html[data-theme="light"] .ow-sidelabel{color:#4a7a94}
+html[data-theme="light"] .ow-nav a:hover,html[data-theme="light"] .ow-nav a.is-active{background:#d8eaf5;color:#0d3d58;border-color:#9bc2d9}
+html[data-theme="light"] .ow-icon{color:#417693}
+html[data-theme="light"] .ow-nav a.is-active .ow-icon{color:#226a91}
+html[data-theme="light"] .ow-sidehelp{background:#e0eff8;border-color:#b4ccda}
+html[data-theme="light"] .ow-sidehelp strong{color:#1d5a7a}
+html[data-theme="light"] .ow-sidehelp p,html[data-theme="light"] .ow-sidebottom a{color:#40677d}
+html[data-theme="light"] .ow-panel,html[data-theme="light"] .ow-metric{background:#fff;color:#173c54;border-color:#b6cedd}
+html[data-theme="light"] .ow-metric span,html[data-theme="light"] .ow-heading p{color:#4e6f82}
+html[data-theme="light"] .ow-hero{color:white}
+html[data-theme="light"] .ow-hero .ow-eyebrow{color:#b6e8ff}
+html[data-theme="light"] .ow-hero .ow-btn:not(.ow-btn-primary){color:#e8f7ff;background:#1a3c53}
+html[data-theme="light"] .ow-shortcut{background:#fff;color:#153e54;border-color:#afccdb}
+html[data-theme="light"] .ow-shortcut:hover{background:#edfaff}
+html[data-theme="light"] .ow-shortcut p{color:#52778b}
+html[data-theme="light"] .ow-shortcut>span{color:#226f98}
+html[data-theme="light"] .ow-toolbar,html[data-theme="light"] .ow-table-wrap{background:#fff;border-color:#accbdc}
+html[data-theme="light"] .ow-toolbar label,html[data-theme="light"] .ow-results-summary{color:#32576c}
+html[data-theme="light"] .ow-search input,html[data-theme="light"] .ow-field select,html[data-theme="light"] .ow-pagination select{background:#f5faff;color:#153a50;border-color:#b6cfdc}
+html[data-theme="light"] .ow-table th{background:#e2f0f8;color:#35596d;border-color:#b8ceda}
+html[data-theme="light"] .ow-table td{color:#254b61;border-color:#d2e0ea}
+html[data-theme="light"] .ow-table tbody tr:hover{background:#eaf4fa}
+html[data-theme="light"] .ow-table .ow-item-name{color:#14364e}
+html[data-theme="light"] .ow-table .ow-item-sub{color:#5c7b90}
+html[data-theme="light"] .ow-badge{background:#e1f3fa;color:#255b79}
+html[data-theme="light"] .ow-badge[data-status="En disputa"]{background:#dff0df;color:#286c39}
+html[data-theme="light"] .ow-table .ow-table-action{color:#25663b;background:#e5f6df;border-color:#acd5a4}
+html[data-theme="light"] .ow-page-buttons button{background:#e7f1f8;color:#23506e;border-color:#afcadb}
+html[data-theme="light"] .ow-page-buttons button.is-current{background:#d4f3c4;border-color:#67ae57}
+html[data-theme="light"] .ow-empty{background:#fff;border-color:#bad1de}
+html[data-theme="light"] .ow-mobile-nav{background:#f5faffed;border-color:#a9c8d8}
+html[data-theme="light"] .ow-mobile-nav a{color:#436f88}
+html[data-theme="light"] .ow-mobile-nav a.is-active{background:#d5edf8;color:#164d70}
