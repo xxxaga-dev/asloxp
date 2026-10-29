@@ -28,17 +28,18 @@ function render(options){
  const text=o.moreText||"Más";
  const sideHtml=groups.map(g=>'<section class="ow-nav-group"><h2 class="ow-sidelabel">'+esc(g.title||"")+'</h2>'+
  '<nav class="ow-nav" aria-label="'+esc(g.title||title)+'">'+(g.items||[]).map(side).join("")+'</nav></section>').join("");
- const quick=o.search?'<button type="button" id="ow-find-task" class="ow-find-task" aria-haspopup="dialog" aria-controls="ow-task-dialog"><span class="aslo-search-symbol" aria-hidden="true">⌕</span><span>Buscar función</span><kbd>Ctrl K</kbd></button>':'';
+ const quick=o.search?'<button type="button" id="ow-find-task" class="ow-find-task" aria-label="Buscar función" title="Buscar función" aria-haspopup="dialog" aria-controls="ow-task-dialog"><svg class="aslo-search-symbol" viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" focusable="false"><circle cx="10.8" cy="10.8" r="6.2" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="m15.5 15.5 4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg><span class="aslo-find-label">Buscar función</span><kbd class="aslo-find-shortcut">Ctrl K</kbd></button>':'';
  const badge=o.demoText||"PROTOTIPO · DATOS DE MUESTRA";
  const extra=o.sideActions||"";
  const bodyId=esc(o.bodyId||"ow-content");
  const contents=o.initialContent||"";
  const mainAttrs=o.modeId?' data-aslo-mode="'+esc(o.modeId)+'"':"";
  return '<header class="ow-top aslo-shell-header"'+mainAttrs+'>'+
- '<a href="'+home+'" class="ow-brand"><span aria-hidden="true">▲</span> ASLO</a>'+
- '<span class="ow-top-division" aria-hidden="true"></span><span class="ow-workspace-title">'+title+'</span>'+quick+
- '<span class="ow-demo">'+esc(badge)+'</span>'+
- '<div id="aslo-account-slot" class="aslo-account-slot"></div></header>'+
+ '<div class="aslo-header-start"><a href="'+home+'" class="ow-brand"><span aria-hidden="true">▲</span> ASLO</a>'+
+ '<span class="ow-top-division" aria-hidden="true"></span><span class="ow-workspace-title">'+title+'</span></div>'+
+ '<div class="aslo-header-search">'+quick+'</div>'+
+ '<div class="aslo-header-end"><span class="ow-demo">'+esc(badge)+'</span>'+
+ '<div id="aslo-account-slot" class="aslo-account-slot"></div></div></header>'+
  '<div class="ow-shell aslo-shell-frame"><aside class="ow-sidebar aslo-shell-sidebar" aria-label="'+title+'">'+
  '<div class="ow-nav-groups">'+sideHtml+'</div>'+
  (extra?'<div class="ow-sidebottom">'+extra+'</div>':'')+
