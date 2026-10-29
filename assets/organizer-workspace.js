@@ -54,10 +54,17 @@ var words={
   onlyDemo:"Fiktive Sitzungsdaten. Keine echten Dienste oder Wettkampfänderungen.",breadcrumb:"Organisatorbereich",sample:"Beispieldaten",viewAll:"Alle ansehen",createFirst:"Erste Liga erstellen",leagueAction:"Diese Liga öffnen",relatedTo:"Von",noActive:"Noch keine laufenden Turniere",direct:"Direkter Zugang",typeToSearch:"In diesem Bereich suchen",emptyAll:"Noch keine Daten vorhanden."}
 };
 var language=(()=>{try{return window.asloAuth?.lang?.()||"es"}catch(e){return"es"}})();
-var t=key=>(words[language]||words.es)[key]||words.es[key]||key;
+var extension={
+ es:{agenda:"Agenda y jornadas",solicitudes:"Solicitudes y avisos",recursos:"Jueces y escenarios",resultados:"Resultados",comunicaciones:"Comunicaciones",operations:"OPERACIÓN",tracking:"SEGUIMIENTO",globalSearch:"Buscar función o tarea",context:"Alcance",allItems:"Todos los torneos",demoView:"Vista conceptual · las operaciones que aún no tienen datos o simulación se indican expresamente.",explore:"Abrir funciones del torneo",lookup:"Buscar actividades",back:"Volver al organizador",openContext:"Abrir su contexto",tasks:"Tareas y accesos",leagueSettings:"Administración de liga",dataEmpty:"No existen registros de demostración de estas gestiones en esta sesión.",seeDemo:"Ver torneo",selectLeague:"Seleccionar liga",limited:"Pendiente de prototipo funcional",available:"Disponible en la demostración"},
+ en:{agenda:"Schedule & rounds",solicitudes:"Requests & notices",recursos:"Officials & venues",resultados:"Results",comunicaciones:"Communications",operations:"OPERATIONS",tracking:"FOLLOW-UP",globalSearch:"Find a function or task",context:"Scope",allItems:"All tournaments",demoView:"Conceptual view · unavailable actions and data are labeled.",explore:"Open tournament tools",lookup:"Find tasks",back:"Back to organizer",openContext:"Open context",tasks:"Tasks and shortcuts",leagueSettings:"League administration",dataEmpty:"No demonstration records exist for these processes in this session.",seeDemo:"View tournament",selectLeague:"Select a league",limited:"Functional prototype pending",available:"Demo available"},
+ de:{agenda:"Kalender und Spieltage",solicitudes:"Anfragen und Hinweise",recursos:"Offizielle und Spielstätten",resultados:"Ergebnisse",comunicaciones:"Mitteilungen",operations:"BETRIEB",tracking:"ÜBERSICHT",globalSearch:"Funktion oder Aufgabe suchen",context:"Bereich",allItems:"Alle Turniere",demoView:"Konzeptansicht · nicht implementierte Aktionen sind gekennzeichnet.",explore:"Turnierwerkzeuge öffnen",lookup:"Aufgaben finden",back:"Zum Organisator",openContext:"Kontext öffnen",tasks:"Aufgaben und Zugänge",leagueSettings:"Ligaverwaltung",dataEmpty:"Keine Demodaten für diese Vorgänge vorhanden.",seeDemo:"Turnier ansehen",selectLeague:"Liga wählen",limited:"Funktionsprototyp ausstehend",available:"Demo verfügbar"}
+};
+var t=key=>(extension[language]||extension.es)[key]||extension.es[key]||(words[language]||words.es)[key]||words.es[key]||key;
+var VIEWS=["inicio","ligas","torneos","agenda","solicitudes","recursos","resultados","comunicaciones"];
+var isView=v=>VIEWS.includes(v);
 var escape=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 var params=new URLSearchParams(location.search);
-var state={view:["inicio","ligas","torneos"].includes(params.get("vista"))?params.get("vista"):"inicio",search:params.get("buscar")||"",sport:params.get("deporte")||"all",league:params.get("liga")||"all",status:params.get("estado")||"all",size:[2,5,10].includes(Number(params.get("limite")))?Number(params.get("limite")):2,page:Math.max(1,Math.min(999,Number(params.get("pagina"))||1))};
+var state={view:isView(params.get("vista"))?params.get("vista"):"inicio",search:params.get("buscar")||"",sport:params.get("deporte")||"all",league:params.get("liga")||"all",status:params.get("estado")||"all",size:[2,5,10].includes(Number(params.get("limite")))?Number(params.get("limite")):2,page:Math.max(1,Math.min(999,Number(params.get("pagina"))||1))};
 function allLeagues(){try{return manager?.all?.()||[]}catch(e){return []}}
 function savedTournaments(id){
  try{var data=JSON.parse(sessionStorage.getItem("aslo-arena-tournaments:"+id));return Array.isArray(data)?data:[]}catch(e){return []}
@@ -84,11 +91,14 @@ function updateStatic(){
  document.querySelector(".ow-demo").textContent=t("demo");
  document.querySelector(".ow-mode-switch").textContent=t("switch")+" ↗";
  document.querySelector(".ow-avatar").setAttribute("aria-label",t("account"));
- document.querySelector(".ow-sidelabel").textContent=t("organizer").toUpperCase();
+ document.querySelectorAll(".ow-sidelabel").forEach(function(x,i){x.textContent=i===0?t("organizer").toUpperCase():i===1?t("operations"):t("tracking")});
+ document.querySelectorAll(".ow-nav a[data-view]").forEach(function(a){var last=a.lastElementChild;if(last)last.textContent=t(a.dataset.view==="inicio"?"home":a.dataset.view==="ligas"?"leagues":a.dataset.view==="torneos"?"tournaments":a.dataset.view)});
+ document.querySelectorAll(".ow-drawer-links a[data-view]").forEach(function(a){var key=a.dataset.view;var icon=a.textContent.trim().slice(0,1);a.textContent=icon+" "+t(key==="inicio"?"home":key==="ligas"?"leagues":key==="torneos"?"tournaments":key)});
+ var drawerTitle=document.querySelector(".ow-drawer-heading strong");if(drawerTitle)drawerTitle.textContent=t("breadcrumb");
  document.querySelector(".ow-sidehelp strong").textContent=t("intro");
  document.querySelector(".ow-sidehelp p").textContent=t("help");
- ["inicio","ligas","torneos"].forEach(function(view){
-  var label=t(view==="inicio"?"home":view==="ligas"?"leagues":"tournaments");
+ ["inicio","ligas","torneos","agenda"].forEach(function(view){
+  var label=t(view==="inicio"?"home":view==="ligas"?"leagues":view==="torneos"?"tournaments":"agenda");
   document.querySelectorAll('.ow-nav [data-view="'+view+'"] span:last-child').forEach(function(node){node.textContent=label;});
   document.querySelectorAll('.ow-mobile-nav [data-view="'+view+'"]').forEach(function(node){
     var icon=node.querySelector("span");var symbol=icon?icon.textContent:"";
@@ -105,7 +115,7 @@ function writeUrl(replace){
  history[replace?"replaceState":"pushState"]({}, "", url.pathname+url.search+url.hash);
 }
 function navigate(view){
- if(!["inicio","ligas","torneos"].includes(view))return;
+ if(!isView(view))return;
  state.view=view;resetFilters();writeUrl(false);render();
  window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
  root.querySelector("h1")?.focus({preventScroll:true});
@@ -198,8 +208,8 @@ function renderList(){
 }
 function render(){
  activateNav();
- document.title="ASLO · "+t(state.view==="inicio"?"home":state.view==="ligas"?"leagues":"tournaments");
- root.innerHTML=state.view==="inicio"?renderHome():renderList();
+ document.title="ASLO · "+t(state.view==="inicio"?"home":state.view==="ligas"?"leagues":state.view==="torneos"?"tournaments":state.view);
+ root.innerHTML=state.view==="inicio"?renderHome():state.view==="ligas"||state.view==="torneos"?renderList():renderCross();
 }
 function refreshList(focusTarget){
  var region=document.getElementById("ow-data-region");
@@ -234,7 +244,7 @@ root.addEventListener("reset",function(e){
 });
 window.addEventListener("popstate",function(){
  params=new URLSearchParams(location.search);
- state.view=["inicio","ligas","torneos"].includes(params.get("vista"))?params.get("vista"):"inicio";
+ state.view=isView(params.get("vista"))?params.get("vista"):"inicio";
  state.search=params.get("buscar")||"";state.sport=params.get("deporte")||"all";state.league=params.get("liga")||"all";state.status=params.get("estado")||"all";
  state.page=Math.max(1,Number(params.get("pagina"))||1);
  state.size=[2,5,10].includes(Number(params.get("limite")))?Number(params.get("limite")):2;
