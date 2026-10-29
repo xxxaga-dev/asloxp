@@ -29,7 +29,7 @@ function upsert(item){
  return copy(item)
 }
 function catName(sport,id){return (sports[sport]?.options||[]).find(x=>x[0]===id)?.[1]||id}
-function leagueLink(id,view="inicio"){return "liga-admin.html?liga="+encodeURIComponent(id)+"&vista="+encodeURIComponent(view)}
+function leagueLink(id,view="liga"){return "liga-admin.html?liga="+encodeURIComponent(id)+"&vista="+encodeURIComponent(view)}
 function formLink(id){return "mis-ligas.html?editar="+encodeURIComponent(id)}
 function summary(league){
  return esc((sports[league.sport]?.name||league.sport)+" · "+(league.city||league.region||league.country||"—"));
