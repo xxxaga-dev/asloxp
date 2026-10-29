@@ -74,7 +74,7 @@ function attachGenericNavigation(host){
  veil?.addEventListener("click",()=>toggle(false));
  drawer?.addEventListener("click",e=>{if(e.target.closest("a"))toggle(false)});
  host.addEventListener("click",e=>{
-  const a=e.target.closest(".ow-nav a,.ow-mobile-nav a");
+  const a=e.target.closest(".ow-nav a,.ow-mobile-nav a,.ow-drawer-links a");
   if(!a)return;
   host.querySelectorAll(".ow-nav a,.ow-mobile-nav a,.ow-drawer-links a").forEach(link=>{
    const active=link.dataset.view===a.dataset.view;
