@@ -113,6 +113,13 @@ html.xp-motion-on .arena-match-banner>.xp-hero-hud{
 .xp-hud-radar>span:nth-child(3){position:absolute;left:50%;top:50%;width:50%;height:2px;
  transform-origin:0 0;background:linear-gradient(90deg,#afffbc9c,transparent);animation:xp-radar-spin 7s linear infinite}
 @keyframes xp-radar-spin{to{transform:rotate(360deg)}}
+/* Radar and instrument captions move at different rates as the page scrolls. */
+html.xp-motion-on .xp-hud-radar{
+ transform:translateY(calc(-50% + var(--xp-scroll-shift,0px))) rotateX(60deg) rotate(-30deg);
+ transition:transform .18s linear
+}
+html.xp-motion-on .xp-hud-bottomline{transform:translateY(var(--xp-scroll-shift,0px));transition:transform .18s linear}
+
 html.xp-motion-on .ow-hero h1,
 html.xp-motion-on .arena-hero h1,
 html.xp-motion-on .arena-tournament-hero h2,
