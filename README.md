@@ -5,6 +5,18 @@
 Este repositorio **público** es únicamente para maquetas navegables HTML, CSS y JavaScript. La documentación y las decisiones del proyecto ASLO están en un repositorio privado independiente.
 
 
+## UX 13 — Visitante público con el layout aprobado (EN ANÁLISIS)
+
+Las páginas públicas de ASLO ahora comparten el **mismo layout aprobado para todos los modos**: encabezado, buscador, botón de cuenta, lateral en escritorio, menú móvil inferior y panel Más. **No se exige sesión, contraseña ni inscripción para consultar** noticias, ligas, torneos, resultados o sus detalles. Los contenidos siguen siendo datos ficticios del prototipo.
+
+**Archivos:** `assets/visitor-shell.js` y `assets/visitor-shell.css`; rutas `index.html`, `ligas.html`, `torneos.html`, `resultados.html`, `liga.html`, `torneo.html`. Se eliminó la carga de la navegación móvil antigua `visitor-nav.js` en estas páginas, sin eliminar sus fuentes de datos de demostración. La navegación inferior incluye Inicio, Torneos, Resultados y Más; el lateral y Más contienen Ligas. Los filtros públicos por deporte y ubicación de demostración están disponibles sin sesión. La búsqueda de la portada conserva el filtro de noticias; el buscador global ofrece accesos a las secciones públicas.
+
+**Cuenta:** cuando no hay sesión el menú muestra Visitante y acceso a inicio de sesión; no simula opciones privadas ni cierre de sesión. Si una persona autenticada visita páginas públicas, el contenido continúa siendo público y su sesión no cambia. La navegación de visitante no enlaza a administración de ligas ni torneos.
+
+**Estado:** la estructura común fue **APROBADA** el 29-10-2026. La selección específica de apartados públicos queda **EN ANÁLISIS** hasta revisión del propietario. Pruebas: sintaxis y estructura, seis rutas y accesos activos, barra inferior, menú público y ausencia de requerimiento de sesión. Pendiente: validación visual y despliegue en navegador real.
+
+**Revisar:** [Inicio público](https://xxxaga-dev.github.io/asloxp/index.html?rev=13v) → Torneos → Resultados → Más → Ligas; probar en móvil sin sesión.
+
 ## Revisión UX 12 — Shell visual y menús de todos los modos (APROBADO · 29-10-2026)
 
 **Decisión del propietario:** el layout, el diseño de los menús y la ubicación del buscador en escritorio y móvil se declaran **ESTÁNDAR APROBADO para todos los modos de ASLO**. Cambian las opciones y los contenidos según el modo, no la estructura visual común. El acuerdo queda registrado de forma autoritativa en el repositorio privado ASLO: `docs/ux/estandar-visual-y-navegacion.md`. La implementación deportiva y las migraciones contextuales pendientes no se consideran aprobadas por esta decisión.
