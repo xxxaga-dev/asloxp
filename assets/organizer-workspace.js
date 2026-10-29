@@ -108,8 +108,8 @@ function updateStatic(){
  document.documentElement.lang=language;
  document.querySelector(".ow-workspace-title").textContent=t("breadcrumb");
  document.querySelector(".ow-demo").textContent=t("demo");
- document.querySelector(".ow-mode-switch").textContent=t("switch")+" ↗";
- document.querySelector(".ow-avatar").setAttribute("aria-label",t("account"));
+ // The top-right user panel is owned by organizer-account.js.
+ // Mode changes, language and account settings no longer occupy the organizer navigation.
  document.querySelectorAll(".ow-sidelabel").forEach(function(x,i){x.textContent=i===0?t("organizer").toUpperCase():i===1?t("operations"):t("tracking")});
  document.querySelectorAll(".ow-nav a[data-view]").forEach(function(a){var last=a.lastElementChild;if(last)last.textContent=t(a.dataset.view==="inicio"?"home":a.dataset.view==="ligas"?"leagues":a.dataset.view==="torneos"?"tournaments":a.dataset.view)});
  document.querySelectorAll(".ow-drawer-links a[data-view]").forEach(function(a){var key=a.dataset.view;var icon=a.textContent.trim().slice(0,1);a.textContent=icon+" "+t(key==="inicio"?"home":key==="ligas"?"leagues":key==="torneos"?"tournaments":key)});
