@@ -311,12 +311,22 @@ function refreshList(focusTarget){
   if(focusTarget==="size")region.querySelector("#ow-page-size")?.focus();
  }
 }
+function setDrawer(open){
+ var drawer=document.getElementById("ow-mobile-drawer"),backdrop=document.getElementById("ow-drawer-backdrop"),button=document.getElementById("ow-mobile-more");
+ if(!drawer||!backdrop||!button)return;
+ drawer.hidden=!open;backdrop.hidden=!open;button.setAttribute("aria-expanded",String(open));
+ if(open)drawer.querySelector("a.is-active, a")?.focus();
+ else if(drawer.contains(document.activeElement))button.focus();
+}
 document.addEventListener("click",function(e){
- var nav=e.target.closest("[data-nav],.ow-nav a[data-view],.ow-mobile-nav a[data-view]");
- if(nav){e.preventDefault();navigate(nav.getAttribute("data-nav")||nav.getAttribute("data-view"));return;}
+ if(e.target.closest("#ow-mobile-more")){setDrawer(document.getElementById("ow-mobile-drawer").hidden);return;}
+ if(e.target.closest("#ow-drawer-close,#ow-drawer-backdrop")){setDrawer(false);return;}
+ var nav=e.target.closest("[data-nav],.ow-nav a[data-view],.ow-mobile-nav a[data-view],.ow-drawer-links a[data-view]");
+ if(nav){e.preventDefault();setDrawer(false);navigate(nav.getAttribute("data-nav")||nav.getAttribute("data-view"));return;}
  var paginationBtn=e.target.closest("[data-page-index]");
  if(paginationBtn&&!paginationBtn.disabled){state.page=Number(paginationBtn.getAttribute("data-page-index"));refreshList("page");}
 });
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!document.getElementById("ow-mobile-drawer").hidden)setDrawer(false)});
 root.addEventListener("input",function(e){
  if(e.target.id==="ow-search"){state.search=e.target.value;state.page=1;refreshList();}
 });
@@ -335,6 +345,7 @@ root.addEventListener("reset",function(e){
  root.querySelector("#ow-search")?.focus();
 });
 window.addEventListener("popstate",function(){
+ setDrawer(false);
  params=new URLSearchParams(location.search);
  state.view=isView(params.get("vista"))?params.get("vista"):"inicio";
  state.search=params.get("buscar")||"";state.sport=params.get("deporte")||"all";state.league=params.get("liga")||"all";state.status=params.get("estado")||"all";
