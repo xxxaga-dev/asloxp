@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#061524">
+<meta name="description" content="ASLO · Espacio de trabajo del organizador. Prototipo interactivo con búsquedas, filtros y navegación directa.">
+<title>ASLO · Organizador</title>
+<link rel="stylesheet" href="assets/organizer-workspace.css?v=1">
+</head>
+<body data-page="organizador">
+<a class="ow-skip" href="#ow-main">Saltar al contenido</a>
+<div id="ow-app">
+ <header class="ow-top"><a href="index.html" class="ow-brand"><span aria-hidden="true">▲</span> ASLO</a><span class="ow-top-division" aria-hidden="true"></span><span class="ow-workspace-title">Espacio del organizador</span><span class="ow-demo">PROTOTIPO · DATOS DE MUESTRA</span><a class="ow-mode-switch" href="modos.html">Cambiar modo ↗</a><a class="ow-avatar" href="cuenta.html?tab=perfil" aria-label="Mi cuenta">◉</a></header>
+ <div class="ow-shell">
+ <aside class="ow-sidebar" aria-label="Navegación del organizador">
+ <div class="ow-sidelabel">MI ESPACIO</div>
+ <nav class="ow-nav" id="ow-nav">
+ <a href="organizador.html?vista=inicio" data-view="inicio"><span class="ow-icon" aria-hidden="true">⌂</span><span>Inicio</span></a>
+ <a href="organizador.html?vista=ligas" data-view="ligas"><span class="ow-icon" aria-hidden="true">⬡</span><span>Mis ligas</span></a>
+ <a href="organizador.html?vista=torneos" data-view="torneos"><span class="ow-icon" aria-hidden="true">▦</span><span>Torneos</span></a>
+ </nav>
+ <div class="ow-sidehelp"><strong>Todo en su lugar.</strong><p>Encuentra primero tu liga o torneo. Las herramientas aparecen en su contexto.</p></div>
+ <div class="ow-sidebottom"><a href="mis-ligas.html?nueva=1">＋ Crear liga</a><a href="modos.html">↩ Cambiar modo</a></div>
+ </aside>
+ <main class="ow-main" id="ow-main" tabindex="-1">
+ <div id="ow-content" aria-live="off"><div class="ow-initial">Preparando el espacio del organizador…</div></div>
+ </main>
+ </div>
+ <nav class="ow-mobile-nav" aria-label="Navegación principal"><a data-view="inicio" href="organizador.html?vista=inicio"><span>⌂</span>Inicio</a><a data-view="ligas" href="organizador.html?vista=ligas"><span>⬡</span>Ligas</a><a data-view="torneos" href="organizador.html?vista=torneos"><span>▦</span>Torneos</a></nav>
+</div>
+<script src="assets/auth-v2.js?v=13"></script>
+<script src="assets/league-manager.js?v=2"></script>
+<script src="assets/organizer-workspace.js?v=1"></script>
+</body>
+</html>
