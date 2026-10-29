@@ -28,7 +28,8 @@ function render(options){
  const text=o.moreText||"Más";
  const sideHtml=groups.map(g=>'<section class="ow-nav-group"><h2 class="ow-sidelabel">'+esc(g.title||"")+'</h2>'+
  '<nav class="ow-nav" aria-label="'+esc(g.title||title)+'">'+(g.items||[]).map(side).join("")+'</nav></section>').join("");
- const quick=o.search?'<button type="button" id="ow-find-task" class="ow-find-task" aria-label="Buscar función" title="Buscar función" aria-haspopup="dialog" aria-controls="ow-task-dialog"><svg class="aslo-search-symbol" viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" focusable="false"><circle cx="10.8" cy="10.8" r="6.2" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="m15.5 15.5 4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg><span class="aslo-find-label">Buscar función</span><kbd class="aslo-find-shortcut">Ctrl K</kbd></button>':'';
+ const searchName=esc(o.searchLabel||"Buscar función");
+ const quick=o.search?'<button type="button" id="ow-find-task" class="ow-find-task" aria-label="'+searchName+'" title="'+searchName+'" aria-haspopup="dialog" aria-controls="ow-task-dialog"><svg class="aslo-search-symbol" viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" focusable="false"><circle cx="10.8" cy="10.8" r="6.2" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="m15.5 15.5 4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/></svg><span class="aslo-find-label">'+searchName+'</span><kbd class="aslo-find-shortcut">Ctrl K</kbd></button>':'';
  const badge=o.demoText||"PROTOTIPO · DATOS DE MUESTRA";
  const extra=o.sideActions||"";
  const bodyId=esc(o.bodyId||"ow-content");
@@ -62,21 +63,27 @@ function mount(config){
  return host;
 }
 function attachGenericNavigation(host){
- const drawer=host.querySelector("#ow-mobile-drawer"),veil=host.querySelector("#ow-drawer-backdrop"),
- button=host.querySelector("#ow-mobile-more"),close=host.querySelector("#ow-drawer-close");
+ if(host.dataset.asloGenericNavReady==="1")return;
+ host.dataset.asloGenericNavReady="1";
+ const nodes=()=>({
+  drawer:host.querySelector("#ow-mobile-drawer"),
+  veil:host.querySelector("#ow-drawer-backdrop"),
+  button:host.querySelector("#ow-mobile-more")
+ });
  const toggle=open=>{
+  const {drawer,veil,button}=nodes();
   if(!drawer||!veil||!button)return;
-  drawer.hidden=!open;veil.hidden=!open;button.setAttribute("aria-expanded",String(open));
+  drawer.hidden=!open;veil.hidden=!open;
+  button.setAttribute("aria-expanded",String(open));
   if(open)drawer.querySelector("a")?.focus();
   else if(drawer.contains(document.activeElement))button.focus();
  };
- button?.addEventListener("click",()=>toggle(drawer.hidden));
- close?.addEventListener("click",()=>toggle(false));
- veil?.addEventListener("click",()=>toggle(false));
- drawer?.addEventListener("click",e=>{if(e.target.closest("a"))toggle(false)});
  host.addEventListener("click",e=>{
+  if(e.target.closest("#ow-mobile-more")){const {drawer}=nodes();if(drawer)toggle(drawer.hidden);return}
+  if(e.target.closest("#ow-drawer-close,#ow-drawer-backdrop")){toggle(false);return}
   const a=e.target.closest(".ow-nav a,.ow-mobile-nav a,.ow-drawer-links a");
   if(!a)return;
+  if(e.target.closest(".ow-drawer-links"))toggle(false);
   host.querySelectorAll(".ow-nav a,.ow-mobile-nav a,.ow-drawer-links a").forEach(link=>{
    const active=link.dataset.view===a.dataset.view;
    link.classList.toggle("is-active",active);
@@ -84,7 +91,10 @@ function attachGenericNavigation(host){
    else link.removeAttribute("aria-current");
   });
  });
- document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!drawer.hidden)toggle(false)});
+ document.addEventListener("keydown",e=>{
+  const {drawer}=nodes();
+  if(e.key==="Escape"&&drawer&&!drawer.hidden)toggle(false);
+ });
 }
 window.asloShell={render,mount};
 })();
