@@ -95,8 +95,8 @@ function updateStatic(){
  document.querySelectorAll(".ow-nav a[data-view]").forEach(function(a){var last=a.lastElementChild;if(last)last.textContent=t(a.dataset.view==="inicio"?"home":a.dataset.view==="ligas"?"leagues":a.dataset.view==="torneos"?"tournaments":a.dataset.view)});
  document.querySelectorAll(".ow-drawer-links a[data-view]").forEach(function(a){var key=a.dataset.view;var icon=a.textContent.trim().slice(0,1);a.textContent=icon+" "+t(key==="inicio"?"home":key==="ligas"?"leagues":key==="torneos"?"tournaments":key)});
  var drawerTitle=document.querySelector(".ow-drawer-heading strong");if(drawerTitle)drawerTitle.textContent=t("breadcrumb");
- document.querySelector(".ow-sidehelp strong").textContent=t("intro");
- document.querySelector(".ow-sidehelp p").textContent=t("help");
+ var sh=document.querySelector(".ow-sidehelp strong");if(sh)sh.textContent=t("intro");
+ var sp=document.querySelector(".ow-sidehelp p");if(sp)sp.textContent=t("help");
  ["inicio","ligas","torneos","agenda"].forEach(function(view){
   var label=t(view==="inicio"?"home":view==="ligas"?"leagues":view==="torneos"?"tournaments":"agenda");
   document.querySelectorAll('.ow-nav [data-view="'+view+'"] span:last-child').forEach(function(node){node.textContent=label;});
