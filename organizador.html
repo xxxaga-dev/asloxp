@@ -14,20 +14,48 @@
  <header class="ow-top"><a href="organizador.html?vista=inicio" class="ow-brand"><span aria-hidden="true">▲</span> ASLO</a><span class="ow-top-division" aria-hidden="true"></span><span class="ow-workspace-title">Espacio del organizador</span><span class="ow-demo">PROTOTIPO · DATOS DE MUESTRA</span><a class="ow-mode-switch" href="modos.html">Cambiar modo ↗</a><a class="ow-avatar" href="cuenta.html?tab=perfil" aria-label="Mi cuenta">◉</a></header>
  <div class="ow-shell">
  <aside class="ow-sidebar" aria-label="Navegación del organizador">
- <div class="ow-sidelabel">MI ESPACIO</div>
- <nav class="ow-nav" id="ow-nav">
- <a href="organizador.html?vista=inicio" data-view="inicio"><span class="ow-icon" aria-hidden="true">⌂</span><span>Inicio</span></a>
- <a href="organizador.html?vista=ligas" data-view="ligas"><span class="ow-icon" aria-hidden="true">⬡</span><span>Mis ligas</span></a>
- <a href="organizador.html?vista=torneos" data-view="torneos"><span class="ow-icon" aria-hidden="true">▦</span><span>Torneos</span></a>
- </nav>
- <div class="ow-sidehelp"><strong>Todo en su lugar.</strong><p>Encuentra primero tu liga o torneo. Las herramientas aparecen en su contexto.</p></div>
- <div class="ow-sidebottom"><a href="mis-ligas.html?nueva=1">＋ Crear liga</a><a href="modos.html">↩ Cambiar modo</a></div>
+  <div class="ow-nav-groups">
+   <section class="ow-nav-group"><h2 class="ow-sidelabel">MI ESPACIO</h2><nav class="ow-nav" aria-label="Mi espacio">
+    <a href="organizador.html?vista=inicio" data-view="inicio"><span class="ow-icon" aria-hidden="true">⌂</span><span>Inicio</span></a>
+    <a href="organizador.html?vista=ligas" data-view="ligas"><span class="ow-icon" aria-hidden="true">⬡</span><span>Mis ligas</span></a>
+    <a href="organizador.html?vista=torneos" data-view="torneos"><span class="ow-icon" aria-hidden="true">▦</span><span>Torneos</span></a>
+   </nav></section>
+   <section class="ow-nav-group"><h2 class="ow-sidelabel">OPERACIÓN</h2><nav class="ow-nav" aria-label="Operación deportiva">
+    <a href="organizador.html?vista=agenda" data-view="agenda"><span class="ow-icon" aria-hidden="true">▤</span><span>Agenda y jornadas</span></a>
+    <a href="organizador.html?vista=solicitudes" data-view="solicitudes"><span class="ow-icon" aria-hidden="true">✉</span><span>Solicitudes y avisos</span></a>
+    <a href="organizador.html?vista=recursos" data-view="recursos"><span class="ow-icon" aria-hidden="true">♧</span><span>Jueces y escenarios</span></a>
+   </nav></section>
+   <section class="ow-nav-group"><h2 class="ow-sidelabel">SEGUIMIENTO</h2><nav class="ow-nav" aria-label="Seguimiento y comunicación">
+    <a href="organizador.html?vista=resultados" data-view="resultados"><span class="ow-icon" aria-hidden="true">◉</span><span>Resultados</span></a>
+    <a href="organizador.html?vista=comunicaciones" data-view="comunicaciones"><span class="ow-icon" aria-hidden="true">◈</span><span>Comunicaciones</span></a>
+   </nav></section>
+  </div>
+  <div class="ow-sidebottom"><a href="mis-ligas.html?nueva=1">＋ Crear liga</a><a href="modos.html">↩ Cambiar modo</a></div>
  </aside>
  <main class="ow-main" id="ow-main" tabindex="-1">
  <div id="ow-content" aria-live="off"><div class="ow-initial">Preparando el espacio del organizador…</div></div>
  </main>
  </div>
- <nav class="ow-mobile-nav" aria-label="Navegación principal"><a data-view="inicio" href="organizador.html?vista=inicio"><span>⌂</span>Inicio</a><a data-view="ligas" href="organizador.html?vista=ligas"><span>⬡</span>Ligas</a><a data-view="torneos" href="organizador.html?vista=torneos"><span>▦</span>Torneos</a></nav>
+ <nav class="ow-mobile-nav" aria-label="Accesos del organizador">
+  <a data-view="inicio" href="organizador.html?vista=inicio"><span aria-hidden="true">⌂</span>Inicio</a>
+  <a data-view="torneos" href="organizador.html?vista=torneos"><span aria-hidden="true">▦</span>Torneos</a>
+  <a data-view="agenda" href="organizador.html?vista=agenda"><span aria-hidden="true">▤</span>Agenda</a>
+  <button type="button" class="ow-mobile-more" id="ow-mobile-more" aria-expanded="false" aria-controls="ow-mobile-drawer"><span aria-hidden="true">☰</span>Más</button>
+ </nav>
+ <div class="ow-drawer-backdrop" id="ow-drawer-backdrop" hidden></div>
+ <aside class="ow-mobile-drawer" id="ow-mobile-drawer" aria-label="Todas las funciones del organizador" hidden>
+ <div class="ow-drawer-heading"><strong>Espacio del organizador</strong><button id="ow-drawer-close" type="button" aria-label="Cerrar menú">×</button></div>
+ <nav class="ow-drawer-links" aria-label="Todas las secciones">
+  <a data-view="inicio" href="organizador.html?vista=inicio">⌂ Inicio</a>
+  <a data-view="ligas" href="organizador.html?vista=ligas">⬡ Mis ligas</a>
+  <a data-view="torneos" href="organizador.html?vista=torneos">▦ Torneos</a>
+  <a data-view="agenda" href="organizador.html?vista=agenda">▤ Agenda y jornadas</a>
+  <a data-view="solicitudes" href="organizador.html?vista=solicitudes">✉ Solicitudes y avisos</a>
+  <a data-view="recursos" href="organizador.html?vista=recursos">♧ Jueces y escenarios</a>
+  <a data-view="resultados" href="organizador.html?vista=resultados">◉ Resultados</a>
+  <a data-view="comunicaciones" href="organizador.html?vista=comunicaciones">◈ Comunicaciones</a>
+ </nav>
+ </aside>
 </div>
 <script src="assets/auth-v2.js?v=13"></script>
 <script src="assets/league-manager.js?v=2"></script>
