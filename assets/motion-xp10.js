@@ -21,7 +21,7 @@ var targets={
  "liga-admin":".arena-hero,.arena-tournament-hero,.arena-identity,.arena-block,.arena-tour-head-actions,.arena-tourney-group,.arena-league-sections,.arena-league-crumb,.arena-tour-content,.arena-league-section-body,.arena-stat,.arena-info-tile,.arena-tour-footer,.arena-match-banner,.arena-news-tile,.arena-sponsor,.arena-sidebar-foot",
  "mis-ligas":".lm-league-card,.lm-hero,.lm-intro,.lm-form,.lm-form-grid,.lm-actions,.lm-banner,.lm-directory-head,.lm-page-head",
  modos:".pagehead,.mode-tile,.other-modes,.account-bottom",
- modo:".pagehead,.mode-tile,.mode-workspace"
+ modo:".ow-hero,.ow-section-heading,.aslo-preview-card,.aslo-preview-note"
 };
 var tiltSelector=".ow-operation-shortcut,.ow-shortcut,.ow-capability-card,.ow-mobile-result,.ow-metric,.lm-league-card,.arena-info-tile,.arena-news-tile,.mode-tile";
 var rippleSelector=".ow-btn,.ow-nav a,.ow-mobile-nav a,.ow-tourney-group button,.ow-shortcut,.ow-operation-shortcut,.ow-page-buttons button,.ow-task-result,.ow-find-task,.arena-action,.arena-tourney-group button,.arena-league-sections button,.lm-button,.mode-tile";
