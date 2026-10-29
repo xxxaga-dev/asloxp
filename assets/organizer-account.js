@@ -2,9 +2,23 @@
    Uses the existing account, languages, appearance, and mode routes. */
 (function(){
 "use strict";
-const control=document.getElementById("ow-account-menu");
+let control=document.getElementById("ow-account-menu");
 const auth=window.asloAuth;
-if(!control||!auth)return;
+if(!auth)return;
+const markup="<details class=\"ow-account-menu\" id=\"ow-account-menu\">\n <summary class=\"ow-account-trigger\" id=\"ow-account-trigger\" aria-label=\"Abrir opciones de cuenta\">\n  <span class=\"ow-profile-copy\"><strong id=\"ow-account-name\">Invitado</strong><small id=\"ow-account-mode\">Organizador</small></span>\n  <span class=\"ow-profile-visual\" id=\"ow-account-image\" aria-hidden=\"true\"></span>\n  <span class=\"ow-account-chevron\" aria-hidden=\"true\">⌄</span>\n </summary>\n <div class=\"ow-account-panel\" aria-label=\"Opciones de cuenta\">\n  <div class=\"ow-account-panel-head\">\n   <span class=\"ow-panel-avatar\" id=\"ow-panel-avatar\" aria-hidden=\"true\"></span>\n   <div><strong id=\"ow-panel-name\">Invitado</strong><small id=\"ow-panel-mode\">Organizador</small></div>\n  </div>\n  <div class=\"ow-account-personal\" id=\"ow-account-personal\">\n   <a href=\"cuenta.html?tab=perfil\" data-account-label=\"profile\"><span aria-hidden=\"true\">♙</span><span>Mi perfil y avatar</span><b aria-hidden=\"true\">›</b></a>\n   <a href=\"cuenta.html?tab=apariencia\" data-account-label=\"appearance\"><span aria-hidden=\"true\">◐</span><span>Apariencia</span><b aria-hidden=\"true\">›</b></a>\n   <a href=\"cuenta.html?tab=seguridad\" data-account-label=\"security\"><span aria-hidden=\"true\">◇</span><span>Seguridad</span><b aria-hidden=\"true\">›</b></a>\n   <a href=\"modos.html\" data-account-label=\"switch\"><span aria-hidden=\"true\">⇄</span><span>Mis modos</span><b aria-hidden=\"true\">›</b></a>\n  </div>\n  <label class=\"ow-account-language\" for=\"ow-account-language\">\n   <span><span aria-hidden=\"true\">文</span> <span id=\"ow-language-label\">Idioma</span></span>\n   <select id=\"ow-account-language\" aria-label=\"Idioma de la interfaz\"><option value=\"es\">Español</option><option value=\"en\">English</option><option value=\"de\">Deutsch</option></select>\n  </label>\n  <button class=\"ow-account-logout\" id=\"ow-account-logout\" type=\"button\"><span aria-hidden=\"true\">↪</span><span>Cerrar sesión</span></button>\n  <a class=\"ow-account-signin\" id=\"ow-account-signin\" href=\"acceso.html\" hidden>Iniciar sesión</a>\n  <small class=\"ow-account-hint\" id=\"ow-account-hint\">Cuenta personal · opciones disponibles en todos tus modos</small>\n </div>\n </details>";
+function mount(){
+ const slot=document.getElementById("aslo-account-slot");
+ if(slot&&!document.getElementById("ow-account-menu"))slot.innerHTML=markup;
+ const node=document.getElementById("ow-account-menu");
+ if(!node)return;
+ if(control!==node){
+  control=node;
+  node.addEventListener("toggle",()=>{
+   if(node.open)node.querySelector(".ow-account-panel a:not([hidden]),.ow-account-panel select")?.focus({preventScroll:true});
+  });
+ }
+ render();
+}
 const sel=id=>document.getElementById(id);
 const labels={
  es:{account:"Abrir opciones de cuenta",organizer:"Organizador",guest:"Visitante",profile:"Mi perfil y avatar",appearance:"Apariencia",security:"Seguridad",switch:"Mis modos",language:"Idioma",logout:"Cerrar sesión",login:"Iniciar sesión",hint:"Cuenta personal · las mismas preferencias en todos tus modos"},
@@ -40,20 +54,18 @@ function render(){
  const personal=sel("ow-account-personal");
  if(personal)personal.hidden=!acct;
 }
-sel("ow-account-language")?.addEventListener("change",function(){
- if(auth.selectLanguage?.(this.value)){location.reload()}
+document.addEventListener("change",e=>{
+ if(e.target?.id==="ow-account-language"&&auth.selectLanguage?.(e.target.value)){location.reload()}
 });
-sel("ow-account-logout")?.addEventListener("click",()=>auth.logout?.());
 document.addEventListener("click",e=>{
- if(control.open&&!control.contains(e.target))control.open=false;
+ if(e.target.closest("#ow-account-logout")){auth.logout?.();return}
+ if(control?.open&&!control.contains(e.target))control.open=false;
 });
 document.addEventListener("keydown",e=>{
- if(e.key==="Escape"&&control.open){
+ if(e.key==="Escape"&&control?.open){
   control.open=false;sel("ow-account-trigger")?.focus();
  }
 });
-control.addEventListener("toggle",()=>{
- if(control.open)control.querySelector(".ow-account-panel a:not([hidden]),.ow-account-panel select")?.focus({preventScroll:true});
-});
-render();
+window.asloAccountMenu={mount};
+mount();
 })();
