@@ -1,0 +1,42 @@
+/* Public visitor pages use the approved ASLO mode shell.
+   The public content and sports media remain the original demo modules. */
+body.aslo-visitor-layout{margin:0;background:#071320;color:#f6fbff}
+body.aslo-visitor-layout .aslo-shell-frame{align-items:stretch}
+body.aslo-visitor-layout .aslo-shell-main{max-width:none;padding:0;min-width:0;overflow:clip}
+body.aslo-visitor-layout #aslo-public-content{min-width:0}
+body.aslo-visitor-layout .v4-root{margin:0;min-width:0;border:0}
+body.aslo-visitor-layout .v5-root{padding-top:0}
+body.aslo-visitor-layout .ow-sidebar{background:#081c2c}
+body.aslo-visitor-layout .ow-nav a{font-weight:800}
+body.aslo-visitor-layout .ow-nav a.is-active{border-color:#baf775;color:#d9ffa5;background:#193d51}
+body.aslo-visitor-layout .ow-demo{font-size:9px}
+body.aslo-visitor-layout .ow-mobile-nav{z-index:82}
+body.aslo-visitor-layout .ow-mobile-drawer:not([hidden]){z-index:85}
+body.aslo-visitor-layout .ow-drawer-backdrop:not([hidden]){z-index:84}
+body.aslo-visitor-layout .ow-main #aslo-public-content>.v4-root{width:100%}
+.aslo-visitor-drawer-controls{padding:16px 13px;border-top:1px solid #406b80;margin-top:6px}
+.aslo-visitor-drawer-controls label{display:block;font-size:12px;line-height:1.35;color:#d0e9f5;font-weight:800;margin:0 0 9px}
+.aslo-visitor-drawer-controls select{display:block;width:100%;min-height:44px;background:#133b52;border:1px solid #5894aa;color:#effaff;border-radius:10px;font-size:13px;padding:10px}
+.aslo-visitor-drawer-controls p{font-size:11px;color:#a5c4d1;line-height:1.5;margin:9px 0 0}
+body.aslo-visitor-layout .aslo-public-search-dialog{z-index:145}
+body.aslo-visitor-layout .aslo-public-search-dialog .ow-task-results{max-height:min(47vh,480px)}
+body.aslo-visitor-layout .aslo-public-search-dialog .ow-task-results a{color:#f5fcff}
+body.aslo-visitor-layout .v4-root .v4-section-title h2{line-height:1.18}
+html[data-theme="light"] body.aslo-visitor-layout{background:#e9f3f9;color:#1e455b}
+html[data-theme="light"] body.aslo-visitor-layout .ow-sidebar{background:#f0f7fc}
+html[data-theme="light"] .aslo-visitor-drawer-controls label{color:#245467}
+html[data-theme="light"] .aslo-visitor-drawer-controls select{background:#fff;color:#244d66}
+html[data-theme="light"] .aslo-visitor-drawer-controls p{color:#527689}
+@media(max-width:760px){
+ body.aslo-visitor-layout .aslo-shell-main{padding:0 0 calc(76px + env(safe-area-inset-bottom))!important}
+ body.aslo-visitor-layout .ow-shell{min-height:calc(100dvh - 62px)}
+ body.aslo-visitor-layout .v4-root{padding-left:11px;padding-right:11px;padding-bottom:24px}
+ body.aslo-visitor-layout .v5-root{padding-left:0;padding-right:0}
+ body.aslo-visitor-layout .v5-root .v5-content{padding-left:12px;padding-right:12px}
+ body.aslo-visitor-layout .ow-mobile-nav{grid-template-columns:repeat(4,minmax(0,1fr))}
+ body.aslo-visitor-layout .ow-mobile-nav a,body.aslo-visitor-layout .ow-mobile-more{min-height:66px}
+ body.aslo-visitor-layout .ow-mobile-drawer:not([hidden]){bottom:calc(67px + env(safe-area-inset-bottom))}
+ body.aslo-visitor-layout .ow-drawer-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:380px){body.aslo-visitor-layout .v4-root{padding-inline:9px}}
+@media(prefers-reduced-motion:reduce){body.aslo-visitor-layout .ow-mobile-nav a{transition:none}}
