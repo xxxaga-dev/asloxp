@@ -30,7 +30,7 @@ html.xp-motion-on .xp-reveal{
  transition-property:opacity,transform,filter,clip-path;
  transition-duration:.68s,.74s,.72s,.72s;
  transition-timing-function:cubic-bezier(.2,.75,.18,1),cubic-bezier(.17,.8,.17,1),ease,cubic-bezier(.18,.8,.2,1);
- transition-delay:calc(var(--xp-sequence,0)*65ms);
+ transition-delay:var(--xp-delay,0ms);
  will-change:opacity,transform;
 }
 html.xp-motion-on .xp-reveal.xp-inview{opacity:1;transform:translate3d(0,0,0) scale(1);filter:none;will-change:auto}
