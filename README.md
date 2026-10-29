@@ -5,6 +5,14 @@
 Este repositorio **público** es únicamente para maquetas navegables HTML, CSS y JavaScript. La documentación y las decisiones del proyecto ASLO están en un repositorio privado independiente.
 
 
+## Revisión UX 8 — Navegación del organizador (EN ANÁLISIS)
+
+La dirección visual de las revisiones anteriores queda **descartada como modelo general de interacción** por observación del propietario: navegación impredecible, exceso de opciones, demasiados clics para localizar un torneo, ausencia de búsqueda/paginación y falta de animaciones funcionales. Los archivos legados permanecen solo para conservar operaciones simuladas mientras se sustituyen las vistas.
+
+**Nuevo punto de entrada:** [Espacio del organizador](organizador.html). Contiene tres destinos estables (Inicio, Mis ligas y Torneos), búsqueda textual, filtros por deporte/liga/estado, paginación, controles de teclado, estados vacíos, transiciones con movimiento reducido y acceso directo al torneo seleccionado. El selector de modos ahora dirige al organizador a este espacio. Se corrigieron los enlaces de retorno desde gestión de ligas y el enlace profundo `liga-admin.html?liga=...&vista=torneos&torneo=...`.
+
+**Para probar:** [abrir organizador](https://xxxaga-dev.github.io/asloxp/organizador.html?vista=inicio) → **Torneos** → buscar «Copa» → seleccionar un resultado → abrir el torneo exacto. Probar paginación (dos elementos por página para mostrar el control en esta demo), filtros y navegación móvil. La página de gestión profunda todavía utiliza una interfaz heredada y queda **pendiente de reestructuración**. Los datos son ficticios y proceden de la sesión de demostración.
+
 ## Revisión visual 7 — Xports / Pubzi como referencias de composición (28-10-2026)
 
 **Estado: EN ANÁLISIS, pendiente revisión visual del propietario.** No se ha sustituido la identidad ASLO ni se han copiado recursos de terceros. Se incorporaron `assets/experience-v7.css` y `assets/experience-v7.js` a 13 páginas existentes: inicio/noticias, ligas, liga, torneos, torneo, resultados, acceso, registro, modos, modo, cuenta, mis ligas y administración de liga. La revisión refuerza encabezados editoriales, tarjetas, contrastes, navegación pública contextual, accesibilidad y responsive; conserva intactos las cuentas personales, los roles, los datos de demostración y las rutas. **Ver:** [prototipo](https://xxxaga-dev.github.io/asloxp/?revision=7) (sujeto al despliegue de GitHub Pages).
