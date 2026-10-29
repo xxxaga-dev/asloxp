@@ -36,6 +36,14 @@ function scrollProgress(){
  var bar=document.querySelector(".xp-scroll-progress-bar");if(!bar)return;
  var range=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
  bar.style.transform="scaleX("+Math.max(0,Math.min(1,window.scrollY/range))+")";
+ if(!motionOff()&&window.innerWidth>760){
+  root.querySelectorAll(".ow-hero,.arena-hero,.arena-tournament-hero,.arena-identity").forEach(function(hero){
+   var bounds=hero.getBoundingClientRect();
+   if(bounds.bottom<0||bounds.top>window.innerHeight)return;
+   var delta=((bounds.top+bounds.height/2)-window.innerHeight/2)*-.045;
+   hero.style.setProperty("--xp-scroll-shift",Math.max(-22,Math.min(22,delta)).toFixed(1)+"px");
+  });
+ }
 }
 function routeKey(){
  var url=new URL(window.location.href),s=url.searchParams;
