@@ -5,6 +5,12 @@
 Este repositorio **público** es únicamente para maquetas navegables HTML, CSS y JavaScript. La documentación y las decisiones del proyecto ASLO están en un repositorio privado independiente.
 
 
+## Revisión visual 7 — Xports / Pubzi como referencias de composición (28-10-2026)
+
+**Estado: EN ANÁLISIS, pendiente revisión visual del propietario.** No se ha sustituido la identidad ASLO ni se han copiado recursos de terceros. Se incorporaron `assets/experience-v7.css` y `assets/experience-v7.js` a 13 páginas existentes: inicio/noticias, ligas, liga, torneos, torneo, resultados, acceso, registro, modos, modo, cuenta, mis ligas y administración de liga. La revisión refuerza encabezados editoriales, tarjetas, contrastes, navegación pública contextual, accesibilidad y responsive; conserva intactos las cuentas personales, los roles, los datos de demostración y las rutas. **Ver:** [prototipo](https://xxxaga-dev.github.io/asloxp/?revision=7) (sujeto al despliegue de GitHub Pages).
+
+**Comprobación efectuada:** 13/13 páginas enlazan una sola vez ambos recursos; JavaScript con sintaxis válida; llaves CSS balanceadas. **Pendiente:** revisión real en navegador/móvil y observaciones del propietario; no se certifica el despliegue de Pages.
+
 ## Revisión 5 — coherencia entre vistas públicas y navegación móvil
 
 - **Seis rutas públicas con estilo coherente:** [Noticias](index.html), [Ligas](ligas.html), [detalle de liga](liga.html?id=metropolitana), [Torneos](torneos.html), [detalle de torneo](torneo.html?id=apertura), [Resultados](resultados.html).
