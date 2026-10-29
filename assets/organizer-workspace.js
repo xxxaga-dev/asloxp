@@ -188,14 +188,19 @@ function render(){
  document.title="ASLO · "+t(state.view==="inicio"?"home":state.view==="ligas"?"leagues":"tournaments");
  root.innerHTML=state.view==="inicio"?renderHome():renderList();
 }
-function refreshList(){
- var region=document.getElementById("ow-data-region");if(region){region.innerHTML=resultList();writeUrl(true);}
+function refreshList(focusTarget){
+ var region=document.getElementById("ow-data-region");
+ if(region){
+  region.innerHTML=resultList();writeUrl(true);
+  if(focusTarget==="page")region.querySelector(".ow-page-buttons .is-current")?.focus();
+  if(focusTarget==="size")region.querySelector("#ow-page-size")?.focus();
+ }
 }
 document.addEventListener("click",function(e){
  var nav=e.target.closest("[data-nav],.ow-nav a[data-view],.ow-mobile-nav a[data-view]");
  if(nav){e.preventDefault();navigate(nav.getAttribute("data-nav")||nav.getAttribute("data-view"));return;}
  var paginationBtn=e.target.closest("[data-page-index]");
- if(paginationBtn&&!paginationBtn.disabled){state.page=Number(paginationBtn.getAttribute("data-page-index"));refreshList();}
+ if(paginationBtn&&!paginationBtn.disabled){state.page=Number(paginationBtn.getAttribute("data-page-index"));refreshList("page");}
 });
 root.addEventListener("input",function(e){
  if(e.target.id==="ow-search"){state.search=e.target.value;state.page=1;refreshList();}
@@ -207,7 +212,7 @@ root.addEventListener("change",function(e){
  else if(id==="ow-status")state.status=e.target.value;
  else if(id==="ow-page-size")state.size=Number(e.target.value);
  else return;
- state.page=1;refreshList();
+ state.page=1;refreshList(id==="ow-page-size"?"size":null);
 });
 root.addEventListener("reset",function(e){
  if(e.target.id!=="ow-filter-form")return;
