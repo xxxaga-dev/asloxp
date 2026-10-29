@@ -286,3 +286,8 @@ html.xp-motion-on .ow-hero .xp-hud-topline,html.xp-motion-on .ow-hero .xp-hud-bo
  html.xp-motion-on .ow-metric{transition:none!important;transform:none!important}
  .xp-scroll-progress-bar{transition:none!important}
 }
+
+/* Disable native cross-document visual transitions when reduced motion is requested. */
+@media(prefers-reduced-motion:reduce){
+ ::view-transition-old(root),::view-transition-new(root){animation-duration:.01ms!important;animation-delay:0ms!important}
+}
