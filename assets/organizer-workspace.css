@@ -280,3 +280,59 @@ html[data-theme="light"] .ow-status-ready{background:#ddefd5;color:#266d3d}
 }
 @media(max-width:430px){.ow-drawer-links{grid-template-columns:1fr 1fr}.ow-drawer-links a{font-size:11px;padding:13px 8px}}
 @media(prefers-reduced-motion:reduce){.ow-capability-card,.ow-operation-shortcut{animation:none;transition:none;transform:none!important}}
+
+
+/* Fast task lookup, with a two-step scope selection rather than nested guesswork. */
+.ow-find-task{display:inline-flex;gap:10px;align-items:center;min-width:170px;min-height:38px;padding:8px 13px;border:1px solid #456d87;border-radius:9px;background:#0d2b40;color:#d1e7f3;font-size:12px;font-weight:800;white-space:nowrap}
+.ow-find-task:hover{border-color:#a6d992;background:#16455c;color:white}
+.ow-find-task>span:first-child{font-size:22px;line-height:1}
+.ow-find-task kbd{background:#163c53;border:1px solid #3d6379;border-radius:5px;color:#adc9d9;padding:2px 5px;margin-left:auto;font-size:10px}
+.ow-task-dialog{width:min(720px,calc(100vw - 25px));max-height:min(82vh,780px);overflow:hidden;padding:0;background:#0c2132;color:#f6fbff;border:1px solid #5c96af;border-radius:18px;box-shadow:0 35px 100px #000c}
+.ow-task-dialog::backdrop{background:#010b18c8;backdrop-filter:blur(5px)}
+.ow-task-dialog-head{display:flex;align-items:start;justify-content:space-between;gap:15px;padding:25px 28px 12px}
+.ow-task-dialog-head h2{font-size:clamp(23px,2.8vw,35px);margin:6px 0 0;letter-spacing:-.04em}
+.ow-task-dialog-head .ow-eyebrow{font-size:10px}
+.ow-task-close{border:0;background:transparent;color:#eff9ff;font-size:30px;width:38px;min-height:38px;line-height:1;border-radius:9px}
+.ow-task-close:hover{background:#1d4962}
+.ow-task-search-label{display:block;font-size:12px;color:#afd4e5;padding:0 28px 7px;font-weight:800}
+.ow-task-dialog input[type="search"]{display:block;width:calc(100% - 56px);margin:0 28px 15px;border:1px solid #5793b1;background:#071928;color:#f5faff;border-radius:10px;min-height:51px;padding:13px 17px;font-size:15px}
+.ow-task-results{max-height:55vh;overflow-y:auto;padding:3px 16px 15px;scrollbar-width:thin}
+.ow-task-result{display:flex;align-items:center;gap:14px;padding:14px 13px;border:1px solid transparent;border-radius:10px}
+.ow-task-result:hover,.ow-task-result:focus-visible{background:#173e55;border-color:#4d8a9c}
+.ow-task-result span:nth-child(2){min-width:0;flex:1}
+.ow-task-result strong{display:block;font-size:14px;color:#f8ffff}
+.ow-task-result small{display:block;font-size:11px;color:#a6c2d5;margin-top:4px}
+.ow-task-dot{display:grid;place-items:center;flex:0 0 34px;width:34px;height:34px;border:1px solid #537e8d;border-radius:8px;color:#b8f0c1}
+.ow-task-arrow{color:#baf775;font-size:19px}
+.ow-task-empty{text-align:center;color:#accadd;padding:22px}
+.ow-task-foot{border-top:1px solid #39566b;margin:0;padding:14px 25px;font-size:11px;color:#9bbbd0;background:#0a1c2c}
+.ow-task-selection{display:flex;align-items:center;gap:16px;padding:16px 18px;margin-bottom:23px;background:#163d48;border:1px solid #548a7c;border-radius:12px}
+.ow-task-selection .ow-step{flex:0 0 auto;display:grid;place-items:center;min-width:54px;min-height:42px;border-radius:9px;background:#c2fb84;color:#0c2c20;font-size:12px;font-weight:900}
+.ow-task-selection>div{flex:1;min-width:0}
+.ow-task-selection strong{font-size:16px}
+.ow-task-selection p{margin:3px 0 0;color:#c1d9e2;font-size:12px}
+.ow-task-selection button{min-height:38px;padding:8px 11px;border:1px solid #79a2a7;color:white;background:#194854;border-radius:8px;font-size:11px;font-weight:800;white-space:nowrap}
+html[data-theme="light"] .ow-find-task{color:#25516a;background:#f9fcff;border-color:#a2bfcc}
+html[data-theme="light"] .ow-task-selection{background:#e5f3ec;border-color:#a4c9ba;color:#193f38}
+html[data-theme="light"] .ow-task-selection p{color:#4c6d64}
+html[data-theme="light"] .ow-task-dialog{background:#fff;color:#1d4058;border-color:#adcad7}
+html[data-theme="light"] .ow-task-dialog-head h2,html[data-theme="light"] .ow-task-result strong{color:#1b425a}
+html[data-theme="light"] .ow-task-dialog input[type="search"]{background:#f5faff;color:#1c4259;border-color:#9fbfce}
+html[data-theme="light"] .ow-task-close{color:#1b4057}
+html[data-theme="light"] .ow-task-result:hover{background:#e7f5fb}
+html[data-theme="light"] .ow-task-result small,html[data-theme="light"] .ow-task-search-label{color:#53788c}
+html[data-theme="light"] .ow-task-foot{background:#edf6fa;color:#41657a}
+@media(max-width:1100px){.ow-find-task kbd{display:none}.ow-find-task{min-width:0}}
+@media(max-width:760px){
+ .ow-find-task{margin-left:auto;padding:7px 12px}
+ .ow-find-task>span:nth-child(2){display:none}
+ .ow-mode-switch{margin-left:0}
+ .ow-task-dialog-head{padding:19px 20px 11px}
+ .ow-task-search-label{padding-inline:20px}
+ .ow-task-dialog input[type="search"]{width:calc(100% - 40px);margin-inline:20px}
+ .ow-task-result{padding:12px 8px}
+ .ow-task-results{padding-inline:10px}
+ .ow-task-selection{flex-wrap:wrap}
+ .ow-task-selection button{margin-left:auto}
+}
+@media(max-width:430px){.ow-find-task{min-width:38px}.ow-task-selection .ow-step{min-width:40px}}
