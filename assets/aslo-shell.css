@@ -101,3 +101,116 @@ body[data-page="liga-admin"] .arena-account-slot .ow-account-chevron{display:non
 @media(prefers-reduced-motion:reduce){
  body[data-page="liga-admin"] .arena-bottomnav button,body[data-page="modo"] .ow-mobile-nav a{transition:none!important}
 }
+
+
+/* UX 13 · Search lives in the geometric center of the shared mode header.
+   Equal side tracks on desktop prevent the account's width from pushing it off center.
+   Mobile keeps a centered 44px icon button without changing the task-finder behavior. */
+.aslo-shell-header{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) minmax(190px,270px) minmax(0,1fr);
+ align-items:center;
+ column-gap:clamp(10px,1.4vw,24px);
+}
+.aslo-shell-header:has(.aslo-header-search:empty){
+ grid-template-columns:minmax(0,1fr) auto;
+}
+.aslo-header-start{
+ display:flex;align-items:center;min-width:0;gap:clamp(10px,1.2vw,20px);
+ justify-self:start;
+}
+.aslo-header-start .ow-brand{flex:none}
+.aslo-header-start .ow-top-division{flex:none}
+.aslo-header-start .ow-workspace-title{
+ min-width:0;overflow:hidden;text-overflow:ellipsis;
+}
+.aslo-header-search{
+ display:flex;align-items:center;justify-content:center;
+ min-width:0;width:100%;justify-self:center;
+}
+.aslo-header-search:empty{display:none}
+.aslo-header-end{
+ display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,1vw,18px);
+ min-width:0;justify-self:end;
+}
+.aslo-header-end .ow-demo{margin-left:0;flex:none}
+.aslo-header-end .aslo-account-slot{margin-left:0;flex:none}
+.aslo-shell-header .ow-find-task{
+ box-sizing:border-box;
+ display:grid;
+ grid-template-columns:22px minmax(0,1fr) auto;
+ align-items:center;
+ justify-content:center;
+ column-gap:10px;
+ width:100%;
+ min-width:0;
+ min-height:42px;
+ padding:8px 12px;
+ margin:0;
+ text-align:left;
+ border-radius:10px;
+ line-height:1.15;
+}
+.aslo-shell-header .ow-find-task .aslo-search-symbol{
+ display:block;flex:none;width:21px;height:21px;
+ align-self:center;justify-self:center;
+ color:#a8e4fb;
+}
+.aslo-shell-header .ow-find-task .aslo-find-label{
+ display:block;min-width:0;white-space:nowrap;overflow:hidden;
+ text-overflow:ellipsis;font-size:12px;line-height:1.2;
+}
+.aslo-shell-header .ow-find-task .aslo-find-shortcut{
+ display:block;margin:0;justify-self:end;padding:3px 6px;
+ font-size:10px;line-height:1.2;white-space:nowrap;
+}
+.aslo-shell-header .ow-find-task:hover .aslo-search-symbol{color:#d0ffa0}
+.aslo-shell-header .ow-find-task:focus-visible{
+ outline:2px solid #c6fa83;outline-offset:3px;
+}
+html[data-theme="light"] .aslo-shell-header .ow-find-task .aslo-search-symbol{color:#266885}
+@media(max-width:1180px){
+ .aslo-shell-header{grid-template-columns:minmax(0,1fr) minmax(180px,250px) minmax(0,1fr)}
+ .aslo-header-start .ow-workspace-title,.aslo-header-start .ow-top-division{display:none}
+ .aslo-header-end .ow-demo{display:none}
+}
+@media(max-width:760px){
+ .aslo-shell-header{
+  display:flex!important;align-items:center;
+  justify-content:space-between;
+  gap:0;
+  position:sticky;
+  padding-inline:12px;
+ }
+ .aslo-header-start{margin-right:auto;min-width:0}
+ .aslo-header-end{margin-left:auto;min-width:0}
+ .aslo-header-search:not(:empty){
+  position:absolute;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:44px;height:44px;
+  margin:0;
+  z-index:2;
+ }
+ .aslo-shell-header .ow-find-task{
+  display:grid!important;
+  place-items:center;
+  grid-template-columns:1fr;
+  width:44px;height:44px;
+  min-width:44px;max-width:44px;min-height:44px;
+  padding:0;margin:0;
+  border-radius:11px;
+  text-align:center;
+ }
+ .aslo-shell-header .ow-find-task .aslo-search-symbol{width:22px;height:22px;grid-column:1;grid-row:1}
+ .aslo-shell-header .ow-find-task .aslo-find-label,
+ .aslo-shell-header .ow-find-task .aslo-find-shortcut{display:none!important}
+}
+@media(max-width:360px){
+ .aslo-shell-header{padding-inline:9px}
+ .aslo-shell-header .ow-brand{font-size:22px}
+ .aslo-shell-header .ow-profile-copy{max-width:65px}
+}
+@media(prefers-reduced-motion:reduce){
+ .aslo-shell-header .ow-find-task{transition:none!important}
+}
