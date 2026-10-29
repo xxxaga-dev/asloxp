@@ -5,6 +5,19 @@
 Este repositorio **público** es únicamente para maquetas navegables HTML, CSS y JavaScript. La documentación y las decisiones del proyecto ASLO están en un repositorio privado independiente.
 
 
+## Revisión UX 12 — Shell visual común para todos los modos (EN ANÁLISIS)
+
+La revisión de escritorio y móvil del propietario solicitó: retirar la flecha desalineada del perfil, centrar las etiquetas inferiores, mostrar el menú de cuenta completo y **reutilizar un único layout visual en todos los modos**.
+
+- `assets/aslo-shell.js` + `assets/aslo-shell.css`: layout compartido de encabezado, acceso a cuenta, navegación lateral, barra inferior y menú Más; cada modo aporta solamente sus apartados.
+- `organizador.html` se monta desde `assets/organizer-shell-init.js`; se conservan las ocho responsabilidades y el buscador propios del organizador. Abajo se muestran Inicio, Torneos, Agenda y Más con iconos/etiquetas separados y centrados.
+- `modo.html` monta el mismo shell en los otros modos actuales, conservando las áreas de demostración ya declaradas por rol. **No se implementan todavía los módulos deportivos faltantes ni se inventan permisos.**
+- Menú de cuenta completo tanto con sesión como sin ella. Visitante no puede cerrar una sesión inexistente: ve iniciar sesión, vínculos personales que llevan al acceso, idioma y tema. Una persona con sesión ve perfil/avatar, apariencia, seguridad, modos, idioma, tema y cerrar sesión. El mismo avatar y las mismas preferencias se mantienen entre modos.
+- `liga-admin.html` conserva por ahora su contenedor histórico de contexto, pero comparte el menú personal, proporciones móviles y paleta. Su migración interna completa al mismo shell sigue pendiente, explícitamente, para no romper la simulación de torneos.
+- Contrato técnico y reglas de extensión: [docs/ui-layout-standard.md](docs/ui-layout-standard.md).
+
+Comprobaciones: sintaxis de JavaScript, estructura de la navegación generada del organizador, inicialización de los otros trece modos, estados de menú personal Visitante/Organizador/Juez, idioma/tema y estilos CSS. **No se verificó el despliegue real ni se hizo una prueba visual automatizada en navegador**. Esta iteración no está aprobada hasta revisión del propietario.
+
 ## Revisión UX 11 — Cuenta global y navegación por modo (EN ANÁLISIS)
 
 El propietario confirmó que el menú operativo del organizador se comprende; pidió separar las funciones personales de las deportivas y disponer de personaje/avatar de perfil. **Cambios aplicados en el prototipo:** el encabezado de `organizador.html` muestra un botón personal con nombre de sesión, modo activo y foto/avatar; al desplegar permite abrir perfil y avatar, apariencia, seguridad, Mis modos, seleccionar idioma (ES/EN/DE) y cerrar sesión. El menú inferior móvil y el lateral conservan exclusivamente funciones del modo organizador; se eliminó de ellos «Cambiar modo».
