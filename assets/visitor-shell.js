@@ -25,6 +25,17 @@ const sportNames=[
  ["natacion","🏊","Natación","Swimming","Schwimmen"]
 ];
 const activeFor={inicio:"inicio",ligas:"ligas",liga:"ligas",torneos:"torneos",torneo:"torneos",resultados:"resultados"};
+const publicGeo={
+ "Colombia":{"Cundinamarca":["Soacha","Bogotá","Chía"],"Antioquia":["Medellín","Envigado"],"Valle del Cauca":["Cali","Palmira"]},
+ "México":{"Ciudad de México":["Ciudad de México"],"Jalisco":["Guadalajara"]},
+ "España":{"Madrid":["Madrid","Alcalá de Henares"],"Cataluña":["Barcelona"]}
+};
+function savedGeo(){
+ const fallback={country:"Colombia",state:"Cundinamarca",city:"Soacha"};
+ try{const v=JSON.parse(localStorage.getItem("asloxp-demo-location")||"null");
+ return v&&publicGeo[v.country]?.[v.state]?.includes(v.city)?v:fallback}catch(e){return fallback}
+}
+
 let active="inicio";
 function readSport(){try{return sessionStorage.getItem("asloxp-demo-sport")||"all"}catch(e){return "all"}}
 function navItem(link){return {...link,label:locale(link.name),short:locale(link.short),active:link.key===active}}
@@ -37,7 +48,7 @@ function searchDialog(){
   tr("EXPLORACIÓN PÚBLICA","PUBLIC EXPLORATION","ÖFFENTLICHE SUCHE")+
   '</span><h2 id="aslo-visitor-search-heading">'+tr("¿Qué quieres encontrar?","What would you like to find?","Was möchtest du finden?")+
   '</h2></div><button type="button" class="ow-task-close" id="aslo-public-search-close" aria-label="'+tr("Cerrar","Close","Schließen")+'">×</button></div>'+
-  '<label class="ow-task-search-label" for="aslo-visitor-search">'+tr("Buscar en información pública","Search public information","Öffentliche Informationen suchen")+'</label>'+
+  '<label class="ow-task-search-label" for="'+(active==="inicio"?"v4-search":"aslo-visitor-search")+'">'+tr("Buscar en información pública","Search public information","Öffentliche Informationen suchen")+'</label>'+
   '<input type="search" id="'+(active==="inicio"?"v4-search":"aslo-visitor-search")+'" autocomplete="off" placeholder="'+tr("Ligas, torneos, resultados, noticias…","Leagues, tournaments, results, news…","Ligen, Turniere, Ergebnisse, Nachrichten…")+'">'+
   '<div class="ow-task-results" id="aslo-visitor-search-links" aria-live="polite"></div>'+
   '<p class="ow-task-foot">'+tr("Las noticias, partidos y torneos mostrados son ejemplos del prototipo.","The displayed stories and competitions are demo examples.","Meldungen und Wettbewerbe sind Demobeispiele.")+'</p>';
@@ -72,14 +83,33 @@ function publicControls(){
  const controls=document.createElement("div");
  controls.className="aslo-visitor-drawer-controls";
  const selected=readSport();
+ const geo=savedGeo();
  controls.innerHTML='<label for="aslo-public-sport">'+tr("Filtrar contenido público por deporte","Filter public content by sport","Öffentliche Inhalte nach Sport filtern")+
  '</label><select id="aslo-public-sport">'+sportNames.map(a=>'<option value="'+a[0]+'"'+(selected===a[0]?' selected':'')+'>'+a[1]+' '+escape(locale(a.slice(2)))+'</option>').join("")+'</select>'+
- '<p>'+tr("Seleccionar un deporte no requiere una cuenta.","Choosing a sport does not require an account.","Eine Sportart auswählen erfordert kein Konto.")+'</p>';
+ '<div class="aslo-public-geo"><strong>'+tr("Ubicación de referencia (demo)","Sample reference location","Beispiel-Referenzort")+'</strong>'+
+ '<label for="aslo-public-country">'+tr("País","Country","Land")+'</label><select id="aslo-public-country"></select>'+
+ '<label for="aslo-public-state">'+tr("Región","Region","Region")+'</label><select id="aslo-public-state"></select>'+
+ '<label for="aslo-public-city">'+tr("Ciudad","City","Stadt")+'</label><select id="aslo-public-city"></select></div>'+
+ '<p>'+tr("La exploración es pública. La ubicación se elige manualmente y no utiliza geolocalización.","Exploration is public. Location is selected manually, without geolocation.","Die Suche ist öffentlich. Der Ort wird manuell gewählt, ohne Geolokalisierung.")+'</p>';
  nav.after(controls);
- controls.querySelector("select").addEventListener("change",e=>{
+ controls.querySelector("#aslo-public-sport").addEventListener("change",e=>{
   try{sessionStorage.setItem("asloxp-demo-sport",e.target.value)}catch(err){}
   location.reload();
  });
+ const country=controls.querySelector("#aslo-public-country"),state=controls.querySelector("#aslo-public-state"),city=controls.querySelector("#aslo-public-city");
+ function options(node,values,selected){
+  node.innerHTML=values.map(v=>'<option value="'+escape(v)+'"'+(v===selected?' selected':'')+'>'+escape(v)+'</option>').join("");
+ }
+ function sync(level){
+  if(level===0)options(country,Object.keys(publicGeo),geo.country);
+  if(level<=1)options(state,Object.keys(publicGeo[geo.country]),geo.state);
+  if(level<=2)options(city,publicGeo[geo.country][geo.state],geo.city);
+ }
+ sync(0);
+ function save(){try{localStorage.setItem("asloxp-demo-location",JSON.stringify(geo))}catch(e){}location.reload();}
+ country.addEventListener("change",()=>{geo.country=country.value;geo.state=Object.keys(publicGeo[geo.country])[0];geo.city=publicGeo[geo.country][geo.state][0];sync(1);save()});
+ state.addEventListener("change",()=>{geo.state=state.value;geo.city=publicGeo[geo.country][geo.state][0];sync(2);save()});
+ city.addEventListener("change",()=>{geo.city=city.value;save()});
 }
 function render(content,page){
  active=activeFor[page]||"inicio";
