@@ -40,8 +40,8 @@ body.v4-visitor .v4-root,body.v4-visitor .v5-root{max-width:1920px;margin-inline
 .v4-root .v4-sponsor:hover{transform:translateY(-4px)}
 .v4-root .v4-main-grid{gap:17px;align-items:stretch}
 .v4-root .v4-hero-news{position:relative;min-height:clamp(510px,42vw,650px);border:1px solid #5aa9d182;border-radius:var(--a7-radius);overflow:hidden;box-shadow:0 25px 56px #0009,inset 0 0 90px #00182990;isolation:isolate}
-.v4-root .v4-hero-news::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(0deg,#030c19e8 0%,#03162aa0 45%,#05203e28 100%);opacity:1}
-.v4-root .v4-hero-news::after{content:"";position:absolute;z-index:1;pointer-events:none;right:0;top:0;width:30%;height:38%;border-top:4px solid #d9ff6e9c;border-right:4px solid #d9ff6e9c;clip-path:polygon(40% 0,100% 0,100% 100%,92% 100%,92% 8%,40% 8%);opacity:.75}
+/* Keep the v6 ::before photo layer so the prominent cover image remains visible. */
+/* Preserve the v6 editorial chapter marker in ::after. */
 .v4-root .v4-hero-news-content{position:relative;z-index:2;max-width:900px;padding:clamp(27px,4vw,62px)!important}
 .v4-root .v4-hero-news h1{font-family:Impact,"Arial Narrow",system-ui,sans-serif;font-weight:900;font-size:clamp(48px,5.4vw,100px);line-height:.98;letter-spacing:.018em;text-transform:uppercase;text-wrap:balance;text-shadow:0 10px 40px #010912a8;margin-block:18px 20px}
 .v4-root .v4-hero-news-content p{font-size:clamp(14px,1.1vw,18px);line-height:1.65;max-width:660px;color:#d6ebf9}
