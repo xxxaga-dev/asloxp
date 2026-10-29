@@ -60,3 +60,8 @@ body[data-page="liga-admin"] .arena-tour-footer a:hover{
  body[data-page="liga-admin"] .arena-tour-content>*{animation:none!important}
  body[data-page="liga-admin"] .arena-tabbar button{transition:none!important}
 }
+
+
+body[data-page="liga-admin"] .arena-tour-head-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+body[data-page="liga-admin"] .arena-tour-head-actions .arena-action{min-height:43px}
+@media(max-width:680px){body[data-page="liga-admin"] .arena-tour-head-actions{width:100%}body[data-page="liga-admin"] .arena-tour-head-actions .arena-action{flex:1}}
