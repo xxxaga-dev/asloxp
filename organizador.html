@@ -11,7 +11,7 @@
 <body data-page="organizador">
 <a class="ow-skip" href="#ow-main">Saltar al contenido</a>
 <div id="ow-app">
- <header class="ow-top"><a href="organizador.html?vista=inicio" class="ow-brand"><span aria-hidden="true">▲</span> ASLO</a><span class="ow-top-division" aria-hidden="true"></span><span class="ow-workspace-title">Espacio del organizador</span><span class="ow-demo">PROTOTIPO · DATOS DE MUESTRA</span><a class="ow-mode-switch" href="modos.html">Cambiar modo ↗</a><a class="ow-avatar" href="cuenta.html?tab=perfil" aria-label="Mi cuenta">◉</a></header>
+ <header class="ow-top"><a href="organizador.html?vista=inicio" class="ow-brand"><span aria-hidden="true">▲</span> ASLO</a><span class="ow-top-division" aria-hidden="true"></span><span class="ow-workspace-title">Espacio del organizador</span><button type="button" id="ow-find-task" class="ow-find-task" aria-haspopup="dialog" aria-controls="ow-task-dialog"><span aria-hidden="true">⌕</span> <span>Buscar función</span> <kbd>Ctrl K</kbd></button><span class="ow-demo">PROTOTIPO · DATOS DE MUESTRA</span><a class="ow-mode-switch" href="modos.html">Cambiar modo ↗</a><a class="ow-avatar" href="cuenta.html?tab=perfil" aria-label="Mi cuenta">◉</a></header>
  <div class="ow-shell">
  <aside class="ow-sidebar" aria-label="Navegación del organizador">
   <div class="ow-nav-groups">
@@ -57,8 +57,16 @@
  </nav>
  </aside>
 </div>
+<dialog class="ow-task-dialog" id="ow-task-dialog" aria-labelledby="ow-task-heading">
+ <div class="ow-task-dialog-head"><div><span class="ow-eyebrow">NAVEGACIÓN POR TAREA</span><h2 id="ow-task-heading">¿Qué necesitas hacer?</h2></div><button type="button" class="ow-task-close" id="ow-task-close" aria-label="Cerrar búsqueda">×</button></div>
+ <label class="ow-task-search-label" for="ow-task-search">Buscar una función</label>
+ <input id="ow-task-search" type="search" autocomplete="off" placeholder="Ej.: reemplazar equipo, juez, reglamento, planilla">
+ <div id="ow-task-results" class="ow-task-results" role="status" aria-live="polite"></div>
+ <p class="ow-task-foot">Selecciona una tarea. ASLO te llevará a elegir la liga o el torneo adecuado.</p>
+</dialog>
 <script src="assets/auth-v2.js?v=13"></script>
 <script src="assets/league-manager.js?v=2"></script>
 <script src="assets/organizer-workspace.js?v=1"></script>
+<script src="assets/organizer-task-finder.js?v=1"></script>
 </body>
 </html>
