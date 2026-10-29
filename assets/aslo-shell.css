@@ -74,3 +74,30 @@ html[data-theme="light"] .aslo-shell-mobile-nav .ow-mobile-more{color:#395e72}
  .aslo-shell-header .ow-brand{font-size:22px}
 }
 @media(prefers-reduced-motion:reduce){.aslo-generic-workspace .aslo-preview-card{transition:none}.aslo-generic-workspace .aslo-preview-card:hover{transform:none}}
+
+
+/* Preserve identical shared chrome colors for every mode, not the legacy mode palette. */
+body[data-page="modo"]{margin:0;background:#071320!important;color:#f5fbff!important;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif!important}
+body[data-page="modo"] .ow-shell{min-height:calc(100dvh - 72px)}
+body[data-page="modo"] .ow-main{max-width:none;width:auto;margin:0;padding:clamp(18px,3vw,36px)}
+html[data-theme="light"] body[data-page="modo"]{--ow-bg:#eaf2f7;--ow-top:#f9fcff;--ow-side:#f0f6fa;--ow-panel:#f6fbfe;--ow-elev:#deebf4;--ow-line:#aec8d8;--ow-text:#123246;--ow-sub:#50728b;--ow-accent:#b8ec79;--ow-blue:#16668f;background:#eaf2f7!important;color:#123246!important}
+@media(max-width:760px){
+ body[data-page="modo"] .ow-main{padding:21px 15px 110px}
+ body[data-page="modo"] .ow-shell{min-height:calc(100dvh - 62px)}
+}
+/* League/tournament detail retains its own contextual tabs but matches shared nav proportions. */
+body[data-page="liga-admin"] .arena-top{background:#071725f5;border-bottom-color:#3d657f77}
+body[data-page="liga-admin"] .arena-sidebar{background:#081c2c;border-right-color:#31526a}
+body[data-page="liga-admin"] .arena-side-nav button{font-weight:800;border-radius:10px}
+body[data-page="liga-admin"] .arena-side-nav button.active{background:#193d51;color:#d5f8b8;border-color:#baf775}
+body[data-page="liga-admin"] .arena-account-slot .ow-account-chevron{display:none!important}
+@media(max-width:760px){
+ body[data-page="liga-admin"] .arena-bottomnav{background:#081c2ced;border-top:1px solid #47738d;backdrop-filter:blur(14px);align-items:stretch;padding:0!important}
+ body[data-page="liga-admin"] .arena-bottomnav button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:66px!important;gap:5px;padding:8px 3px calc(8px + env(safe-area-inset-bottom));text-align:center;border-top:2px solid transparent;line-height:1.1;color:#a9c8d8}
+ body[data-page="liga-admin"] .arena-bottomnav button span{font-size:23px;line-height:1.1}
+ body[data-page="liga-admin"] .arena-bottomnav button small{display:block;width:100%;text-align:center;text-wrap:balance;font-weight:830;font-size:10px;line-height:1.2;margin:0}
+ body[data-page="liga-admin"] .arena-bottomnav button.active{color:#d9ffa5;background:#1a3a44;border-top-color:#c3fd83}
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-page="liga-admin"] .arena-bottomnav button,body[data-page="modo"] .ow-mobile-nav a{transition:none!important}
+}
