@@ -74,7 +74,7 @@ function decorateHero(){
   hero.setAttribute("data-xp-stage","");
   var visual=make("div","xp-hero-hud");
   visual.setAttribute("aria-hidden","true");
-  visual.innerHTML='<span class="xp-hud-corner xp-hud-tl"></span><span class="xp-hud-corner xp-hud-tr"></span><span class="xp-hud-corner xp-hud-bl"></span><span class="xp-hud-corner xp-hud-br"></span><span class="xp-hud-radar"><span></span><span></span><span></span></span><span class="xp-hud-scan"></span><span class="xp-hud-topline">ASLO <i>◆</i> SPORTS EXPERIENCE</span><span class="xp-hud-bottomline">LIVE INTERFACE <i>◆</i> CONTROL / XP</span>';
+  visual.innerHTML='<span class="xp-hud-corner xp-hud-tl"></span><span class="xp-hud-corner xp-hud-tr"></span><span class="xp-hud-corner xp-hud-bl"></span><span class="xp-hud-corner xp-hud-br"></span><span class="xp-hud-radar"><span></span><span></span><span></span></span><span class="xp-hud-scan"></span><span class="xp-hud-topline">ASLO <i>◆</i> SPORTS EXPERIENCE</span><span class="xp-hud-bottomline">SPORTS UI <i>◆</i> INTERACTIVE / XP</span>';
   hero.appendChild(visual);
   // The decorative layer never contains accessible text or receives events.
  });
@@ -162,7 +162,17 @@ function resetTilt(node){
 function tickPointer(){
  raf=0;
  if(!lastPointer||!pointerFine())return;
- var event=lastPointer,el=event.target.closest(tiltSelector);
+ var event=lastPointer;
+ var hero=event.target.closest(".ow-hero,.arena-hero,.arena-tournament-hero");
+ if(hero){
+  var hr=hero.getBoundingClientRect();
+  if(hr.width&&hr.height){
+   hero.style.setProperty("--xp-look-x",Math.max(0,Math.min(100,(event.clientX-hr.left)/hr.width*100)).toFixed(1)+"%");
+   hero.style.setProperty("--xp-look-y",Math.max(0,Math.min(100,(event.clientY-hr.top)/hr.height*100)).toFixed(1)+"%");
+  }
+ }
+ // Other ASLO screens already have a legacy tilt/ripple engine; do not run both.
+ var el=page==="organizador"?event.target.closest(tiltSelector):null;
  if(activeTilt!==el){resetTilt(activeTilt);activeTilt=el;}
  if(!el)return;
  var r=el.getBoundingClientRect();
@@ -174,11 +184,7 @@ function tickPointer(){
  el.style.setProperty("--xp-pointer-y",(y*100).toFixed(1)+"%");
  el.style.setProperty("--xp-rotate-x",((.5-y)*4.8).toFixed(2)+"deg");
  el.style.setProperty("--xp-rotate-y",((x-.5)*5.4).toFixed(2)+"deg");
- var hero=event.target.closest(".ow-hero,.arena-hero,.arena-tournament-hero");
- if(hero){
-  hero.style.setProperty("--xp-look-x",(x*100).toFixed(1)+"%");
-  hero.style.setProperty("--xp-look-y",(y*100).toFixed(1)+"%");
- }
+
 }
 function setIntro(){
  if(motionOff())return;
@@ -187,6 +193,7 @@ function setIntro(){
 }
 function addListeners(){
  document.addEventListener("pointerdown",function(e){
+  if(page!=="organizador")return;
   var node=e.target.closest(rippleSelector);
   if(node&&!node.matches("[disabled],:disabled")&&e.pointerType!=="touch")createRipple(node,e);
  },{passive:true});
