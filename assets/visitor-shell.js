@@ -38,28 +38,31 @@ function searchDialog(){
   '</span><h2 id="aslo-visitor-search-heading">'+tr("¿Qué quieres encontrar?","What would you like to find?","Was möchtest du finden?")+
   '</h2></div><button type="button" class="ow-task-close" id="aslo-public-search-close" aria-label="'+tr("Cerrar","Close","Schließen")+'">×</button></div>'+
   '<label class="ow-task-search-label" for="aslo-visitor-search">'+tr("Buscar en información pública","Search public information","Öffentliche Informationen suchen")+'</label>'+
-  '<input type="search" id="aslo-visitor-search" autocomplete="off" placeholder="'+tr("Ligas, torneos, resultados, noticias…","Leagues, tournaments, results, news…","Ligen, Turniere, Ergebnisse, Nachrichten…")+'">'+
+  '<input type="search" id="'+(active==="inicio"?"v4-search":"aslo-visitor-search")+'" autocomplete="off" placeholder="'+tr("Ligas, torneos, resultados, noticias…","Leagues, tournaments, results, news…","Ligen, Turniere, Ergebnisse, Nachrichten…")+'">'+
   '<div class="ow-task-results" id="aslo-visitor-search-links" aria-live="polite"></div>'+
   '<p class="ow-task-foot">'+tr("Las noticias, partidos y torneos mostrados son ejemplos del prototipo.","The displayed stories and competitions are demo examples.","Meldungen und Wettbewerbe sind Demobeispiele.")+'</p>';
  document.body.appendChild(dlg);
  dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
- const input=dlg.querySelector("#aslo-visitor-search");
+ const input=dlg.querySelector("input[type=search]");
  const results=dlg.querySelector("#aslo-visitor-search-links");
  function list(){
   const q=input.value.trim(),norm=x=>String(x).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
   const filtered=links.filter(x=>!q||norm([...x.name].join(" ")).includes(norm(q))||norm(x.key).includes(norm(q)));
   results.innerHTML=(filtered.length?filtered:links).map(x=>'<a class="ow-task-result" href="'+escape(x.href)+(q&&x.key==="ligas"?"?buscar="+encodeURIComponent(q):"")+'"><span class="ow-task-dot" aria-hidden="true">'+x.icon+'</span><span><strong>'+escape(locale(x.name))+'</strong><small>'+tr("Consultar información pública","Browse public information","Öffentliche Informationen ansehen")+'</small></span><span class="ow-task-arrow" aria-hidden="true">→</span></a>').join("");
-  if(active==="inicio"){
-   // Keep the existing local news filter working without a parallel search engine.
-   const current=document.getElementById("v4-search");
-   if(current){current.value=q;current.dispatchEvent(new Event("input",{bubbles:true}))}
-  }
+  // On the public home the input uses #v4-search; the existing news filter responds to its input event.
  }
  input.addEventListener("input",list);
  dlg.querySelector("#aslo-public-search-close")?.addEventListener("click",()=>dlg.close());
  const button=document.getElementById("ow-find-task");
  button?.addEventListener("click",()=>{list();dlg.showModal();input.focus()});
- document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"&&!e.repeat){e.preventDefault();if(dlg.open)dlg.close();else{list();dlg.showModal();input.focus()}}});
+ if(!document.documentElement.dataset.publicSearchShortcut){
+  document.documentElement.dataset.publicSearchShortcut="1";
+  document.addEventListener("keydown",e=>{
+   if(!(e.ctrlKey||e.metaKey)||e.key.toLowerCase()!=="k"||e.repeat)return;
+   const current=document.getElementById("ow-task-dialog");if(!current)return;
+   e.preventDefault();if(current.open)current.close();else document.getElementById("ow-find-task")?.click();
+  });
+ }
  list();
 }
 function publicControls(){
@@ -78,27 +81,10 @@ function publicControls(){
   location.reload();
  });
 }
-function attach(){
- const drawer=document.getElementById("ow-mobile-drawer"),veil=document.getElementById("ow-drawer-backdrop"),button=document.getElementById("ow-mobile-more"),close=document.getElementById("ow-drawer-close");
- const closeMenu=()=>{
-  if(!drawer||!veil||!button)return;
-  drawer.hidden=true;veil.hidden=true;button.setAttribute("aria-expanded","false");
- };
- const toggle=()=>{
-  const opening=drawer.hidden;drawer.hidden=!opening;veil.hidden=!opening;
-  button.setAttribute("aria-expanded",String(opening));
-  if(opening)drawer.querySelector("a")?.focus();
-  else button.focus();
- };
- button?.addEventListener("click",toggle);
- close?.addEventListener("click",()=>{closeMenu();button.focus()});
- veil?.addEventListener("click",closeMenu);
- drawer?.addEventListener("click",e=>{if(e.target.closest("a"))closeMenu()});
- document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!drawer.hidden){closeMenu();button.focus()}});
-}
 function render(content,page){
  active=activeFor[page]||"inicio";
  const all=links.map(navItem);
+ // Keep the public URL as the active selection even if account state changes.
  const groups=[
   {title:tr("EXPLORAR","EXPLORE","ENTDECKEN"),items:all}
  ];
