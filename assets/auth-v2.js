@@ -108,7 +108,7 @@ function topbar(section){
  const a=account(),r=role(activeMode());const inMode=section==="mode";
  const identityPages=["modos","modo","cuenta"].includes(document.body.dataset.page);
  const navigation=identityPages?`<nav class="publicnav" aria-label="Mis espacios ASLO"><a href="modos.html">${tr("modes")}</a><a href="cuenta.html?tab=perfil">${tr("account")}</a><a href="index.html">${tr("public")}</a></nav>`:inMode?"":`<nav class="publicnav" aria-label="${tr("public")}"><a href="index.html" class="${section==="inicio"?"sel":""}">${tr("home")}</a><a href="ligas.html" class="${section==="ligas"?"sel":""}">${tr("leagues")}</a></nav>`;
- const user=a?`<details class="account-menu"><summary class="account-trigger" aria-label="${tr("account")}"><span class="avatar" aria-hidden="true">${esc(a.name.trim().slice(0,1).toUpperCase()||"U")}</span><span class="account-trigger-copy"><strong>${esc(a.name)}</strong><small>${r?esc(r.name):tr("account")}</small></span><span aria-hidden="true">⌄</span></summary><div class="account-popover"><div class="popover-title"><span class="avatar">${esc(a.name.trim().slice(0,1).toUpperCase()||"U")}</span><div><strong>${esc(a.name)}</strong><small>${tr("account")}</small></div></div><a href="cuenta.html?tab=perfil">${tr("profile")}</a><a href="cuenta.html?tab=seguridad">${tr("security")}</a><a href="cuenta.html?tab=apariencia">${tr("appearance")}</a><a href="cuenta.html?tab=idioma">${tr("language")}</a><a href="modos.html">${tr("switch")}</a><button type="button" data-logout class="logout-option">${tr("logout")}</button></div></details>`:`<a class="loginlink" href="acceso.html">${tr("login")}</a>`;
+ const user=a?`<details class="account-menu"><summary class="account-trigger" aria-label="${tr("account")}">${avatarForAccount(a,"aslo-account-avatar--small")}<span class="account-trigger-copy"><strong>${esc(a.name)}</strong><small>${r?esc(r.name):tr("account")}</small></span><span aria-hidden="true">⌄</span></summary><div class="account-popover"><div class="popover-title"><span class="avatar">${esc(a.name.trim().slice(0,1).toUpperCase()||"U")}</span><div><strong>${esc(a.name)}</strong><small>${tr("account")}</small></div></div><a href="cuenta.html?tab=perfil">${tr("profile")}</a><a href="cuenta.html?tab=seguridad">${tr("security")}</a><a href="cuenta.html?tab=apariencia">${tr("appearance")}</a><a href="cuenta.html?tab=idioma">${tr("language")}</a><a href="modos.html">${tr("switch")}</a><button type="button" data-logout class="logout-option">${tr("logout")}</button></div></details>`:`<a class="loginlink" href="acceso.html">${tr("login")}</a>`;
  return `<header class="sitehead"><div class="shell headrow"><a class="brand" href="index.html">${identityPages?'<span class="brand-symbol">▲</span> ASLO':'aslo<i>XP</i>'}</a>${navigation}<div class="account-actions">${languages()}${user}</div></div></header>`;
 }
 function chrome(content,section=""){
@@ -177,20 +177,79 @@ function modePage(){
  changeMode(id);if(id==="organizador"){location.replace("organizador.html");return}const r=role(id);
  render(`<div class="shell modeview"><section class="pagehead"><div class="crumb"><a href="modos.html">${tr("modes")}</a> / ${esc(r.name)}</div><span class="eyebrow">${tr("activeMode")}</span><h1>${r.icon} ${esc(r.name)}</h1><p class="intro">${tr("modeDescription")}</p><a href="modos.html" class="btn primary">${tr("switch")}</a><a href="cuenta.html?tab=perfil" class="btn">${tr("account")}</a></section><section class="mode-workspace"><h2>${tr("modeTitle")} ${esc(r.name)}</h2><p>${tr("modeWork")}</p><div class="mode-grid mode-promises">${r.parts.map(k=>`<div class="mode-tile preview-tile"><span class="chip">${tr("comingLater")}</span><h3>${esc(tr(k))}</h3></div>`).join("")}</div></section><p class="fineprint">${tr("noPerm")}</p></div>`,"mode");
 }
+
+function avatarPicker(a){
+ const t3=(es,en,de)=>({es,en,de})[lang()]||es;
+ const hasPhoto=validPhoto(a.photoData);
+ const items=avatarCatalog.map(v=>
+  '<button type="button" class="aslo-avatar-choice '+(!hasPhoto&&(a.avatarId||"classic")===v.id?'selected':'')+
+  '" data-pick-avatar="'+v.id+'" aria-pressed="'+(!hasPhoto&&(a.avatarId||"classic")===v.id)+'" aria-label="'+esc(avatarLabel(v))+'">'+
+  avatarMarkup(v.id)+'<span>'+esc(avatarLabel(v))+'</span></button>').join("");
+ return '<section class="aslo-avatar-settings" aria-labelledby="avatar-choose-title">'+
+  '<h3 id="avatar-choose-title">'+t3("Tu personaje deportivo","Your sports character","Deine Sportfigur")+'</h3>'+
+  '<p class="fineprint">'+t3("Elige un personaje para identificarte en tus distintos modos y deportes. No cambia tus permisos.","Choose a character for every mode and sport. It does not grant permissions.","Wähle eine Figur für alle Modi und Sportarten. Keine Berechtigungsänderung.")+'</p>'+
+  '<div class="aslo-avatar-grid" role="group" aria-label="'+t3("Elegir avatar","Choose avatar","Avatar auswählen")+'">'+items+'</div>'+
+  '<label class="aslo-photo-picker" for="profile-photo-upload">'+
+   '<span class="aslo-photo-picker-icon" aria-hidden="true">▣</span><span><strong>'+
+   t3("Usar una foto de perfil","Use a profile photo","Profilfoto verwenden")+'</strong><small>'+
+   t3("JPG, PNG o WebP · foto solo para esta sesión de demostración","JPG, PNG or WebP · photo for this demo session only","JPG, PNG oder WebP · Foto nur für diese Demo-Sitzung")+'</small></span></label>'+
+  '<input id="profile-photo-upload" class="aslo-photo-input" type="file" accept="image/jpeg,image/png,image/webp">'+
+  (hasPhoto?'<button type="button" class="aslo-remove-photo" id="aslo-remove-photo">'+t3("Quitar foto y usar avatar","Remove photo and use avatar","Foto entfernen, Avatar verwenden")+'</button>':'')+
+  '<p id="avatar-feedback" class="fineprint" role="status" aria-live="polite"></p></section>';
+}
+
 function settings(){
  if(!account()){location.replace("acceso.html");return}
  const qp=new URLSearchParams(location.search);let tab=qp.get("tab")||"perfil";if(!["perfil","seguridad","apariencia","idioma"].includes(tab))tab="perfil";
  const a=account();const tabs=[["perfil","profile"],["seguridad","security"],["apariencia","appearance"],["idioma","language"]];
- const pane=tab==="perfil"?`<span class="eyebrow">${tr("profile")}</span><h2>${tr("personalData")}</h2><p>${tr("profileDesc")}</p><div class="profile-preview"><span class="avatar large">${esc(a.name.trim().slice(0,1).toUpperCase()||"U")}</span><div><strong>${esc(a.name)}</strong><small>${tr("sessionMode")}: ${esc(role(activeMode())?.name||"")}</small></div></div><form id="profile-form"><label for="profile-name">${tr("displayName")}</label><input id="profile-name" required maxlength="40" value="${esc(a.name)}"><p class="fineprint">${tr("displayNameHelp")}</p><button type="submit" class="btn primary">${tr("save")}</button></form>`:
+ const pane=tab==="perfil"?`<span class="eyebrow">${tr("profile")}</span><h2>${tr("personalData")}</h2><p>${tr("profileDesc")}</p><div class="profile-preview">${avatarForAccount(a,"aslo-account-avatar--large")}<div><strong>${esc(a.name)}</strong><small>${tr("sessionMode")}: ${esc(role(activeMode())?.name||"")}</small></div></div><form id="profile-form"><label for="profile-name">${tr("displayName")}</label><input id="profile-name" required maxlength="40" value="${esc(a.name)}"><p class="fineprint">${tr("displayNameHelp")}</p><button type="submit" class="btn primary">${tr("save")}</button></form>${avatarPicker(a)}`:
  tab==="seguridad"?`<span class="eyebrow">${tr("security")}</span><h2>${tr("security")}</h2><p>${tr("securityIntro")}</p><div class="security-warning">${tr("securityWarning")}</div>${["changePassword","twoFactor","devices"].map(k=>`<div class="security-line"><div><strong>${tr(k)}</strong><p class="fineprint">${tr("disabledDemo")}</p></div><button type="button" disabled title="${tr("notReal")}">${tr("notAvailable")}</button></div>`).join("")}`:
  tab==="apariencia"?`<span class="eyebrow">${tr("appearance")}</span><h2>${tr("appearance")}</h2><p>${tr("themeIntro")}</p><fieldset class="pref-choices"><legend>${tr("theme")}</legend>${["light","dark","system"].map(v=>`<label class="pref-option"><input type="radio" name="theme" value="${v}" ${theme()===v?"checked":""}><span>${tr(v)}</span></label>`).join("")}</fieldset><p class="fineprint">${tr("changesSaved")}</p>`:
  `<span class="eyebrow">${tr("language")}</span><h2>${tr("language")}</h2><p>${tr("languageIntro")}</p><fieldset class="pref-choices"><legend>${tr("language")}</legend>${[["es","langName"],["en","langEn"],["de","langDe"]].map(([code,key])=>`<label class="pref-option"><input type="radio" name="language" value="${code}" ${lang()===code?"checked":""}><span>${tr(key)}</span></label>`).join("")}</fieldset><p class="fineprint">${tr("changesSaved")}</p>`;
  render(`<div class="shell settings-shell"><section class="pagehead"><div class="crumb"><a href="modos.html">${tr("modes")}</a> / ${tr("settings")}</div><span class="eyebrow">${tr("account")}</span><h1>${tr("accountHeading")}</h1><p class="intro">${tr("accountIntro")}</p></section><div class="settings-grid"><nav class="settings-tabs" aria-label="${tr("settings")}">${tabs.map(([id,key])=>`<a class="${tab===id?"selected":""}" href="cuenta.html?tab=${id}">${tr(key)} <span aria-hidden="true">›</span></a>`).join("")}</nav><section class="settings-main" id="settings-panel">${pane}<div id="pref-feedback" aria-live="polite"></div></section></div></div>`);
+
+ document.querySelectorAll("[data-pick-avatar]").forEach(button=>button.addEventListener("click",()=>{
+  if(!saveVisual({avatarId:button.dataset.pickAvatar,photoData:null}))return;
+  settings();document.querySelector('[data-pick-avatar="'+button.dataset.pickAvatar+'"]')?.focus();
+ }));
+ const upload=document.querySelector("#profile-photo-upload");
+ if(upload)upload.addEventListener("change",function(){
+  const file=this.files?.[0];if(!file)return;
+  const status=document.querySelector("#avatar-feedback");
+  const tmsg=(es,en,de)=>({es,en,de})[lang()]||es;
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type)||file.size>5*1024*1024){
+   status.textContent=tmsg("Elige una imagen JPG, PNG o WebP de menos de 5 MB.","Choose a JPG, PNG or WebP image under 5 MB.","Bitte ein JPG-, PNG- oder WebP-Bild unter 5 MB wählen.");this.value="";return;
+  }
+  status.textContent=tmsg("Preparando imagen…","Processing image…","Bild wird verarbeitet…");
+  const reader=new FileReader();
+  reader.onerror=()=>{status.textContent=tmsg("No se pudo abrir la imagen.","Could not read image.","Bild konnte nicht gelesen werden.")};
+  reader.onload=()=>{
+   const image=new Image();
+   image.onerror=()=>{status.textContent=tmsg("Formato de imagen no compatible.","Unsupported image format.","Bildformat nicht unterstützt.")};
+   image.onload=()=>{
+    try{
+     const canvas=document.createElement("canvas"),context=canvas.getContext("2d");
+     if(!context)throw Error("Canvas unavailable");
+     canvas.width=canvas.height=192;
+     const side=Math.min(image.naturalWidth,image.naturalHeight),x=(image.naturalWidth-side)/2,y=(image.naturalHeight-side)/2;
+     context.drawImage(image,x,y,side,side,0,0,192,192);
+     const data=canvas.toDataURL("image/jpeg",.76);
+     if(!validPhoto(data)||!saveVisual({photoData:data}))throw Error("Session storage unavailable");
+     settings();
+    }catch(e){status.textContent=tmsg("No se pudo guardar la foto en esta sesión.","Could not save this photo in the demo session.","Foto konnte in dieser Sitzung nicht gespeichert werden.")}
+   };
+   image.src=String(reader.result||"");
+  };
+  reader.readAsDataURL(file);
+ });
+ document.getElementById("aslo-remove-photo")?.addEventListener("click",()=>{
+  if(saveVisual({photoData:null}))settings();
+ });
  const form=document.querySelector("#profile-form");if(form)form.addEventListener("submit",e=>{e.preventDefault();const v=document.querySelector("#profile-name").value.trim();if(!v)return;const old=account();old.name=v;try{sessionStorage.setItem(ACCOUNT,JSON.stringify(old))}catch(e){}location.reload()});
  document.querySelectorAll('input[name="theme"]').forEach(r=>r.addEventListener("change",e=>{prefSet(THEME,e.target.value);applyPreferences();document.querySelector("#pref-feedback").textContent=tr("changesSaved")}));
  document.querySelectorAll('input[name="language"]').forEach(r=>r.addEventListener("change",e=>{prefSet(LANG,e.target.value);location.reload()}));
 }
-window.asloAuth={chrome,attachChrome,tr,lang,theme,getAccount:account,getMode:activeMode,logout,esc};
+window.asloAuth={chrome,attachChrome,tr,lang,theme,getAccount:account,getMode:activeMode,logout,esc,avatarForAccount,avatarMarkup,avatarCatalog,saveVisual,selectLanguage(code){if(["es","en","de"].includes(code)){prefSet(LANG,code);return true}return false}};
 const page=document.body.dataset.page;
 if(page==="acceso"||page==="registro")loginForm(page==="registro");
 if(page==="modos")choose();
