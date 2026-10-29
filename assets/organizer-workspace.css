@@ -196,3 +196,23 @@ html[data-theme="light"] .ow-empty{background:#fff;border-color:#bad1de}
 html[data-theme="light"] .ow-mobile-nav{background:#f5faffed;border-color:#a9c8d8}
 html[data-theme="light"] .ow-mobile-nav a{color:#436f88}
 html[data-theme="light"] .ow-mobile-nav a.is-active{background:#d5edf8;color:#164d70}
+
+
+/* On narrow devices, list rows become readable result cards, not sideways-scrolling data grids. */
+.ow-mobile-list{display:none}
+@media(max-width:760px){
+ #ow-data-region .ow-table-wrap{display:none}
+ #ow-data-region .ow-mobile-list{display:grid;gap:12px}
+ .ow-mobile-result{display:flex;flex-direction:column;gap:13px;padding:20px 18px;background:linear-gradient(145deg,#112d41,#0b2133);border:1px solid #416f86;border-radius:13px;box-shadow:0 12px 27px #0004}
+ .ow-mobile-result .ow-eyebrow{font-size:10px;margin:0 0 8px}
+ .ow-mobile-result h3{font-size:20px;line-height:1.15;margin:0;color:#f5fbff}
+ .ow-mobile-result dl{display:grid;gap:10px;margin:1px 0 4px}
+ .ow-mobile-result dl>div{display:flex;align-items:baseline;justify-content:space-between;gap:15px;border-bottom:1px solid #355b7188;padding-bottom:9px}
+ .ow-mobile-result dt{font-size:11px;font-weight:800;color:#9fc6d9}
+ .ow-mobile-result dd{margin:0;text-align:right;font-size:12px;font-weight:750;color:#eff9ff}
+ .ow-mobile-result .ow-btn{align-self:stretch}
+ html[data-theme="light"] .ow-mobile-result{background:#fff;border-color:#accbdc;box-shadow:0 10px 23px #17384913}
+ html[data-theme="light"] .ow-mobile-result h3{color:#173e55}
+ html[data-theme="light"] .ow-mobile-result dt{color:#50758a}
+ html[data-theme="light"] .ow-mobile-result dd{color:#274f64}
+}
