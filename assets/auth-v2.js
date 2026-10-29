@@ -249,7 +249,7 @@ function settings(){
  document.querySelectorAll('input[name="theme"]').forEach(r=>r.addEventListener("change",e=>{prefSet(THEME,e.target.value);applyPreferences();document.querySelector("#pref-feedback").textContent=tr("changesSaved")}));
  document.querySelectorAll('input[name="language"]').forEach(r=>r.addEventListener("change",e=>{prefSet(LANG,e.target.value);location.reload()}));
 }
-window.asloAuth={chrome,attachChrome,tr,lang,theme,getAccount:account,getMode:activeMode,logout,esc,avatarForAccount,avatarMarkup,avatarCatalog,saveVisual,selectLanguage(code){if(["es","en","de"].includes(code)){prefSet(LANG,code);return true}return false}};
+window.asloAuth={chrome,attachChrome,tr,lang,theme,getAccount:account,getMode:activeMode,logout,esc,avatarForAccount,avatarMarkup,avatarCatalog,saveVisual,selectLanguage(code){if(["es","en","de"].includes(code)){prefSet(LANG,code);return true}return false},selectTheme(value){if(["light","dark","system"].includes(value)){prefSet(THEME,value);applyPreferences();return true}return false}};
 const page=document.body.dataset.page;
 if(page==="acceso"||page==="registro")loginForm(page==="registro");
 if(page==="modos")choose();
