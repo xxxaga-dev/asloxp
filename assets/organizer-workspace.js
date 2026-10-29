@@ -162,6 +162,19 @@ function tableRow(item,i){
  '<td><span class="ow-item-name">'+escape(item.name)+'</span><span class="ow-item-sub">'+escape(item.sub||sportName(item.sport))+'</span></td><td>'+escape(item.leagueName)+'</td><td>'+badge(item.state)+'</td><td>'+escape(String(item.teams))+'</td>')+
  '<td><a class="ow-table-action" href="'+link+'">'+escape(t(league?"openLeague":"openTournament"))+' ↗</a>'+(league?'<a class="ow-text-link" href="'+escape(manager?.formLink?.(item.id)||("mis-ligas.html?editar="+encodeURIComponent(item.id)))+'">'+escape(t("configure"))+'</a>':"")+'</td></tr>';
 }
+
+function mobileRow(item,i){
+ var isLeague=state.view==="ligas",url=isLeague?leagueLink(item):tournamentLink(item);
+ var details=isLeague?[
+  [t("sport"),sportName(item.sport)],[t("location"),locationText(item)]
+ ]:[
+  [t("league"),item.leagueName],[t("status"),item.state],[t("teams"),String(item.teams)]
+ ];
+ return '<article class="ow-mobile-result ow-row-appear" style="--ow-delay:'+Math.min(i*55,300)+'ms">'+
+ '<div class="ow-mobile-result-head"><span class="ow-eyebrow">'+escape(t(isLeague?"leagues":"tournaments"))+'</span><h3>'+escape(item.name)+'</h3></div>'+
+ '<dl>'+details.map(function(row){return '<div><dt>'+escape(row[0])+'</dt><dd>'+escape(row[1])+'</dd></div>'}).join("")+'</dl>'+
+ '<a class="ow-btn ow-btn-primary" href="'+url+'">'+escape(t(isLeague?"openLeague":"openTournament"))+' →</a></article>';
+}
 function pagination(count,start,end,totalPages){
  var pages=[];var a=Math.max(1,state.page-1),b=Math.min(totalPages,state.page+1);
  for(var i=a;i<=b;i++)pages.push('<button type="button" data-page-index="'+i+'"'+(i===state.page?' class="is-current" aria-current="page"':'')+' aria-label="'+escape(t("page"))+' '+i+'">'+i+'</button>');
@@ -174,7 +187,7 @@ function resultList(){
  state.page=Math.max(1,Math.min(state.page,totalPages));
  var start=(state.page-1)*state.size,selected=items.slice(start,start+state.size),end=Math.min(start+state.size,items.length);
  return '<div class="ow-results-summary" role="status" aria-live="polite" aria-atomic="true"><span>'+items.length+' '+escape(t("entries"))+'</span><span>'+escape(t("page"))+' '+state.page+' / '+totalPages+'</span></div>'+
- (selected.length?'<div class="ow-table-wrap"><table class="ow-table"><thead><tr>'+(league?['name','location','category','actions']:['name','league','status','teams','actions']).map(x=>'<th scope="col">'+escape(t(x))+'</th>').join("")+'</tr></thead><tbody>'+selected.map(tableRow).join("")+'</tbody></table></div>':
+ (selected.length?'<div class="ow-table-wrap"><table class="ow-table"><thead><tr>'+(league?['name','location','category','actions']:['name','league','status','teams','actions']).map(x=>'<th scope="col">'+escape(t(x))+'</th>').join("")+'</tr></thead><tbody>'+selected.map(tableRow).join("")+'</tbody></table></div><div class="ow-mobile-list">'+selected.map(mobileRow).join("")+'</div>':
  '<div class="ow-empty"><strong>'+escape(t(league?"noLeagues":"noTournaments"))+'</strong><p>'+escape(t(league?"noLeaguesTip":"noTournamentsTip"))+'</p></div>')+pagination(items.length,start,end,totalPages);
 }
 function renderList(){
