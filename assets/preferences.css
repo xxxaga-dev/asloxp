@@ -66,3 +66,41 @@ html[data-theme=light] .statline span{background:#edf6ef;border-color:#c1d4c5}
 .auth-register-btn:hover{background:#285d4a;color:#fff}
 html[data-theme=light] .auth-register-btn{border-color:#49966f;background:#e5f2e9;color:#1b623b}
 html[data-theme=light] .auth-register-btn:hover{background:#d4e9da;color:#14522e}
+
+
+/* Shared ASLO illustrated user identity — one account avatar across all modes. */
+.aslo-account-avatar{display:inline-grid;place-items:center;vertical-align:middle;width:39px;height:39px;min-width:39px;flex:none;border-radius:12px;overflow:hidden;border:1px solid #95dfff88;background:#14394a}
+.aslo-account-avatar img,.aslo-account-avatar svg{display:block;width:100%;height:100%;object-fit:cover}
+.aslo-account-avatar--large{width:62px;height:62px;min-width:62px;border-radius:17px}
+.aslo-account-avatar--small{width:38px;height:38px;min-width:38px}
+.aslo-avatar-svg{display:block;width:100%;height:100%;object-fit:cover}
+.account-trigger .aslo-account-avatar{width:36px;height:36px;min-width:36px}
+.popover-title .aslo-account-avatar{width:39px;height:39px;min-width:39px}
+.aslo-avatar-settings{margin-top:30px;border-top:1px solid var(--line,#47636e);padding-top:24px}
+.aslo-avatar-settings h3{font-size:20px;margin:0 0 9px}
+.aslo-avatar-settings .fineprint{line-height:1.6}
+.aslo-avatar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:12px;margin:22px 0 25px}
+.aslo-avatar-choice{display:flex;align-items:center;justify-content:flex-start;flex-direction:column;gap:9px;
+ background:#122c34;color:#d7ecf0;border:1px solid #466571;border-radius:13px;padding:12px 9px;
+ min-width:0;min-height:112px;cursor:pointer;transition:transform .22s,border-color .22s,box-shadow .22s}
+.aslo-avatar-choice>svg{width:62px;height:62px;border-radius:13px;box-shadow:0 4px 14px #0003}
+.aslo-avatar-choice>span{font-size:11px;font-weight:850;line-height:1.2;text-align:center}
+.aslo-avatar-choice:hover{transform:translateY(-3px);border-color:#b7ed87;box-shadow:0 7px 20px #0005}
+.aslo-avatar-choice.selected{background:#204536;border-color:#cefc87;color:#e3ffb8;box-shadow:inset 0 0 0 1px #bdf880,0 0 20px #b6ee8b2a}
+.aslo-avatar-choice:focus-visible,.aslo-photo-picker:focus-within{outline:3px solid #b5fa87;outline-offset:3px}
+.aslo-photo-picker{display:flex;align-items:center;gap:13px;width:100%;border:1px dashed #6b9cae;border-radius:13px;padding:15px 17px;cursor:pointer;background:#102c38}
+.aslo-photo-picker:hover{border-color:#d4ff96;background:#204658}
+.aslo-photo-picker-icon{display:grid;place-items:center;width:45px;height:45px;flex:none;border-radius:10px;background:#274e63;color:#ccf3ff;font-size:25px}
+.aslo-photo-picker strong{display:block;font-size:13px}
+.aslo-photo-picker small{display:block;font-size:11px;line-height:1.5;color:#b7cbd2;margin-top:4px}
+.aslo-photo-input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip-path:inset(50%)}
+.aslo-remove-photo{margin-top:12px;border:1px solid #6d91a7;border-radius:9px;color:#e9f5ff;background:#204356;padding:10px 14px;cursor:pointer;font-weight:800}
+.aslo-remove-photo:hover{border-color:#d2ffa5}
+html[data-theme="light"] .aslo-avatar-choice{background:#f6fbff;color:#224958;border-color:#b8d5de}
+html[data-theme="light"] .aslo-avatar-choice.selected{background:#dff0d6;color:#275a37;border-color:#6ea34a}
+html[data-theme="light"] .aslo-photo-picker{background:#edf7fb;border-color:#9ebfcf;color:#254a59}
+html[data-theme="light"] .aslo-photo-picker:hover{background:#e1f1f8}
+html[data-theme="light"] .aslo-photo-picker small{color:#577783}
+html[data-theme="light"] .aslo-remove-photo{background:#eef7ff;color:#28536b}
+@media(max-width:600px){.aslo-avatar-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.aslo-avatar-choice{min-height:106px;padding:10px 5px}.aslo-avatar-choice>svg{width:57px;height:57px}}
+@media(prefers-reduced-motion:reduce){.aslo-avatar-choice{transition:none}.aslo-avatar-choice:hover{transform:none}}
