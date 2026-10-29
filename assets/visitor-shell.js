@@ -121,7 +121,7 @@ function render(content,page){
  // Three frequent public sections + Más. The remaining section stays in the drawer.
  shell.mount({
   host:document.body,modeId:"visitante",title:tr("Exploración pública","Public exploration","Öffentlicher Bereich"),
-  brandHref:"index.html",groups,search:true,
+  brandHref:"index.html",groups,search:true,searchLabel:tr("Buscar información pública","Search public information","Öffentliche Informationen suchen"),
   bottom:[all[0],all[2],all[3]],
   moreText:tr("Más","More","Mehr"),
   demoText:tr("PROTOTIPO · DATOS PÚBLICOS FICTICIOS","PROTOTYPE · PUBLIC SAMPLE DATA","PROTOTYP · ÖFFENTLICHE BEISPIELDATEN"),
