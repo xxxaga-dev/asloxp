@@ -5,6 +5,18 @@
 Este repositorio **público** es únicamente para maquetas navegables HTML, CSS y JavaScript. La documentación y las decisiones del proyecto ASLO están en un repositorio privado independiente.
 
 
+## Revisión UX 9 — Recuperación de responsabilidades del organizador (EN ANÁLISIS)
+
+Tras la revisión del propietario, el espacio del organizador deja de reducir la experiencia a Ligas y Torneos. Se recuperó la cobertura documentada a partir de la épica `docs/historias/modo-organizador/README.md`, el recorrido de organizador y las historias transversales del repositorio privado ASLO, **sin convertir las historias en nuevas facultades ni en código productivo**.
+
+**Prototipo:** [Organizador](organizador.html) con navegación por grupos estables: Mi espacio (Inicio, Mis ligas, Torneos), Operación (Agenda y jornadas, Solicitudes y avisos, Jueces y escenarios) y Seguimiento (Resultados, Comunicaciones). Menú móvil completo y búsqueda de tareas (botón «Buscar función» o Ctrl/Cmd+K). El buscador dirige a la selección de la liga o el torneo correspondiente y abre su sección, por ejemplo `?vista=torneos&accion=inscripciones` → torneo → `&tab=inscripciones`.
+
+**Ámbito de liga:** información general, participación/categorías/edad/territorio, reglamentos versionados, administradores y asistentes, noticias y reconocimiento ASLO (exclusivamente consultivo). **Ámbito de torneo:** resumen, equipos/cupos/sustituciones, fases/grupos/cruces, interligas, programación, solicitudes, puestos y designaciones arbitrales, escenarios/franjas, planillas, disciplina, clasificación, premios, noticias, suspensión y cierre. Los contextos tienen su propia navegación agrupada y permiten regresar al organizador.
+
+**Límite honesto:** las operaciones simuladas previamente (por ejemplo crear torneo de muestra, capacidad/reemplazo, clasificación y planilla de muestra) siguen disponibles; múltiples responsabilidades adicionales son **vistas de cobertura en análisis**, señaladas expresamente y **sin** registro/guardado real. No hay motor de verificación, sanciones, arbitraje, franjas, noticias productivas ni cálculos de ranking implementados. No fingir que ver una vista de cobertura equivale a tener una funcionalidad operativa. La interfaz anterior permanece solo como soporte provisional de las acciones existentes.
+
+**Ruta de revisión:** [abrir organizador](https://xxxaga-dev.github.io/asloxp/organizador.html?vista=inicio) → Buscar función → «Reemplazar equipo» → seleccionar un torneo → Inscripciones y cupos. También revisar «Reglamentos y versiones» desde el buscador y «Jueces y escenarios» desde la navegación. Revisar escritorio y móvil antes de aprobar. El enlace de Pages no se certifica desplegado desde esta conexión.
+
 ## Revisión UX 8 — Navegación del organizador (EN ANÁLISIS)
 
 La dirección visual de las revisiones anteriores queda **descartada como modelo general de interacción** por observación del propietario: navegación impredecible, exceso de opciones, demasiados clics para localizar un torneo, ausencia de búsqueda/paginación y falta de animaciones funcionales. Los archivos legados permanecen solo para conservar operaciones simuladas mientras se sustituyen las vistas.
