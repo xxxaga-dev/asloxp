@@ -12,7 +12,32 @@
 <body data-page="organizador">
 <a class="ow-skip" href="#ow-main">Saltar al contenido</a>
 <div id="ow-app">
- <header class="ow-top"><a href="organizador.html?vista=inicio" class="ow-brand"><span aria-hidden="true">▲</span> ASLO</a><span class="ow-top-division" aria-hidden="true"></span><span class="ow-workspace-title">Espacio del organizador</span><button type="button" id="ow-find-task" class="ow-find-task" aria-haspopup="dialog" aria-controls="ow-task-dialog"><span aria-hidden="true">⌕</span> <span>Buscar función</span> <kbd>Ctrl K</kbd></button><span class="ow-demo">PROTOTIPO · DATOS DE MUESTRA</span><a class="ow-mode-switch" href="modos.html">Cambiar modo ↗</a><a class="ow-avatar" href="cuenta.html?tab=perfil" aria-label="Mi cuenta">◉</a></header>
+ <header class="ow-top"><a href="organizador.html?vista=inicio" class="ow-brand"><span aria-hidden="true">▲</span> ASLO</a><span class="ow-top-division" aria-hidden="true"></span><span class="ow-workspace-title">Espacio del organizador</span><button type="button" id="ow-find-task" class="ow-find-task" aria-haspopup="dialog" aria-controls="ow-task-dialog"><span aria-hidden="true">⌕</span> <span>Buscar función</span> <kbd>Ctrl K</kbd></button><span class="ow-demo">PROTOTIPO · DATOS DE MUESTRA</span><details class="ow-account-menu" id="ow-account-menu">
+ <summary class="ow-account-trigger" id="ow-account-trigger" aria-label="Abrir opciones de cuenta">
+  <span class="ow-profile-copy"><strong id="ow-account-name">Invitado</strong><small id="ow-account-mode">Organizador</small></span>
+  <span class="ow-profile-visual" id="ow-account-image" aria-hidden="true"></span>
+  <span class="ow-account-chevron" aria-hidden="true">⌄</span>
+ </summary>
+ <div class="ow-account-panel" aria-label="Opciones de cuenta">
+  <div class="ow-account-panel-head">
+   <span class="ow-panel-avatar" id="ow-panel-avatar" aria-hidden="true"></span>
+   <div><strong id="ow-panel-name">Invitado</strong><small id="ow-panel-mode">Organizador</small></div>
+  </div>
+  <div class="ow-account-personal" id="ow-account-personal">
+   <a href="cuenta.html?tab=perfil" data-account-label="profile"><span aria-hidden="true">♙</span><span>Mi perfil y avatar</span><b aria-hidden="true">›</b></a>
+   <a href="cuenta.html?tab=apariencia" data-account-label="appearance"><span aria-hidden="true">◐</span><span>Apariencia</span><b aria-hidden="true">›</b></a>
+   <a href="cuenta.html?tab=seguridad" data-account-label="security"><span aria-hidden="true">◇</span><span>Seguridad</span><b aria-hidden="true">›</b></a>
+   <a href="modos.html" data-account-label="switch"><span aria-hidden="true">⇄</span><span>Mis modos</span><b aria-hidden="true">›</b></a>
+  </div>
+  <label class="ow-account-language" for="ow-account-language">
+   <span><span aria-hidden="true">文</span> <span id="ow-language-label">Idioma</span></span>
+   <select id="ow-account-language" aria-label="Idioma de la interfaz"><option value="es">Español</option><option value="en">English</option><option value="de">Deutsch</option></select>
+  </label>
+  <button class="ow-account-logout" id="ow-account-logout" type="button"><span aria-hidden="true">↪</span><span>Cerrar sesión</span></button>
+  <a class="ow-account-signin" id="ow-account-signin" href="acceso.html" hidden>Iniciar sesión</a>
+  <small class="ow-account-hint" id="ow-account-hint">Cuenta personal · opciones disponibles en todos tus modos</small>
+ </div>
+ </details></header>
  <div class="ow-shell">
  <aside class="ow-sidebar" aria-label="Navegación del organizador">
   <div class="ow-nav-groups">
@@ -31,7 +56,7 @@
     <a href="organizador.html?vista=comunicaciones" data-view="comunicaciones"><span class="ow-icon" aria-hidden="true">◈</span><span>Comunicaciones</span></a>
    </nav></section>
   </div>
-  <div class="ow-sidebottom"><a href="mis-ligas.html?nueva=1">＋ Crear liga</a><a href="modos.html">↩ Cambiar modo</a></div>
+  <div class="ow-sidebottom"><a href="mis-ligas.html?nueva=1">＋ Crear liga</a></div>
  </aside>
  <main class="ow-main" id="ow-main" tabindex="-1">
  <div id="ow-content" aria-live="off"><div class="ow-initial">Preparando el espacio del organizador…</div></div>
@@ -68,6 +93,7 @@
 <script src="assets/auth-v2.js?v=13"></script>
 <script src="assets/league-manager.js?v=2"></script>
 <script src="assets/organizer-workspace.js?v=1"></script>
-<script src="assets/organizer-task-finder.js?v=1"></script><script src="assets/motion-xp10.js?v=1"></script>
+<script src="assets/organizer-task-finder.js?v=1"></script>
+<script src="assets/organizer-account.js?v=1"></script><script src="assets/motion-xp10.js?v=1"></script>
 </body>
 </html>
