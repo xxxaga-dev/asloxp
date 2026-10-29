@@ -206,6 +206,83 @@ function renderList(){
  heading(t(league?"leagueTitle":"tourTitle"),t(league?"leagueDesc":"tourDesc"),league?'<a class="ow-btn ow-btn-primary" href="mis-ligas.html?nueva=1">＋ '+escape(t("createLeague"))+'</a>':"")+
  filters(league)+'<div id="ow-data-region">'+resultList()+'</div><p class="ow-caption">'+escape(t("onlyDemo"))+'</p></div>';
 }
+
+/* Transversal organizer responsibilities. The real ownership of sporting events,
+   rulings and venue bookings remains with its proper actor and scope. */
+function crossSpec(){
+ var es={
+ agenda:{intro:"Consulta la programación de tus competiciones y entra a cada torneo para coordinar sus jornadas, horarios y sedes.",cards:[
+ ["▤","Programación y encuentros","Abre el calendario de un torneo y sus partidos.","partidos",true],
+ ["⏸","Suspensión de jornada","La suspensión total o parcial no debe inventar resultados deportivos.","jornadas",false],
+ ["⌖","Sedes y franjas","Comprueba los escenarios y las franjas admitidas antes de programar.","escenarios",false]]},
+ solicitudes:{intro:"Localiza solicitudes de reprogramación, avisos de sedes y otras incidencias. Una solicitud pendiente no cambia automáticamente un partido.",cards:[
+ ["✉","Solicitudes de equipos","Revisar motivos y resolver reprogramaciones autorizadas.","solicitudes",false],
+ ["⌖","Alertas de escenarios","Ver bloqueos de franjas y decidir qué encuentros reprogramar.","escenarios",false],
+ ["⚑","Incidencias arbitrales","Atender ausencia, sustitución y servicio efectivo con trazabilidad.","oficiales",false]]},
+ recursos:{intro:"Coordina jueces, escuelas y escenarios sin administrar las cuentas de esas entidades. Las funciones y cantidades arbitrales se definen por ronda.",cards:[
+ ["♧","Arbitraje y designaciones","Puestos por función y ronda, postulaciones, escuelas y suplencias.","oficiales",false],
+ ["⌖","Escenarios deportivos","Disponibilidad, franjas autorizadas y programación multisede.","escenarios",false],
+ ["⇄","Contingencias del encuentro","Consultar sustituciones y diferencias entre designado y efectivo.","oficiales",false]]},
+ resultados:{intro:"Consulta encuentros, resultados de planillas, tablas provisionales y cierre de las competiciones. ASLO no crea marcadores alternativos.",cards:[
+ ["◉","Clasificaciones","Tablas del torneo, sin confundirlas con el ranking oficial de ASLO.","clasificacion",true],
+ ["▣","Planillas y hechos","Consultar los hechos registrados por oficiales competentes.","planillas",true],
+ ["⚖","Decisiones y sanciones","Resultados administrativos, sanciones, reclamaciones y trazabilidad.","disciplina",false]]},
+ comunicaciones:{intro:"Publica novedades de tus ligas y torneos y consulta sus reconocimientos; las publicaciones de otras personas no necesitan aprobación previa del organizador.",cards:[
+ ["◈","Noticias del torneo","Comunicados sobre competición, fechas, cambios y premiación.","noticias",true],
+ ["✦","Premiación","Premios propios del torneo, cambios justificados y anuncio correspondiente.","premios",true],
+ ["◇","Patrocinadores de liga","Revisa las campañas y espacios comerciales de demostración.","patrocinadores",true]]}
+ };
+ var en={
+ agenda:["Schedule, rounds and venues across your competitions.","Match schedule","Open each tournament's fixtures.","Round suspension","Partial or complete cancellation must not fabricate scores.","Venues and slots","Check approved venue availability."],
+ solicitudes:["Review reschedule requests, venue notices and incidents. Requests never alter the calendar automatically.","Team requests","Review and resolve justified rescheduling requests.","Venue alerts","See blocked slots and choose rescheduling.","Officiating incidents","Track substitutions and effective officials."],
+ recursos:["Coordinate judges, officiating schools and venues without managing their identities. Official positions are configured by round.","Officials and assignments","Roles, applications, schools and replacements.","Sports venues","Approved time slots and multi-venue schedules.","Match contingencies","Assigned versus actual officials."],
+ resultados:["Review match reports, provisional tables and tournament completion. ASLO does not fabricate alternate score feeds.","Standings","Tournament tables, not ASLO rankings.","Match reports","Official sporting events and signatures.","Discipline and decisions","Administrative results, sanctions and complaints."],
+ comunicaciones:["Publish league and tournament news; other people do not need organizer approval to post.","Tournament news","Competition updates and prize changes.","Awards","Tournament prizes and justified changes.","League sponsors","Sample commercial presence."]
+ };
+ if(language==="es")return es[state.view];
+ var entry=es[state.view];if(!entry)return null;
+ var translations=en[state.view];
+ if(language==="en"&&translations) return {intro:translations[0],cards:entry.cards.map(function(card,i){return [card[0],translations[1+i*2],translations[2+i*2],card[3],card[4]]})};
+ return entry;
+}
+function crossUrl(x,tab){
+ var link=tournamentLink(x);
+ if(tab==="patrocinadores")
+  return manager?.leagueLink?.(x.leagueId,"patrocinadores")||link;
+ return link+"&tab="+encodeURIComponent(tab);
+}
+function crossCard(card){
+ return '<article class="ow-capability-card"><div class="ow-capability-icon" aria-hidden="true">'+card[0]+'</div>'+
+ '<div class="ow-capability-details"><h3>'+escape(card[1])+'</h3><p>'+escape(card[2])+'</p>'+
+ '<span class="ow-status-note '+(card[4]?"ow-status-ready":"")+'">'+escape(t(card[4]?"available":"limited"))+'</span></div></article>';
+}
+function crossRows(){
+ var items=filtered(),totalPages=Math.max(1,Math.ceil(items.length/state.size));
+ state.page=Math.max(1,Math.min(state.page,totalPages));
+ var start=(state.page-1)*state.size,visible=items.slice(start,start+state.size),end=Math.min(start+state.size,items.length);
+ var tab={agenda:"partidos",solicitudes:"solicitudes",recursos:"oficiales",resultados:"clasificacion",comunicaciones:"noticias"}[state.view]||"resumen";
+ var head='<div class="ow-results-summary" role="status" aria-live="polite"><span>'+items.length+' '+escape(t("entries"))+'</span><span>'+escape(t("page"))+' '+state.page+' / '+totalPages+'</span></div>';
+ var table=visible.length?'<div class="ow-table-wrap"><table class="ow-table"><thead><tr><th>'+escape(t("tournaments"))+'</th><th>'+escape(t("league"))+'</th><th>'+escape(t("status"))+'</th><th>'+escape(t("actions"))+'</th></tr></thead><tbody>'+
+ visible.map(function(item,i){return '<tr class="ow-row-appear" style="--ow-delay:'+i*45+'ms"><td><strong class="ow-item-name">'+escape(item.name)+'</strong><small class="ow-item-sub">'+escape(item.sub)+'</small></td><td>'+escape(item.leagueName)+'</td><td>'+badge(item.state)+'</td><td><a class="ow-table-action" href="'+crossUrl(item,tab)+'">'+escape(t("openContext"))+' ↗</a></td></tr>'}).join("")+
+ '</tbody></table></div><div class="ow-mobile-list">'+visible.map(function(item,i){return '<article class="ow-mobile-result"><h3>'+escape(item.name)+'</h3><p>'+escape(item.leagueName)+'</p><a class="ow-btn ow-btn-primary" href="'+crossUrl(item,tab)+'">'+escape(t("openContext"))+' →</a></article>'}).join("")+'</div>':
+ '<div class="ow-empty"><strong>'+escape(t("noTournaments"))+'</strong><p>'+escape(t("noTournamentsTip"))+'</p></div>';
+ return head+table+pagination(items.length,start,end,totalPages);
+}
+function renderCross(){
+ var spec=crossSpec();
+ if(!spec)return renderList();
+ var title=t(state.view),all=allTournaments();
+ var cards=spec.cards.map(crossCard).join("");
+ return '<div class="ow-appear"><div class="ow-breadcrumb"><a href="organizador.html?vista=inicio" data-nav="inicio">'+escape(t("breadcrumb"))+'</a> / '+escape(title)+'</div>'+
+ heading(title,spec.intro,'<a class="ow-btn" href="organizador.html?vista=torneos" data-nav="torneos">'+escape(t("tournaments"))+' ↗</a>')+
+ '<div class="ow-section-heading"><h2>'+escape(t("tasks"))+'</h2></div>'+
+ '<div class="ow-capability-grid">'+cards+'</div>'+
+ '<div class="ow-section-heading"><h2>'+escape(t("allItems"))+'</h2><small>'+all.length+' '+escape(t("entries"))+'</small></div>'+
+ '<p class="ow-cross-desc">'+escape(t("demoView"))+'</p>'+
+ filters(false)+'<div id="ow-data-region">'+crossRows()+'</div>'+
+ '<p class="ow-caption">'+escape(t("onlyDemo"))+'</p></div>';
+}
+
 function render(){
  activateNav();
  document.title="ASLO · "+t(state.view==="inicio"?"home":state.view==="ligas"?"leagues":state.view==="torneos"?"tournaments":state.view);
@@ -214,7 +291,7 @@ function render(){
 function refreshList(focusTarget){
  var region=document.getElementById("ow-data-region");
  if(region){
-  region.innerHTML=resultList();writeUrl(true);
+  region.innerHTML=(state.view==="ligas"||state.view==="torneos")?resultList():crossRows();writeUrl(true);
   if(focusTarget==="page")region.querySelector(".ow-page-buttons .is-current")?.focus();
   if(focusTarget==="size")region.querySelector("#ow-page-size")?.focus();
  }
