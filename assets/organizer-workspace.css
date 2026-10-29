@@ -424,3 +424,10 @@ html[data-theme="light"] .ow-account-logout:hover{background:#fce8e5;color:#8f24
  .ow-account-trigger,.ow-account-chevron,.ow-account-personal a{transition:none}
  .ow-account-personal a:hover{transform:none}
 }
+
+/* Avatar SVG and uploaded-photo box in this standalone organizer layout
+   (public/account pages already receive these rules from preferences.css). */
+.ow-account-menu .aslo-account-avatar{display:inline-grid;place-items:center;vertical-align:middle;flex:none;overflow:hidden;line-height:0}
+.ow-account-menu .aslo-account-avatar>svg,.ow-account-menu .aslo-account-avatar>img{display:block;width:100%;height:100%;object-fit:cover}
+.ow-account-menu img.aslo-account-avatar{display:block;object-fit:cover}
+.ow-top:has(.ow-account-menu[open]){z-index:94}
