@@ -116,16 +116,19 @@ function updateStatic(){
  var drawerTitle=document.querySelector(".ow-drawer-heading strong");if(drawerTitle)drawerTitle.textContent=t("breadcrumb");
  var sh=document.querySelector(".ow-sidehelp strong");if(sh)sh.textContent=t("intro");
  var sp=document.querySelector(".ow-sidehelp p");if(sp)sp.textContent=t("help");
- ["inicio","ligas","torneos","agenda"].forEach(function(view){
-  var label=t(view==="inicio"?"home":view==="ligas"?"leagues":view==="torneos"?"tournaments":"agenda");
-  document.querySelectorAll('.ow-nav [data-view="'+view+'"] span:last-child').forEach(function(node){node.textContent=label;});
-  document.querySelectorAll('.ow-mobile-nav [data-view="'+view+'"]').forEach(function(node){
-    var icon=node.querySelector("span");var symbol=icon?icon.textContent:"";
-    node.textContent=label;
-    if(icon){var retained=document.createElement("span");retained.textContent=symbol;node.prepend(retained);}
-  });
+ // Shared mobile shell: short, centered labels; full section names remain in the drawer.
+ var mobileLabels={
+  inicio:{es:"Inicio",en:"Home",de:"Start"},
+  torneos:{es:"Torneos",en:"Tournaments",de:"Turniere"},
+  agenda:{es:"Agenda",en:"Agenda",de:"Termine"}
+ };
+ document.querySelectorAll(".ow-mobile-nav a[data-view]").forEach(function(link){
+  var label=link.querySelector(".aslo-nav-caption");
+  if(label&&mobileLabels[link.dataset.view])label.textContent=mobileLabels[link.dataset.view][language]||mobileLabels[link.dataset.view].es;
  });
- var side=document.querySelectorAll(".ow-sidebottom a");if(side[0])side[0].textContent="＋ "+t("createLeague");if(side[1])side[1].textContent="↩ "+t("switch");
+ var moreLabel=document.querySelector("#ow-mobile-more .aslo-nav-caption");
+ if(moreLabel)moreLabel.textContent=({es:"Más",en:"More",de:"Mehr"})[language]||"Más";
+ var side=document.querySelectorAll(".ow-sidebottom a");if(side[0])side[0].textContent="＋ "+t("createLeague");
 }
 function resetFilters(){state.search="";state.sport="all";state.league="all";state.status="all";state.page=1}
 function writeUrl(replace){
