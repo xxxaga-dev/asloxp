@@ -132,7 +132,15 @@ function render(content,page){
  // mount() installs the generic drawer for non-organizer modes.
  publicControls();
  searchDialog();
- window.asloAccountMenu?.mount();
+ const accountSlot=document.getElementById("aslo-account-slot");
+ if(auth.getAccount?.()){
+  // Authenticated people retain their real account control while browsing public pages.
+  window.asloAccountMenu?.mount();
+ }else if(accountSlot){
+  // A visitor has no account identity: show an explicit sign-in action, never a fake avatar.
+  const label=tr("Iniciar sesión","Sign in","Anmelden");
+  accountSlot.innerHTML='<a class="aslo-visitor-signin" href="acceso.html" aria-label="'+escape(label)+'">'+escape(label)+'</a>';
+ }
  // Explicitly no gate, sign-in redirect or role check for public browsing.
  document.querySelectorAll(".ow-nav a,.ow-mobile-nav a,.ow-drawer-links a").forEach(a=>{
   const on=a.dataset.view===active;
