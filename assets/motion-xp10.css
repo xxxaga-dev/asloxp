@@ -1,0 +1,281 @@
+/* ASLO XP / Motion v10 — original responsive gaming atmosphere.
+   Referenced principles: layered panels, perspective, staged reveal, parallax,
+   cinematic scene wipes, responsive microinteractions. No copied template code. */
+@view-transition{navigation:auto}
+html.xp-motion-on{--xp-a:#c6fa83;--xp-b:#49d5ff;--xp-c:#3f98e6;--xp-void:#041321}
+html.xp-motion-on body[data-page="organizador"],
+html.xp-motion-on body[data-page="liga-admin"],
+html.xp-motion-on body[data-page="mis-ligas"]{
+ background-image:radial-gradient(ellipse at 18% 3%,#165a6b26,transparent 48%),
+ radial-gradient(ellipse at 84% 61%,#19435d34,transparent 44%);
+ background-attachment:fixed;
+}
+html.xp-motion-on body[data-page="organizador"]::before,
+html.xp-motion-on body[data-page="liga-admin"]::before{
+ content:"";pointer-events:none;position:fixed;inset:0;z-index:0;opacity:.22;
+ background-image:linear-gradient(#6eacb70a 1px,transparent 1px),
+ linear-gradient(90deg,#6eacb70a 1px,transparent 1px);
+ background-size:32px 32px;
+ -webkit-mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 80%,transparent);
+ mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 80%,transparent)
+}
+html.xp-motion-on body[data-page="organizador"] #ow-app,
+html.xp-motion-on body[data-page="liga-admin"] #league-arena{position:relative}
+html.xp-motion-on .ow-appear,
+html.xp-motion-on .ow-row-appear.xp-reveal{animation:none!important}
+html.xp-motion-on .xp-reveal{
+ opacity:0;
+ transform:translate3d(0,25px,0) scale(.982);
+ filter:blur(4px);
+ transition-property:opacity,transform,filter,clip-path;
+ transition-duration:.68s,.74s,.72s,.72s;
+ transition-timing-function:cubic-bezier(.2,.75,.18,1),cubic-bezier(.17,.8,.17,1),ease,cubic-bezier(.18,.8,.2,1);
+ transition-delay:calc(var(--xp-sequence,0)*65ms);
+ will-change:opacity,transform;
+}
+html.xp-motion-on .xp-reveal.xp-inview{opacity:1;transform:translate3d(0,0,0) scale(1);filter:none;will-change:auto}
+html.xp-motion-on .ow-hero.xp-reveal,
+html.xp-motion-on .arena-hero.xp-reveal,
+html.xp-motion-on .arena-tournament-hero.xp-reveal,
+html.xp-motion-on .arena-identity.xp-reveal{
+ clip-path:inset(0 0 16% 0 round 15px);
+ transform:translate3d(0,25px,0) scale(.97)
+}
+html.xp-motion-on .ow-hero.xp-inview,
+html.xp-motion-on .arena-hero.xp-inview,
+html.xp-motion-on .arena-tournament-hero.xp-inview,
+html.xp-motion-on .arena-identity.xp-inview{clip-path:inset(0 0 0 0 round 15px);transform:translate3d(0,0,0) scale(1)}
+/* The scene wipe is visual only, so navigation and input never become blocked. */
+.xp-stage-sweep{position:fixed;inset:0;pointer-events:none;z-index:110;overflow:hidden;
+ background:linear-gradient(110deg,#06192b00 8%,#1a688578 36%,#8bdaf32e 46%,#092e45a8 55%,#04121b00 80%);
+ transform:translateX(-120%);animation:xp-scene-wipe .72s cubic-bezier(.21,.66,.2,1) both;
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 19%,#000 80%,transparent);
+ mask-image:linear-gradient(90deg,transparent,#000 19%,#000 80%,transparent)}
+.xp-stage-laser{position:absolute;top:-35%;left:48%;height:170%;width:2px;background:#caffad;
+ box-shadow:0 0 9px 2px #a8ffc1,0 0 35px 13px #58ceffb8;transform:rotate(12deg)}
+.xp-stage-grid{position:absolute;inset:0;
+ background:repeating-linear-gradient(0deg,#69d4ff0b,#69d4ff0b 1px,transparent 1px,transparent 12px)}
+@keyframes xp-scene-wipe{0%{opacity:0;transform:translateX(-120%) skewX(-12deg)}21%{opacity:1}78%{opacity:1}100%{opacity:0;transform:translateX(125%) skewX(-12deg)}}
+/* Slim, readable progress line: gaming energy without occupying screen space. */
+.xp-scroll-progress{position:fixed;z-index:125;left:0;right:0;top:0;height:3px;pointer-events:none;background:#020c1422}
+.xp-scroll-progress-bar{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:0 50%;
+ background:linear-gradient(90deg,#81dbff,#c6fa83 68%,#f3ffca);box-shadow:0 0 13px #b1fda0;transition:transform .09s linear}
+/* Entry sequence: hero sweeps into focus before its copy and controls. */
+html.xp-motion-on .ow-hero,
+html.xp-motion-on .arena-hero,
+html.xp-motion-on .arena-tournament-hero,
+html.xp-motion-on .arena-identity,
+html.xp-motion-on .arena-match-banner{
+ position:relative;isolation:isolate;overflow:hidden
+}
+html.xp-motion-on .ow-hero>.xp-hero-hud,
+html.xp-motion-on .arena-hero>.xp-hero-hud,
+html.xp-motion-on .arena-tournament-hero>.xp-hero-hud,
+html.xp-motion-on .arena-identity>.xp-hero-hud,
+html.xp-motion-on .arena-match-banner>.xp-hero-hud{
+ position:absolute;inset:0;display:block;pointer-events:none;z-index:4;overflow:hidden;border-radius:inherit;
+ transform:translateZ(0)
+}
+.xp-hero-hud::before{content:"";position:absolute;inset:-25%;opacity:.26;pointer-events:none;
+ background:radial-gradient(circle at 32% 68%,#67dcff53 0 1px,transparent 2px),
+ radial-gradient(circle at 76% 21%,#a7ec8b95 0 1px,transparent 2px),
+ radial-gradient(circle at 69% 80%,#90dfff74 0 1px,transparent 2px);
+ background-size:144px 142px,192px 189px,104px 178px;
+ animation:xp-stars-drift 24s linear infinite
+}
+.xp-hero-hud::after{content:"";position:absolute;inset:0;opacity:.33;pointer-events:none;
+ background:radial-gradient(circle at var(--xp-look-x,78%) var(--xp-look-y,34%),#91ecff46,transparent 42%);
+ transition:opacity .45s
+}
+.xp-hero-hover .xp-hero-hud::after{opacity:.88}
+@keyframes xp-stars-drift{0%{transform:translate3d(-2%,0,0)}50%{transform:translate3d(2%,3%,0)}100%{transform:translate3d(-2%,0,0)}}
+.xp-hud-corner{position:absolute;width:23px;height:23px;opacity:.85;
+ border-color:#b9f990;border-style:solid;filter:drop-shadow(0 0 6px #a9ec8380)}
+.xp-hud-tl{top:15px;left:15px;border-width:2px 0 0 2px}
+.xp-hud-tr{top:15px;right:15px;border-width:2px 2px 0 0}
+.xp-hud-bl{bottom:15px;left:15px;border-width:0 0 2px 2px}
+.xp-hud-br{bottom:15px;right:15px;border-width:0 2px 2px 0}
+.xp-hud-scan{position:absolute;left:-30%;right:-30%;height:50%;top:-50%;
+ background:linear-gradient(to bottom,transparent 73%,#96f4ff0c 90%,#baffad62 99%,transparent 100%);
+ animation:xp-scan-pass 6.5s cubic-bezier(.55,.2,.3,.8) 1s infinite}
+@keyframes xp-scan-pass{0%{transform:translateY(-40%);opacity:0}12%{opacity:1}43%{opacity:.7}60%,100%{transform:translateY(450%);opacity:0}}
+.xp-hud-topline,.xp-hud-bottomline{position:absolute;left:48px;color:#cce8f0d4;font:900 9px/1.2 system-ui,sans-serif;letter-spacing:.2em;text-shadow:0 0 8px #092437}
+.xp-hud-topline{top:18px}.xp-hud-bottomline{bottom:18px;color:#baf6c4aa}
+.xp-hud-topline i,.xp-hud-bottomline i{font-style:normal;color:#c5fc88;padding-inline:3px}
+.xp-hud-radar{position:absolute;right:7%;top:50%;width:205px;height:205px;
+ transform:translateY(-50%) rotateX(60deg) rotate(-30deg);
+ border:1px solid #aaf3e44f;border-radius:50%;
+ box-shadow:0 0 0 34px #a7f4db0a,0 0 0 69px #8ff5dc09}
+.xp-hud-radar>span:nth-child(1){position:absolute;inset:23px;border:1px dashed #d2ffad76;border-radius:50%;
+ animation:xp-radar-spin 26s linear infinite}
+.xp-hud-radar>span:nth-child(2){position:absolute;inset:67px;border:2px solid #a7faff8f;border-radius:50%;
+ box-shadow:0 0 15px #5ed8f554}
+.xp-hud-radar>span:nth-child(3){position:absolute;left:50%;top:50%;width:50%;height:2px;
+ transform-origin:0 0;background:linear-gradient(90deg,#afffbc9c,transparent);animation:xp-radar-spin 7s linear infinite}
+@keyframes xp-radar-spin{to{transform:rotate(360deg)}}
+html.xp-motion-on .ow-hero h1,
+html.xp-motion-on .arena-hero h1,
+html.xp-motion-on .arena-tournament-hero h2,
+html.xp-motion-on .arena-identity h2{
+ animation:xp-headline-cut 1.02s cubic-bezier(.13,.84,.2,1) both;
+ animation-delay:.12s
+}
+@keyframes xp-headline-cut{
+ 0%{clip-path:inset(0 100% 0 0);opacity:0;transform:translate3d(-16px,0,0)}
+ 43%{opacity:1}
+ 100%{clip-path:inset(0);opacity:1;transform:translate3d(0,0,0)}
+}
+/* Cards have an energy edge, depth and a light streak which responds to hover. */
+html.xp-motion-on .ow-operation-shortcut,
+html.xp-motion-on .ow-shortcut,
+html.xp-motion-on .ow-capability-card,
+html.xp-motion-on .ow-mobile-result,
+html.xp-motion-on .ow-metric,
+html.xp-motion-on .lm-league-card,
+html.xp-motion-on .arena-info-tile,
+html.xp-motion-on .arena-news-tile,
+html.xp-motion-on .mode-tile{
+ position:relative;isolation:isolate;overflow:hidden;
+ backface-visibility:hidden;
+ transition-property:transform,box-shadow,border-color,background,opacity,filter!important;
+ transition-duration:.3s,.32s,.25s,.25s,.6s,.6s!important;
+ transition-timing-function:cubic-bezier(.16,.8,.22,1)!important;
+}
+html.xp-motion-on .ow-operation-shortcut::before,
+html.xp-motion-on .ow-shortcut::before,
+html.xp-motion-on .ow-capability-card::before,
+html.xp-motion-on .ow-mobile-result::before,
+html.xp-motion-on .lm-league-card::before,
+html.xp-motion-on .mode-tile::before{
+ content:"";position:absolute;z-index:1;pointer-events:none;
+ left:-190%;top:-75%;height:250%;width:60%;
+ transform:skewX(-25deg);
+ background:linear-gradient(90deg,transparent,#b9ecff18 35%,#ddffdd44 52%,#b9ecff18 69%,transparent);
+ transition:left .85s cubic-bezier(.22,.74,.15,1)
+}
+html.xp-motion-on .ow-operation-shortcut:hover::before,
+html.xp-motion-on .ow-shortcut:hover::before,
+html.xp-motion-on .ow-capability-card:hover::before,
+html.xp-motion-on .ow-mobile-result:hover::before,
+html.xp-motion-on .lm-league-card:hover::before,
+html.xp-motion-on .mode-tile:hover::before{left:155%}
+html.xp-motion-on .ow-operation-shortcut::after,
+html.xp-motion-on .ow-shortcut::after,
+html.xp-motion-on .ow-capability-card::after,
+html.xp-motion-on .ow-mobile-result::after,
+html.xp-motion-on .ow-metric::after,
+html.xp-motion-on .arena-info-tile::after{
+ content:"";position:absolute;z-index:0;pointer-events:none;inset:0;opacity:0;
+ background:radial-gradient(280px circle at var(--xp-pointer-x,50%) var(--xp-pointer-y,50%),#a7faff36,transparent 73%);
+ transition:opacity .3s ease
+}
+html.xp-motion-on .xp-tilt-active::after,
+html.xp-motion-on .ow-operation-shortcut:hover::after,
+html.xp-motion-on .ow-shortcut:hover::after,
+html.xp-motion-on .arena-info-tile:hover::after{opacity:1}
+html.xp-motion-on body[data-page="organizador"] .ow-operation-shortcut.xp-tilt-active,
+html.xp-motion-on body[data-page="organizador"] .ow-shortcut.xp-tilt-active,
+html.xp-motion-on body[data-page="organizador"] .ow-capability-card.xp-tilt-active,
+html.xp-motion-on body[data-page="organizador"] .ow-mobile-result.xp-tilt-active,
+html.xp-motion-on body[data-page="organizador"] .ow-metric.xp-tilt-active,
+html.xp-motion-on body[data-page="mis-ligas"] .lm-league-card.xp-tilt-active,
+html.xp-motion-on body[data-page="liga-admin"] .arena-info-tile.xp-tilt-active,
+html.xp-motion-on body[data-page="modos"] .mode-tile.xp-tilt-active{
+ transform:perspective(1000px) rotateX(var(--xp-rotate-x,0deg)) rotateY(var(--xp-rotate-y,0deg)) translateY(-3px)!important;
+ border-color:#c0f9a4!important;
+ box-shadow:0 12px 34px #0008,0 0 22px #78f3d328,inset 0 0 0 1px #b9f8a925!important;
+}
+html.xp-motion-on .ow-operation-shortcut b,
+html.xp-motion-on .ow-shortcut b,
+html.xp-motion-on .ow-capability-card h3,
+html.xp-motion-on .mode-tile h3{position:relative;z-index:2}
+/* The active menu feels like a selected game objective, but remains predictable. */
+html.xp-motion-on .ow-nav a,
+html.xp-motion-on .arena-side-nav button,
+html.xp-motion-on .arena-tourney-group button,
+html.xp-motion-on .arena-league-sections button{position:relative;overflow:hidden}
+html.xp-motion-on .ow-nav a::after,
+html.xp-motion-on .arena-tourney-group button::after,
+html.xp-motion-on .arena-league-sections button::after{
+ content:"";position:absolute;pointer-events:none;inset:0;
+ background:linear-gradient(110deg,transparent 20%,#b8f8d621 50%,transparent 80%);
+ transform:translateX(-130%);transition:transform .52s ease
+}
+html.xp-motion-on .ow-nav a:hover::after,
+html.xp-motion-on .arena-tourney-group button:hover::after,
+html.xp-motion-on .arena-league-sections button:hover::after{transform:translateX(130%)}
+html.xp-motion-on .ow-nav a.is-active{box-shadow:inset 3px 0 #baff87,0 0 20px #54dcfa13}
+html.xp-motion-on .ow-nav a.is-active .ow-icon{filter:drop-shadow(0 0 7px #baf77577)}
+html.xp-motion-on .ow-nav a.is-active::before{
+ content:"";position:absolute;left:0;top:10%;height:80%;width:3px;border-radius:4px;
+ background:#c3ff86;box-shadow:0 0 13px 4px #b7ff7e6a;
+ animation:xp-select-power .65s cubic-bezier(.12,.75,.18,1) both
+}
+@keyframes xp-select-power{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
+/* HUD filters and table results retain text contrast and full-size hit targets. */
+html.xp-motion-on .ow-toolbar:focus-within,
+html.xp-motion-on .ow-task-selection,
+html.xp-motion-on .arena-league-section-body:focus-within{box-shadow:0 0 0 1px #7bd9ed55,0 12px 30px #0004}
+html.xp-motion-on .ow-table-wrap{position:relative}
+html.xp-motion-on .ow-table-wrap::before{content:"";pointer-events:none;position:absolute;inset:0 0 auto 0;height:2px;
+ background:linear-gradient(90deg,#72d0f800,#83e0f5a0 50%,#c8fc8499,#72d0f800);
+ background-size:220% 100%;animation:xp-line-flow 7s linear infinite;z-index:2}
+@keyframes xp-line-flow{to{background-position:220% 0}}
+html.xp-motion-on .ow-item-name{transition:color .16s ease}
+html.xp-motion-on .ow-table tbody tr:hover .ow-item-name{color:#bafbc0}
+html.xp-motion-on .ow-mobile-result>.ow-btn{position:relative;z-index:3}
+/* Interactive pressing: small sparks of feedback at click position. */
+html.xp-motion-on .xp-click-surface{position:relative;isolation:isolate;overflow:hidden}
+.xp-press-ripple{position:absolute;display:block;pointer-events:none;z-index:8;border-radius:50%;
+ background:radial-gradient(circle,#d8ffc97d 0%,#8be3ff4f 35%,transparent 67%);
+ transform:scale(.15);opacity:0;animation:xp-ripple .68s cubic-bezier(.17,.72,.2,1) both}
+@keyframes xp-ripple{0%{transform:scale(.15);opacity:.9}100%{transform:scale(1);opacity:0}}
+/* The searchable task palette emerges as a game command console. */
+html.xp-motion-on .ow-task-dialog[open]{animation:xp-console-open .36s cubic-bezier(.18,.82,.21,1) both}
+html.xp-motion-on .ow-task-dialog[open]::backdrop{animation:xp-backdrop .3s ease-out both}
+@keyframes xp-console-open{from{opacity:0;transform:translateY(23px) scale(.96);filter:blur(8px)}to{opacity:1;transform:translateY(0) scale(1);filter:none}}
+@keyframes xp-backdrop{from{opacity:0}to{opacity:1}}
+html.xp-motion-on .ow-task-dialog-head::after{content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+ background:linear-gradient(90deg,#5cc9ff,#d9ff7c,#7be9ff);box-shadow:0 0 16px #96ebf977}
+html.xp-motion-on .ow-task-result{transition:background .2s,transform .2s,border-color .2s}
+html.xp-motion-on .ow-task-result:hover{transform:translateX(3px)}
+html.xp-motion-on .ow-task-result .ow-task-arrow{transition:transform .2s}
+html.xp-motion-on .ow-task-result:hover .ow-task-arrow{transform:translateX(4px)}
+/* On cards the lead content retains its visual hierarchy while decorative HUD stays behind. */
+html.xp-motion-on .ow-operation-shortcut>*,html.xp-motion-on .ow-shortcut>*{position:relative;z-index:2}
+html.xp-motion-on .ow-capability-card .ow-capability-icon{position:relative;z-index:2}
+html.xp-motion-on .ow-hero .xp-hud-topline,html.xp-motion-on .ow-hero .xp-hud-bottomline{opacity:.88}
+@media(max-width:1150px){
+ .xp-hud-radar{width:145px;height:145px;opacity:.6}
+ .xp-hud-radar>span:nth-child(2){inset:48px}
+}
+@media(max-width:760px){
+ html.xp-motion-on .xp-reveal{transform:translate3d(0,15px,0) scale(.995);transition-duration:.44s,.48s,.44s,.44s;filter:none}
+ html.xp-motion-on .xp-reveal.xp-inview{transform:none}
+ .xp-hud-radar{display:none}
+ .xp-hud-topline,.xp-hud-bottomline{font-size:8px;letter-spacing:.12em;left:39px}
+ .xp-hud-tl{top:12px;left:12px}.xp-hud-tr{top:12px;right:12px}
+ .xp-hud-bl{bottom:12px;left:12px}.xp-hud-br{bottom:12px;right:12px}
+ .xp-scroll-progress{height:2px}
+}
+@media(hover:none),(pointer:coarse){
+ html.xp-motion-on .ow-operation-shortcut::before,html.xp-motion-on .ow-shortcut::before,
+ html.xp-motion-on .ow-capability-card::before,html.xp-motion-on .ow-mobile-result::before{display:none}
+ html.xp-motion-on .ow-operation-shortcut:hover,html.xp-motion-on .ow-shortcut:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ html.xp-motion-on .xp-reveal,html.xp-motion-on .xp-reveal:not(.xp-inview),
+ html.xp-motion-on .ow-hero.xp-reveal,html.xp-motion-on .arena-hero.xp-reveal,
+ html.xp-motion-on .arena-tournament-hero.xp-reveal,html.xp-motion-on .arena-identity.xp-reveal{
+ opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important;transition:none!important;animation:none!important;will-change:auto!important;
+ }
+ html.xp-motion-on .ow-hero h1,html.xp-motion-on .arena-hero h1,
+ html.xp-motion-on .arena-tournament-hero h2,html.xp-motion-on .arena-identity h2{animation:none!important;clip-path:none!important}
+ .xp-stage-sweep,.xp-hero-hud,.xp-press-ripple{display:none!important}
+ .xp-hud-radar,.xp-hud-scan,.xp-hero-hud::before,.xp-hero-hud::after{animation:none!important}
+ html.xp-motion-on .ow-task-dialog[open],html.xp-motion-on .ow-task-dialog[open]::backdrop{animation:none!important}
+ html.xp-motion-on .ow-operation-shortcut::before,html.xp-motion-on .ow-shortcut::before,html.xp-motion-on .ow-nav a::after{display:none!important}
+ html.xp-motion-on .ow-operation-shortcut,html.xp-motion-on .ow-shortcut,html.xp-motion-on .ow-capability-card,
+ html.xp-motion-on .ow-metric{transition:none!important;transform:none!important}
+ .xp-scroll-progress-bar{transition:none!important}
+}
