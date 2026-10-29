@@ -75,7 +75,7 @@ function allTournaments(){
   return list.map(function(x){return {id:x.id,name:x.name||"—",category:x.category||x.sub||"—",sub:x.sub||"",state:x.state||"Borrador",teams:x.teams||0,leagueId:l.id,leagueName:l.name,sport:l.sport||"",location:l.city||l.region||l.country||""}});
  });
 }
-function leagueLink(l){return manager?.leagueLink?.(l.id,"inicio")||("liga-admin.html?liga="+encodeURIComponent(l.id)+"&vista=inicio")}
+function leagueLink(l){return manager?.leagueLink?.(l.id,"liga")||("liga-admin.html?liga="+encodeURIComponent(l.id)+"&vista=inicio")}
 function tournamentLink(x){
  var base=manager?.leagueLink?.(x.leagueId,"torneos")||("liga-admin.html?liga="+encodeURIComponent(x.leagueId)+"&vista=torneos");
  return base+"&torneo="+encodeURIComponent(x.id);
