@@ -5,6 +5,16 @@
 Este repositorio **público** es únicamente para maquetas navegables HTML, CSS y JavaScript. La documentación y las decisiones del proyecto ASLO están en un repositorio privado independiente.
 
 
+## Revisión visual UX 10 — Sistema de movimiento ASLO XP (EN ANÁLISIS)
+
+Se mantienen las rutas y ámbitos funcionales de la revisión UX 9. **La experiencia visual/interactiva se reorienta hacia el movimiento y la profundidad**, no únicamente hacia los colores. Se estudiaron los ZIP de referencia Xports y Pubzi: revelado por scroll, entradas escalonadas, animaciones de títulos, capas a diferentes velocidades, transiciones y respuesta interactiva; se desarrolló una implementación **original sin copiar scripts ni recursos gráficos de dichas plantillas**.
+
+**Archivos nuevos:** `assets/motion-xp10.css` y `assets/motion-xp10.js`, activados en `organizador.html`, `liga-admin.html`, `mis-ligas.html`, `modos.html` y `modo.html`. Incluyen: entrada coreografiada de paneles mediante IntersectionObserver; apariciones escalonadas; barrido cinematográfico entre vistas; HUD deportivo no interactivo sobre cabeceras; radar/capas de parallax leve; brillo direccional y profundidad en tarjetas; línea de progreso de scroll; contadores de muestra que aparecen gradualmente; ondas de activación en el organizador; presentación de buscador de tareas; indicadores activos de navegación. Se respeta `prefers-reduced-motion`, se simplifican efectos en móviles y se evita duplicar inclinación/ripples donde ya existe el motor legado.
+
+**Cobertura:** estilo y animación solamente; no se cambian historias, roles, permisos, datos, estado de encuentros ni reglas deportivas. Las pantallas conceptuales siguen etiquetadas como no implementadas. **Verificación realizada:** existencia de recursos en GitHub, JS sintácticamente válido, CSS balanceado y comprobación estática de enlaces en cinco páginas; prueba aislada de inicialización sin navegador completo. **Pendiente:** evaluar visualmente en un navegador real (escritorio, móvil, accesibilidad, navegadores soportados) y recibir la valoración del propietario; desde esta conexión no se confirmó el despliegue de GitHub Pages.
+
+**Recorrido de observación:** [Espacio del organizador](https://xxxaga-dev.github.io/asloxp/organizador.html?vista=inicio) → pasar por tarjetas / hacer scroll → Agenda y jornadas → Torneos → abrir un torneo → cambiar entre Inscripciones, Fases y Planillas → Buscar función (Ctrl+K). Para evaluar sin movimiento usar la opción de reducir movimiento del sistema.
+
 ## Revisión UX 9 — Recuperación de responsabilidades del organizador (EN ANÁLISIS)
 
 Tras la revisión del propietario, el espacio del organizador deja de reducir la experiencia a Ligas y Torneos. Se recuperó la cobertura documentada a partir de la épica `docs/historias/modo-organizador/README.md`, el recorrido de organizador y las historias transversales del repositorio privado ASLO, **sin convertir las historias en nuevas facultades ni en código productivo**.
