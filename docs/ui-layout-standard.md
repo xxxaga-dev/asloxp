@@ -1,6 +1,6 @@
 # ASLO — Estándar de layout y navegación por modo
 
-**Estado: EN ANÁLISIS (prototipo de referencia).** El propietario solicitó un único sistema visual para todos los modos. Esta nota documenta la implementación actual; no aprueba requisitos deportivos nuevos ni declara funcionalidades productivas.
+**Estado: APROBADO — estándar visual y de navegación de ASLO para todos los modos (29 de octubre de 2026).** El propietario aprobó el layout y los menús del Organizador, en escritorio y móvil, incluida la alineación final del buscador. La aprobación corresponde a la experiencia visual común: no aprueba requisitos deportivos nuevos ni declara funcionalidades productivas. La decisión principal también está registrada en el repositorio privado `xxxaga-dev/ASLO`, en `docs/ux/estandar-visual-y-navegacion.md`.
 
 ## Contrato común (sin dependencia del modo)
 
@@ -26,7 +26,7 @@
 
 No crear una nueva cabecera, avatar, menú de cuenta, barra inferior o panel Más por cada modo. Configurar opciones de modo y vistas sobre el shell existente. Si el modo no tiene contenido funcional aprobado/implementado, mostrar explícitamente la cobertura pendiente; no inventar flujos. Respetar las fuentes documentales del proyecto privado ASLO y validar con el propietario cualquier cambio importante.
 
-## Validación pendiente
+## Verificaciones y migración aún pendientes (no revierten la aprobación visual)
 
 Revisión visual real en navegadores y dispositivos, especialmente anchuras de 320 a 430 px, cuentas con nombre largo, orientación horizontal, foco/teclado, desplazamiento con paneles abiertos, idiomas y comportamiento de retroceso. Las pruebas de código y de renderizado lógico no sustituyen esa validación.
 
