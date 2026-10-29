@@ -84,7 +84,7 @@ function scrollObserve(el,seq){
  seen.add(el);
  if(motionOff())return;
  el.classList.add("xp-reveal");
- el.style.setProperty("--xp-sequence",Math.min(seq%6,5));
+ el.style.setProperty("--xp-delay",(Math.min(seq%6,5)*65)+"ms");
  if(intersector){intersector.observe(el);}
  else{requestAnimationFrame(function(){el.classList.add("xp-inview");onReveal(el)})}
 }
@@ -210,7 +210,7 @@ function addListeners(){
  window.addEventListener("resize",scrollProgress,{passive:true});
  window.addEventListener("blur",function(){resetTilt(activeTilt);activeTilt=null});
  if(reduced&&reduced.addEventListener)reduced.addEventListener("change",function(){if(reduced.matches){
-  root.querySelectorAll(".xp-reveal").forEach(function(x){x.classList.add("xp-inview");x.style.removeProperty("--xp-sequence")});
+  root.querySelectorAll(".xp-reveal").forEach(function(x){x.classList.add("xp-inview");x.style.removeProperty("--xp-delay")});
   resetTilt(activeTilt);activeTilt=null;
  }});
 }
