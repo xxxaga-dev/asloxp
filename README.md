@@ -5,6 +5,18 @@
 Este repositorio **público** es únicamente para maquetas navegables HTML, CSS y JavaScript. La documentación y las decisiones del proyecto ASLO están en un repositorio privado independiente.
 
 
+## Revisión UX 11 — Cuenta global y navegación por modo (EN ANÁLISIS)
+
+El propietario confirmó que el menú operativo del organizador se comprende; pidió separar las funciones personales de las deportivas y disponer de personaje/avatar de perfil. **Cambios aplicados en el prototipo:** el encabezado de `organizador.html` muestra un botón personal con nombre de sesión, modo activo y foto/avatar; al desplegar permite abrir perfil y avatar, apariencia, seguridad, Mis modos, seleccionar idioma (ES/EN/DE) y cerrar sesión. El menú inferior móvil y el lateral conservan exclusivamente funciones del modo organizador; se eliminó de ellos «Cambiar modo».
+
+**Consistencia contextual:** el mismo menú de cuenta aparece en `liga-admin.html` al entrar en cualquier liga o torneo, incluso después de un renderizado dinámico. Se reutilizan `asloAuth.getAccount()`, `asloAuth.lang()`, la configuración global `asloAuth.selectLanguage()`, `cuenta.html` y `modos.html`: no se crean cuentas por liga ni permisos nuevos.
+
+**Avatares y fotografía:** el menú usa la foto de la cuenta cuando está disponible y en otro caso un personaje ilustrado. `cuenta.html?tab=perfil` permite elegir 10 avatares SVG originales (personas con referencias a fútbol, baloncesto, voleibol, tenis, atletismo, arbitraje, entrenamiento, etc.) o cargar una foto local JPG/PNG/WebP que se recorta y reduce a 192×192. El avatar/foto se guarda **solo en la sesión de demostración**, en el registro de cuenta simulado que comparten los modos; no hay carga a un servidor, fotos públicas reales ni almacenamiento permanente. La elección de personaje no determina deporte, rol ni autorización.
+
+**Verificación:** comprobadas estructuras de navegación y enlaces, sintaxis JS/CSS, renderizado lógico del perfil para avatar seleccionado/foto/visitante y funcionamiento del cambio global de idioma. No se ha comprobado el renderizado visual final en navegador remoto ni el despliegue de GitHub Pages.
+
+**Prueba:** [Organizador](https://xxxaga-dev.github.io/asloxp/organizador.html?vista=inicio) → botón superior con nombre/avatar → seleccionar «Mi perfil y avatar» → elegir personaje o foto → volver → abrir torneo → comprobar el mismo botón. «Cambiar modo» debe aparecer solo en el menú de cuenta, nunca en la navegación deportiva.
+
 ## Revisión visual UX 10 — Sistema de movimiento ASLO XP (EN ANÁLISIS)
 
 Se mantienen las rutas y ámbitos funcionales de la revisión UX 9. **La experiencia visual/interactiva se reorienta hacia el movimiento y la profundidad**, no únicamente hacia los colores. Se estudiaron los ZIP de referencia Xports y Pubzi: revelado por scroll, entradas escalonadas, animaciones de títulos, capas a diferentes velocidades, transiciones y respuesta interactiva; se desarrolló una implementación **original sin copiar scripts ni recursos gráficos de dichas plantillas**.
