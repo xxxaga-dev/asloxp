@@ -29,6 +29,62 @@ de:{
 home:"Startseite",leagues:"Ligen",guest:"Gast",login:"Anmelden",signup:"Konto erstellen",account:"Mein Konto",profile:"Mein Profil",settings:"Einstellungen",security:"Sicherheit",appearance:"Darstellung",language:"Sprache",modes:"Meine Modi",switch:"Modus wechseln",logout:"Abmelden",sample:"UX-PROTOTYP · Beispieldaten",sessionSample:"Demo-Sitzung. Keine echte Anmeldung.",guestSample:"Öffentliche Informationen ohne Benutzerkonto.",footer:"Prototyp zur Überprüfung · Keine echte Anmeldung oder Berechtigungen.",public:"Öffentliche Inhalte ansehen",back:"Zurück",changesSaved:"Einstellung in diesem Browser gespeichert.",notReal:"Diese Funktion benötigt die spätere echte Umsetzung. Hier prüfen wir nur ihre Platzierung.",fan:"Fan",player:"Spieler",team:"Mannschaft",organizer:"Veranstalter",referee:"Schiedsrichter",scorer:"Spielprotokollführer",assistant:"Liga-Assistent",academy:"Sportakademie oder Verein",coach:"Trainer",school:"Schiedsrichterschule",venue:"Sportstätte",sponsor:"Sponsor",guardian:"Erziehungsberechtigte",operator:"ASLO-Team",favorites:"Favoriten",news:"Neuigkeiten",activities:"Aktivitäten",fixtures:"Nächste Spiele",myteams:"Meine Mannschaften",history:"Sportliche Laufbahn",members:"Teilnehmer",competitions:"Wettbewerbe",tournaments:"Turniere",schedule:"Spielplan",assignments:"Zugewiesene Spiele",reports:"Berichte",scoresheets:"Spielberichte",pending:"Ausstehend",results:"Ergebnisse",coaches:"Trainer",training:"Training",professional:"Berufsprofil",referees:"Schiedsrichter",venues:"Anlagen",authorizations:"Genehmigungen",bookings:"Reservierungen",missions:"Missionen",prizes:"Preise",campaigns:"Kampagnen",supervised:"Betreute Konten",controls:"Kontrollen",verification:"Verifizierung",support:"Support",integrity:"Integrität",notAvailable:"Nicht verfügbar",comingLater:"Wird in einer späteren Phase gestaltet",modeDescription:"Jeder Modus zeigt nur die zugehörigen Funktionen.",selectorTitle:"Welchen Modus möchtest du nutzen?",selectorHelp:"Ein Konto kann mehrere Modi haben, aber nur die freigegebenen sind verfügbar.",availableModes:"Meine verfügbaren Modi",otherModes:"Weitere ASLO-Modi",otherNote:"Sie werden durch Verknüpfungen, Rollen oder Prüfungen freigegeben.",enterMode:"Diesen Modus öffnen",modeTitle:"Dein Bereich:",modeWork:"Die Funktionen werden schrittweise ergänzt. Jetzt kannst du dein Konto verwalten und zwischen Modi wechseln.",noPerm:"Die Modusauswahl gewährt keine echten Berechtigungen.",joined:"Im Namen von",introModes:"EIN KONTO · MEHRERE MODI",hello:"Willkommen zurück.",welcome:"Starte dein Erlebnis.",introAuth:"Du kannst den Sport als Gast entdecken. Nach der Anmeldung siehst du nur die für dein Konto verfügbaren Modi.",continueGuest:"Als Gast fortfahren",sampleOnly:"Bitte nur erfundene Daten eingeben. Keine echten E-Mail-Adressen oder Passwörter.",displayName:"Beispielname",email:"Beispiel-E-Mail",password:"Beispielpasswort",loginDemo:"Anmelden (Demo)",registerDemo:"Konto erstellen (Demo)",multiDemo:"Demo-Konto mit mehreren Modi testen",or:"oder",askRegister:"Noch kein Konto?",askLogin:"Hast du bereits ein Konto?",newFan:"Neue Konten beginnen als Fan. Weitere Modi erfordern Freigaben oder Verknüpfungen.",accountHeading:"Gestalte dein ASLO-Erlebnis",accountIntro:"Profil, Sicherheit, Darstellung und Sprache gelten in allen Modi.",personalData:"Kontodaten",displayNameHelp:"Ändere den Beispielnamen im Kopfbereich.",save:"Speichern",yourAvatar:"Kontoinformationen",sessionMode:"Aktiver Modus",profileDesc:"Diese Daten sind simuliert. Es gibt kein echtes Benutzerprofil auf einem Server.",securityIntro:"Diese Funktionen schützen später dein Konto, sobald eine echte Anmeldung verfügbar ist.",changePassword:"Passwort ändern",twoFactor:"Zwei-Faktor-Authentifizierung",devices:"Sitzungen und Geräte",disabledDemo:"In dieser Demo nicht verfügbar",securityWarning:"Bitte niemals echte Passwörter in diesem öffentlichen Prototyp eingeben.",themeIntro:"Wähle das Design. Die Einstellung wird in deinem Browser gespeichert.",theme:"Design",light:"Hell",dark:"Dunkel",system:"Geräteeinstellung",languageIntro:"Wähle die Sprache der Oberfläche. Sie wird für spätere Besuche in diesem Browser gespeichert.",langName:"Español",langEn:"English",langDe:"Deutsch",apply:"Anwenden",activeMode:"Aktiver Modus",viewPublic:"Öffentliche Seite ansehen"
 }};
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* Shared illustrated account avatars. Fixed SVG paths and palette, no external images.
+   The account owns its visual identity across all modes; sports are visual choices,
+   not role assignments or eligibility records. */
+const avatarCatalog=[
+ {id:"classic",es:"Clásico",en:"Classic",de:"Klassisch",color:"#68cbfa",shirt:"#204d78",hair:"#253951",sport:"person"},
+ {id:"futbol",es:"Fútbol",en:"Football",de:"Fußball",color:"#b8f38b",shirt:"#258456",hair:"#202b3b",sport:"football"},
+ {id:"basket",es:"Baloncesto",en:"Basketball",de:"Basketball",color:"#ffa36e",shirt:"#a24429",hair:"#33283e",sport:"basketball"},
+ {id:"volley",es:"Voleibol",en:"Volleyball",de:"Volleyball",color:"#e9a0fc",shirt:"#713eae",hair:"#4b2c53",sport:"volleyball"},
+ {id:"tenis",es:"Tenis",en:"Tennis",de:"Tennis",color:"#dcf779",shirt:"#437a41",hair:"#2a3e4b",sport:"tennis"},
+ {id:"running",es:"Atletismo",en:"Athletics",de:"Leichtathletik",color:"#ffc875",shirt:"#b75151",hair:"#2d3043",sport:"running"},
+ {id:"referee",es:"Arbitraje",en:"Referee",de:"Schiedsrichter",color:"#95d2ee",shirt:"#364451",hair:"#26323d",sport:"referee"},
+ {id:"coach",es:"Entrenamiento",en:"Coaching",de:"Training",color:"#f6b783",shirt:"#3e7279",hair:"#3c3138",sport:"coach"},
+ {id:"captain",es:"Capitán",en:"Captain",de:"Kapitän",color:"#8fb6ff",shirt:"#4157ab",hair:"#252945",sport:"captain"},
+ {id:"esports",es:"Competición",en:"Competition",de:"Wettkampf",color:"#eb99d1",shirt:"#7f3a7e",hair:"#252944",sport:"competition"}
+];
+function avatarLabel(v){return v[lang()]||v.es}
+function avatarMarkup(id="classic",sizeClass=""){
+ const a=avatarCatalog.find(x=>x.id===id)||avatarCatalog[0],p=a.sport;
+ const gear=p==="football"?'<circle cx="69" cy="64" r="10" fill="#fff" stroke="#23334c" stroke-width="2"/><path d="M69 59l5 4-2 6h-6l-3-6z" fill="#243b4b"/><path d="M69 54v5m-10 3 4 1m13 0 3-2m-7 8 3 4m-9-4-3 4" stroke="#263e4f" stroke-width="2"/>':
+ p==="basketball"?'<circle cx="70" cy="64" r="11" fill="#f6a04f" stroke="#8d4423" stroke-width="2"/><path d="M59 64h22M70 53v22M61 58q15 6 17 13M78 58q-15 7-17 13" fill="none" stroke="#813c21" stroke-width="1.7"/>':
+ p==="volleyball"?'<circle cx="69" cy="64" r="11" fill="#f3edf9" stroke="#5c71a0" stroke-width="1.6"/><path d="M61 58q8 1 12 13m-9-15q8 0 14 9m-18 4q8-10 18-10m-13 15q4-10 14-12" fill="none" stroke="#6e81b6" stroke-width="2"/>':
+ p==="tennis"?'<ellipse cx="70" cy="61" rx="8" ry="13" transform="rotate(31 70 61)" fill="none" stroke="#deffb6" stroke-width="3"/><path d="M72 72l7 11M60 61l19 0m-11-12v24" stroke="#2a6679" stroke-width="2"/><circle cx="55" cy="73" r="6" fill="#d8f765"/>':
+ p==="referee"?'<rect x="62" y="56" width="16" height="22" rx="2" fill="#eaf4fa" stroke="#465f73"/><rect x="65" y="58" width="10" height="13" fill="#f9d878"/><path d="M67 76h6" stroke="#566577" stroke-width="1.5"/>':
+ p==="coach"?'<rect x="60" y="54" width="20" height="25" rx="3" fill="#c5e0ea" stroke="#517889" stroke-width="2"/><path d="M65 62h10m-10 5h10m-10 5h6" stroke="#32536b" stroke-width="1.8"/>':
+ p==="captain"?'<path d="M58 65l6 3 6-8 7 8 6-3-4 15H62z" fill="#f9d56e" stroke="#9b7e27" stroke-width="1.5"/><circle cx="70" cy="60" r="3" fill="#fff5c8"/>':
+ p==="running"?'<path d="M61 75l8-18 9 15" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M65 61l13-4M68 69l-10 10" stroke="#fff" stroke-width="4" stroke-linecap="round"/>':
+ p==="competition"?'<path d="M57 68l9-10h8l9 10-5 10H62z" fill="#d9b7e9" stroke="#694b8a" stroke-width="2"/><circle cx="70" cy="69" r="4" fill="#653f89"/>':
+ '<path d="M62 63h16m-8-8v16" stroke="#e4f9ff" stroke-width="4" stroke-linecap="round"/>';
+ const hair=a.id==="volley"||a.id==="esports"?'<path d="M27 50q-3-37 17-39 22-1 22 39l-7 6-4-24-23 1-2 24z" fill="'+a.hair+'"/>':
+ '<path d="M24 34q1-23 23-23 19 0 20 22-12-8-22-10-9 13-21 11z" fill="'+a.hair+'"/>';
+ return '<svg class="aslo-avatar-svg '+sizeClass+'" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">'+
+ '<rect width="96" height="96" rx="22" fill="'+a.color+'"/><circle cx="48" cy="42" r="35" fill="#ffffff" opacity=".12"/>'+
+ '<path d="M7 96q0-31 26-32l15 7 15-7q25 1 26 32" fill="'+a.shirt+'"/>'+
+ '<path d="M36 63l12 11 12-11v-13H36z" fill="#c68b69"/>'+
+ '<ellipse cx="48" cy="39" rx="22" ry="27" fill="#e7b18e"/>'+
+ '<path d="M25 39q-6 3-4 10 2 7 7 6M71 39q6 3 4 10-2 7-7 6" fill="#e7b18e"/>'+
+ hair+
+ '<path d="M38 42h3m14 0h3" stroke="#293341" stroke-width="3" stroke-linecap="round"/>'+
+ '<path d="M43 54q5 4 10 0" fill="none" stroke="#9a624e" stroke-width="2.2" stroke-linecap="round"/>'+
+ '<path d="M28 76l18 13h5l18-13" fill="none" stroke="#ffffff" stroke-opacity=".42" stroke-width="2"/>'+
+ '<circle cx="70" cy="67" r="17" fill="#0e2539" stroke="#ffffff" stroke-width="2"/>'+gear+
+ '</svg>';
+}
+function validPhoto(s){return typeof s==="string"&&s.length<=250000&&/^data:image\/(?:png|jpeg|webp);base64,[a-z0-9+/=]+$/i.test(s)}
+function avatarForAccount(a,extraClass=""){
+ const src=a&&validPhoto(a.photoData)?a.photoData:"";
+ if(src)return '<img class="aslo-account-avatar '+extraClass+'" src="'+src+'" alt="" loading="lazy" decoding="async">';
+ return '<span class="aslo-account-avatar '+extraClass+'" aria-hidden="true">'+avatarMarkup(a?.avatarId||"classic")+'</span>';
+}
+function saveVisual(patch){
+ const a=account();if(!a)return false;
+ const next={...a,...patch};
+ try{sessionStorage.setItem(ACCOUNT,JSON.stringify(next));return true}catch(e){return false}
+}
+
 function prefGet(key,defaultValue){try{return localStorage.getItem(key)||defaultValue}catch(e){return defaultValue}}
 function prefSet(key,val){try{localStorage.setItem(key,val)}catch(e){}}
 const lang=()=>["es","en","de"].includes(prefGet(LANG,"es"))?prefGet(LANG,"es"):"es";
