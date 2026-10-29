@@ -32,7 +32,7 @@ function render(){
  const roles={aficionado:"fan",jugador:"player",equipo:"team",organizador:"organizer",juez:"referee",planillador:"scorer",asistente:"assistant",academia:"academy",entrenador:"coach",escuela:"school",escenario:"venue",patrocinador:"sponsor",responsable:"guardian",aslo:"operator"};
  const currentMode=control.closest("[data-aslo-mode]")?.dataset.asloMode||document.body.dataset.activeMode||"organizador";
  const key=roles[currentMode]||"organizer";
- const mode=auth.tr?.(key)||d.organizer;
+ const mode=currentMode==="visitante"?(acct?({es:"Exploración pública",en:"Public browsing",de:"Öffentlicher Bereich"})[lang]||"Exploración pública":d.guest):(auth.tr?.(key)||d.organizer);
  const name=(acct?.name||d.guest).trim()||d.guest;
  const figure=auth.avatarForAccount?.(acct,"ow-figure")||'<span class="aslo-account-avatar" aria-hidden="true">♙</span>';
  text(sel("ow-account-name"),name);
