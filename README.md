@@ -5,7 +5,9 @@
 Este repositorio **público** es únicamente para maquetas navegables HTML, CSS y JavaScript. La documentación y las decisiones del proyecto ASLO están en un repositorio privado independiente.
 
 
-## Revisión UX 12 — Shell visual común para todos los modos (EN ANÁLISIS)
+## Revisión UX 12 — Shell visual y menús de todos los modos (APROBADO · 29-10-2026)
+
+**Decisión del propietario:** el layout, el diseño de los menús y la ubicación del buscador en escritorio y móvil se declaran **ESTÁNDAR APROBADO para todos los modos de ASLO**. Cambian las opciones y los contenidos según el modo, no la estructura visual común. El acuerdo queda registrado de forma autoritativa en el repositorio privado ASLO: `docs/ux/estandar-visual-y-navegacion.md`. La implementación deportiva y las migraciones contextuales pendientes no se consideran aprobadas por esta decisión.
 
 La revisión de escritorio y móvil del propietario solicitó: retirar la flecha desalineada del perfil, centrar las etiquetas inferiores, mostrar el menú de cuenta completo y **reutilizar un único layout visual en todos los modos**.
 
