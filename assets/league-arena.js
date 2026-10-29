@@ -34,7 +34,7 @@ const nav=[["inicio","⌂",tr("Mi liga","My league","Meine Liga")],["torneos","�
 const safe=(s)=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const read=(k,fallback)=>{try{return JSON.parse(sessionStorage.getItem(k))||fallback}catch{return fallback}};
 const save=(k,val)=>{try{sessionStorage.setItem(k,JSON.stringify(val))}catch{}};
-const state={view:new URLSearchParams(location.search).get("vista")||"liga",leagueSection:new URLSearchParams(location.search).get("seccion")||"general",tournament:0,matchTab:"alineaciones",tourTab:(["resumen","inscripciones","fases","partidos","solicitudes","oficiales","escenarios","planillas","disciplina","clasificacion","premios","noticias","cierre"].includes(new URLSearchParams(location.search).get("tab"))?new URLSearchParams(location.search).get("tab"):"resumen"),sponsor:0,more:false,modal:false,notifications:read("aslo-arena-news:"+league.id,[]),added:read("aslo-arena-tournaments:"+league.id,[]),award:read("aslo-arena-awards:"+league.id,{description:"Premios deportivos del torneo · Por confirmar",note:""})};
+const state={view:new URLSearchParams(location.search).get("vista")||"liga",leagueSection:new URLSearchParams(location.search).get("seccion")||"general",tournament:0,matchTab:"alineaciones",tourTab:(["resumen","inscripciones","fases","interligas","partidos","solicitudes","oficiales","escenarios","planillas","disciplina","clasificacion","premios","noticias","cierre"].includes(new URLSearchParams(location.search).get("tab"))?new URLSearchParams(location.search).get("tab"):"resumen"),sponsor:0,more:false,modal:false,notifications:read("aslo-arena-news:"+league.id,[]),added:read("aslo-arena-tournaments:"+league.id,[]),award:read("aslo-arena-awards:"+league.id,{description:"Premios deportivos del torneo · Por confirmar",note:""})};
 if(!nav.some(([id])=>id===state.view))state.view="inicio";
 /* Direct access from organizer search: retain the selected league and tournament. */
 var requestedTournament=new URLSearchParams(location.search).get("torneo");
@@ -139,6 +139,7 @@ function tournamentSections(){
  ["resumen",tr("Resumen","Overview","Übersicht")],
  ["inscripciones",tr("Equipos y cupos","Teams & slots","Teams & Plätze")],
  ["fases",tr("Fases y cruces","Stages & brackets","Phasen & Paarungen")],
+ ["interligas",tr("Interligas","Interleague","Interligen")],
  ["partidos",tr("Calendario","Schedule","Spielplan")]]},
  {name:tr("OPERACIÓN","OPERATIONS","BETRIEB"),tabs:[
  ["solicitudes",tr("Solicitudes","Requests","Anfragen")],
@@ -159,6 +160,8 @@ function tournamentSections(){
 }
 function previewTournament(section){
  const specs={
+ interligas:[tr("Competiciones entre ligas","Interleague competitions","Wettbewerbe zwischen Ligen"),
+  tr("Una liga interligas organizadora puede reunir ligas participantes mediante sus propios criterios de clasificación. El alcance operativo específico sigue en análisis.","An interleague organizer can accept other leagues under appropriate qualification rules.","Interligen haben eigene Qualifikationsbedingungen.")],
  fases:[tr("Fases, grupos y cruces","Stages, groups & brackets","Phasen, Gruppen & Paarungen"),
   tr("Cada torneo configura sus fases, grupos desde un equipo, criterios de avance y cruces. Las fases posteriores iniciadas no se recomponen.","Each tournament defines its stages, groups and progressions.","Turnierphasen, Gruppen und Paarungen.")],
  solicitudes:[tr("Solicitudes y reprogramaciones","Requests and rescheduling","Anfragen und Spielverlegungen"),
@@ -191,7 +194,7 @@ return headline("🏆",tr("Torneo seleccionado","Selected tournament","Ausgewäh
 '<section class="arena-tournament-hero aslo-fx-hero" style="--arena-photo:url(\''+t.photo+'\')"><div class="aslo-fx-depth"><span class="arena-overline">SEASON 2026 · '+safe(t.sub)+'</span><h2>'+safe(t.name)+'</h2><div class="arena-tour-hero-stats">'+badge(t.state)+'<span>◉ '+t.teams+' '+tr("equipos","teams","Teams")+'</span><span>⚽ '+t.matches+' '+tr("encuentros","matches","Spiele")+'</span></div><p>'+safe(t.description)+'</p></div></section>'+
 
 tournamentSections()+
-'<div class="arena-tour-content">'+(state.tourTab==="inscripciones"?tourOperations():state.tourTab==="fases"?previewTournament("fases"):state.tourTab==="solicitudes"?previewTournament("solicitudes"):state.tourTab==="oficiales"?previewTournament("oficiales"):state.tourTab==="escenarios"?previewTournament("escenarios"):state.tourTab==="disciplina"?previewTournament("disciplina"):state.tourTab==="planillas"?(selected()?.id==="apertura"?arenaMatchSheet():previewTournament("planillas")):state.tourTab==="cierre"?previewTournament("cierre"):state.tourTab==="resumen"?'<div class="arena-info-grid">'+infoTile("◉",tr("Equipos independientes","Independent teams","Unabhängige Teams"),tr("La inscripción y vinculación se realiza por invitación y aceptación.","Entry by invitation and acceptance.","Teilnahme durch Einladung und Annahme."))+infoTile("⚙",tr("Categoría y edades","Category and age limits","Kategorie und Altersgrenzen"),tr("Categoría ilustrativa del catálogo ASLO; edades configuradas por la liga.","Illustrative ASLO category; ages set by the league.","Beispielkategorie von ASLO; Altersgrenzen durch die Liga."))+infoTile("⌖",tr("Diferentes escenarios","Multiple venues","Mehrere Spielorte"),tr("Los partidos pueden disputarse en sedes distintas.","Matches may take place at different venues.","Spiele können an verschiedenen Orten stattfinden."))+infoTile("✦",tr("Trofeos y premios","Trophies and prizes","Pokale und Preise"),tr("La premiación puede actualizarse con motivo y noticia.","Prizes may change with a reason and news post.","Preise können mit Begründung angepasst werden."))+'</div>':state.tourTab==="partidos"?(selected()?.id==="apertura"?matchesTable():previewTournament("partidos")):state.tourTab==="clasificacion"?standings():state.tourTab==="premios"?awards():state.tourTab==="noticias"&&selected()?.id==="apertura"?newsPanel():previewTournament("noticias"))+'</div>'+
+'<div class="arena-tour-content">'+(state.tourTab==="inscripciones"?tourOperations():state.tourTab==="fases"?previewTournament("fases"):state.tourTab==="interligas"?previewTournament("interligas"):state.tourTab==="solicitudes"?previewTournament("solicitudes"):state.tourTab==="oficiales"?previewTournament("oficiales"):state.tourTab==="escenarios"?previewTournament("escenarios"):state.tourTab==="disciplina"?previewTournament("disciplina"):state.tourTab==="planillas"?(selected()?.id==="apertura"?arenaMatchSheet():previewTournament("planillas")):state.tourTab==="cierre"?previewTournament("cierre"):state.tourTab==="resumen"?'<div class="arena-info-grid">'+infoTile("◉",tr("Equipos independientes","Independent teams","Unabhängige Teams"),tr("La inscripción y vinculación se realiza por invitación y aceptación.","Entry by invitation and acceptance.","Teilnahme durch Einladung und Annahme."))+infoTile("⚙",tr("Categoría y edades","Category and age limits","Kategorie und Altersgrenzen"),tr("Categoría ilustrativa del catálogo ASLO; edades configuradas por la liga.","Illustrative ASLO category; ages set by the league.","Beispielkategorie von ASLO; Altersgrenzen durch die Liga."))+infoTile("⌖",tr("Diferentes escenarios","Multiple venues","Mehrere Spielorte"),tr("Los partidos pueden disputarse en sedes distintas.","Matches may take place at different venues.","Spiele können an verschiedenen Orten stattfinden."))+infoTile("✦",tr("Trofeos y premios","Trophies and prizes","Pokale und Preise"),tr("La premiación puede actualizarse con motivo y noticia.","Prizes may change with a reason and news post.","Preise können mit Begründung angepasst werden."))+'</div>':state.tourTab==="partidos"?(selected()?.id==="apertura"?matchesTable():previewTournament("partidos")):state.tourTab==="clasificacion"?standings():state.tourTab==="premios"?awards():state.tourTab==="noticias"&&selected()?.id==="apertura"?newsPanel():previewTournament("noticias"))+'</div>'+
 '<div class="arena-tour-footer"><a href="organizador.html?vista=torneos">'+tr("← Todos mis torneos","← All my tournaments","← Alle meine Turniere")+'</a></div>';
 }
 function infoTile(icon,title,detail){return '<article class="arena-info-tile aslo-fx-tilt"><span>'+icon+'</span><h3>'+title+'</h3><p>'+detail+'</p></article>'}
@@ -238,7 +241,8 @@ function leagueSectionNav(){
  ["participacion",tr("Participación","Eligibility","Teilnahme")],
  ["reglas",tr("Reglamentos","Rules","Regeln")],
  ["responsables",tr("Responsables","Administrators","Verantwortliche")],
- ["noticias",tr("Noticias de liga","League news","Liga-Nachrichten")]
+ ["noticias",tr("Noticias de liga","League news","Liga-Nachrichten")],
+ ["reconocimiento",tr("Reconocimiento ASLO","ASLO recognition","ASLO-Anerkennung")]
  ];
  return '<nav class="arena-league-sections" aria-label="'+tr("Gestión de la liga","League management","Ligaverwaltung")+'">'+sections.map(function(s){
  return '<button type="button" class="'+(state.leagueSection===s[0]?"active":"")+'" aria-current="'+(state.leagueSection===s[0]?"page":"false")+'" data-league-section="'+s[0]+'">'+s[1]+'</button>';
@@ -272,11 +276,16 @@ function arenaLeague(){
   tr("Invitar y resolver relaciones según sus competencias.","Manage invitations with valid authority.","Einladungen mit Berechtigung verwalten."),
   tr("Modificar o retirar facultades conservando la trazabilidad.","Change or revoke access with history.","Berechtigungen mit Verlauf ändern.")]);
  const news='<section class="arena-league-news">'+newsPanel()+'<p class="arena-fine">'+tr("Las publicaciones de terceros no requieren aprobación previa del organizador; ASLO mantiene los mecanismos de reporte y moderación.","Third-party posts do not require league pre-approval.","Beiträge anderer benötigen keine Vorabgenehmigung durch den Organisator.")+'</p></section>';
+ const recognition=leaguePreview(tr("Estado de reconocimiento y ranking ASLO","ASLO recognition and ranking","ASLO-Ranking und Anerkennung"),
+ tr("La liga puede operar sin estar verificada. ASLO revisa autónomamente la elegibilidad de actividad para sus rankings; el organizador no solicita ni concede esta validación.","The league operates without verification. ASLO alone evaluates ranking eligibility.","Die Liga darf ohne Verifizierung tätig sein. ASLO prüft das Ranking."),
+ [tr("Consultar el estado de la liga sin impedir la operación deportiva.","View the league's status without blocking activity.","Status ansehen, ohne Wettbewerbe zu blockieren."),
+ tr("Distinguir clasificación del torneo y ranking oficial de ASLO.","Separate tournament standings from ASLO rankings.","Turniertabelle und ASLO-Ranking unterscheiden."),
+ tr("Consultar el reconocimiento cuando ASLO lo haya determinado.","View validated recognition when available.","Bestätigte Anerkennung ansehen.")]);
  return headline("⚙",tr("Gestión de liga","League management","Ligaverwaltung"),safe(league.name),
  '<a class="arena-action arena-action-outline" href="organizador.html?vista=ligas">← '+tr("Mis ligas","My leagues","Meine Ligen")+'</a>')+
  '<div class="arena-league-crumb"><a href="organizador.html?vista=ligas">'+tr("Mis ligas","My leagues","Meine Ligen")+'</a><span aria-hidden="true">/</span><strong>'+safe(league.name)+'</strong></div>'+
  leagueSectionNav()+
- '<div class="arena-league-section-body">'+(section==="participacion"?blockParticipation:section==="reglas"?rules:section==="responsables"?people:section==="noticias"?news:blockGeneral)+'</div>';
+ '<div class="arena-league-section-body">'+(section==="participacion"?blockParticipation:section==="reglas"?rules:section==="responsables"?people:section==="noticias"?news:section==="reconocimiento"?recognition:blockGeneral)+'</div>';
 }
 
 function render(){
