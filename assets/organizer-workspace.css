@@ -336,3 +336,91 @@ html[data-theme="light"] .ow-task-foot{background:#edf6fa;color:#41657a}
  .ow-task-selection button{margin-left:auto}
 }
 @media(max-width:430px){.ow-find-task{min-width:38px}.ow-task-selection .ow-step{min-width:40px}}
+
+
+/* UX 11 — Accounts live in the top-right identity control, mode tools in bottom nav. */
+.ow-account-menu{position:relative;display:block;flex:none;z-index:130}
+.ow-account-trigger{display:flex;align-items:center;gap:12px;list-style:none;min-height:52px;padding:5px 10px 5px 16px;
+ background:#102c40;color:#eafbff;border:1px solid #456c85;border-radius:12px;cursor:pointer;
+ transition:background .22s,border-color .22s,box-shadow .22s}
+.ow-account-trigger::-webkit-details-marker{display:none}
+.ow-account-trigger::marker{content:""}
+.ow-account-trigger:hover,.ow-account-menu[open] .ow-account-trigger{background:#19445d;border-color:#a2eeae;box-shadow:0 0 0 1px #80edcd22}
+.ow-profile-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0;max-width:175px;line-height:1.15}
+.ow-profile-copy strong{font-size:13px;font-weight:870;max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.ow-profile-copy small{font-size:11px;color:#a4dbdb;margin-top:5px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ow-profile-visual,.ow-panel-avatar{display:grid;place-items:center;flex:none}
+.ow-profile-visual .aslo-account-avatar,.ow-profile-visual .aslo-account-avatar>svg{width:41px;height:41px;min-width:41px}
+.ow-panel-avatar .aslo-account-avatar,.ow-panel-avatar .aslo-account-avatar>svg{width:54px;height:54px;min-width:54px}
+.ow-profile-visual .aslo-account-avatar,.ow-panel-avatar .aslo-account-avatar{overflow:hidden;border-radius:12px;border:1px solid #b9edc289;background:#15334b}
+.ow-account-chevron{font-size:17px;color:#a5cbdc;transition:transform .18s}
+.ow-account-menu[open] .ow-account-chevron{transform:rotate(180deg)}
+.ow-account-panel{position:absolute;top:calc(100% + 10px);right:0;width:min(330px,calc(100vw - 22px));padding:8px;border:1px solid #5684a0;
+ border-radius:16px;background:#0a2236;color:#f3fcff;box-shadow:0 23px 65px #000b;animation:ow-account-reveal .25s cubic-bezier(.18,.74,.16,1) both}
+@keyframes ow-account-reveal{from{opacity:0;transform:translateY(-9px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.ow-account-panel-head{display:flex;align-items:center;gap:13px;padding:13px 12px 17px;margin-bottom:7px;border-bottom:1px solid #36566c}
+.ow-account-panel-head>div{min-width:0}
+.ow-account-panel-head strong{display:block;overflow-wrap:anywhere;font-size:14px}
+.ow-account-panel-head small{display:block;margin-top:4px;font-size:11px;color:#a1c7d7}
+.ow-account-personal{display:grid;gap:3px}
+.ow-account-personal a{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:10px;font-size:12px;font-weight:790;transition:background .16s,transform .16s}
+.ow-account-personal a:hover{background:#1c455a;transform:translateX(2px)}
+.ow-account-personal a span:first-child{display:grid;place-items:center;flex:0 0 26px;width:26px;height:26px;color:#bff5ab;font-size:19px}
+.ow-account-personal a span:nth-child(2){flex:1}
+.ow-account-personal a b{font-size:19px;font-weight:400;color:#84aebe}
+.ow-account-language{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;border-top:1px solid #36566c;margin-top:8px;padding:15px 11px}
+.ow-account-language>span{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:790}
+.ow-account-language>span>span:first-child{color:#bdf28f;font-size:18px}
+.ow-account-language select{max-width:150px;min-height:40px;border:1px solid #5b8ca1;background:#163d52;border-radius:9px;padding:8px 9px;color:#e5fbff;font-size:12px;font-weight:800;cursor:pointer}
+.ow-account-logout{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;color:#f4c0b4;text-align:left;border-radius:10px;font-weight:830;font-size:12px;padding:12px 14px}
+.ow-account-logout:hover{background:#552c32;color:#fff}
+.ow-account-logout>span:first-child{font-size:22px}
+.ow-account-signin{display:block;margin:6px;border-radius:9px;padding:13px;background:#bdf67f;color:#14352c;text-align:center;font-size:13px;font-weight:900}
+.ow-account-hint{display:block;border-top:1px solid #31576c;margin-top:7px;padding:13px 11px 8px;color:#93b4c7;line-height:1.5;font-size:10px}
+.ow-account-panel [hidden]{display:none!important}
+.ow-account-trigger:focus-visible,.ow-account-panel a:focus-visible,.ow-account-language select:focus-visible,.ow-account-logout:focus-visible{outline:3px solid #c6fa85;outline-offset:3px}
+html[data-theme="light"] .ow-account-trigger{background:#f7fcff;border-color:#a4c5d8;color:#1f455d}
+html[data-theme="light"] .ow-profile-copy small,html[data-theme="light"] .ow-account-chevron{color:#4a7186}
+html[data-theme="light"] .ow-account-panel{background:#fff;color:#22495e;border-color:#b2cedb;box-shadow:0 24px 56px #123a5540}
+html[data-theme="light"] .ow-account-panel-head,html[data-theme="light"] .ow-account-language,html[data-theme="light"] .ow-account-hint{border-color:#c6dbe6}
+html[data-theme="light"] .ow-account-panel-head small,html[data-theme="light"] .ow-account-hint{color:#54798d}
+html[data-theme="light"] .ow-account-personal a:hover{background:#e7f4f9}
+html[data-theme="light"] .ow-account-language select{background:#eef7fa;color:#24546c}
+html[data-theme="light"] .ow-account-logout{color:#9c393f}
+html[data-theme="light"] .ow-account-logout:hover{background:#fce8e5;color:#8f242b}
+@media(max-width:1180px){
+ .ow-top{gap:12px}
+ .ow-profile-copy{max-width:140px}
+ .ow-account-trigger{padding-left:11px;gap:9px}
+}
+@media(max-width:760px){
+ .ow-top{gap:10px;padding-inline:13px}
+ .ow-find-task{margin-left:auto}
+ .ow-account-trigger{padding:4px 6px 4px 9px;min-height:47px;gap:8px}
+ .ow-account-menu{margin-left:0}
+ .ow-profile-copy{max-width:93px}
+ .ow-profile-copy strong{font-size:11px}
+ .ow-profile-copy small{font-size:10px;margin-top:3px}
+ .ow-profile-visual .aslo-account-avatar,.ow-profile-visual .aslo-account-avatar>svg{width:37px;height:37px;min-width:37px}
+ .ow-account-chevron{display:none}
+ .ow-account-panel{top:calc(100% + 9px)}
+}
+@media(max-width:430px){
+ .ow-brand{font-size:23px}
+ .ow-top{padding-inline:11px;gap:8px}
+ .ow-find-task{padding:6px 7px;min-width:37px}
+ .ow-profile-copy{max-width:83px}
+ .ow-account-trigger{gap:6px}
+ .ow-account-panel{right:-1px}
+}
+@media(max-width:350px){
+ .ow-brand{font-size:21px}
+ .ow-profile-copy{max-width:68px}
+ .ow-top{padding-inline:8px;gap:5px}
+ .ow-find-task{min-width:34px;padding-inline:5px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ow-account-panel{animation:none}
+ .ow-account-trigger,.ow-account-chevron,.ow-account-personal a{transition:none}
+ .ow-account-personal a:hover{transform:none}
+}
