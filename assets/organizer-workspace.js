@@ -131,11 +131,26 @@ function badge(s){return '<span class="ow-badge" data-status="'+escape(s)+'">'+e
 function heading(title,description,button){
  return '<div class="ow-heading"><div><div class="ow-eyebrow">'+escape(t("eyebrow"))+'</div><h1 tabindex="-1">'+escape(title)+'</h1><p>'+escape(description)+'</p></div>'+(button||"")+'</div>';
 }
+
+function organizerShortcuts(){
+ var items=[
+ {key:"agenda",icon:"▤",es:"Agenda y jornadas",en:"Schedule & rounds",de:"Kalender und Spieltage",s:"Programar y revisar jornadas y encuentros."},
+ {key:"solicitudes",icon:"✉",es:"Solicitudes y avisos",en:"Requests & notices",de:"Anfragen und Hinweise",s:"Reprogramaciones, avisos e incidencias."},
+ {key:"recursos",icon:"♧",es:"Jueces y escenarios",en:"Officials & venues",de:"Offizielle & Spielstätten",s:"Arbitraje, escuelas, sustituciones y sedes."},
+ {key:"resultados",icon:"◉",es:"Resultados",en:"Results",de:"Ergebnisse",s:"Planillas, tablas y decisiones deportivas."},
+ {key:"comunicaciones",icon:"◈",es:"Comunicaciones",en:"Communications",de:"Mitteilungen",s:"Noticias, premios y patrocinadores."}
+ ];
+ return '<div class="ow-section-heading"><h2>'+escape(t("tasks"))+'</h2></div>'+
+ '<div class="ow-operations-shortcuts">'+items.map(function(it){
+ return '<a class="ow-operation-shortcut" data-nav="'+it.key+'" href="organizador.html?vista='+it.key+'"><span class="ow-operation-symbol">'+it.icon+'</span><div><b>'+escape(it[language]||it.es)+'</b><small>'+escape(it.s)+'</small></div><span class="ow-operation-arrow" aria-hidden="true">↗</span></a>';
+ }).join("")+'</div>';
+}
 function renderHome(){
  var leagues=allLeagues(),tours=allTournaments(),live=tours.filter(x=>x.state==="En disputa");
  return '<div class="ow-appear"><section class="ow-hero" aria-label="'+escape(t("breadcrumb"))+'"><div><div class="ow-eyebrow">'+escape(t("eyebrow"))+'</div><h1>'+escape(t("overview"))+'</h1><p>'+escape(t("overviewDesc"))+'</p><div class="ow-actions"><a class="ow-btn ow-btn-primary" href="organizador.html?vista=torneos" data-nav="torneos">'+escape(t("goTournaments"))+' →</a><a class="ow-btn" href="organizador.html?vista=ligas" data-nav="ligas">'+escape(t("goLeagues"))+'</a></div></div><aside class="ow-hero-aside"><strong>'+escape(t("heroAside"))+'</strong><p>'+escape(t("heroHelp"))+'</p></aside></section>'+
  '<section class="ow-overview-metrics" aria-label="'+escape(t("sample"))+'"><div class="ow-metric"><span>'+escape(t("countLeagues"))+'</span><strong>'+leagues.length+'</strong></div><div class="ow-metric"><span>'+escape(t("countTournaments"))+'</span><strong>'+tours.length+'</strong></div><div class="ow-metric"><span>'+escape(t("countActive"))+'</span><strong>'+live.length+'</strong></div></section>'+
  '<div class="ow-section-heading"><h2>'+escape(t("quick"))+'</h2></div><div class="ow-shortcuts"><a class="ow-shortcut" href="organizador.html?vista=ligas" data-nav="ligas"><div><b>'+escape(t("leagueShortcut"))+'</b><p>'+escape(t("leagueShortcutDesc"))+'</p></div><span aria-hidden="true">↗</span></a><a class="ow-shortcut" href="organizador.html?vista=torneos" data-nav="torneos"><div><b>'+escape(t("tourShortcut"))+'</b><p>'+escape(t("tourShortcutDesc"))+'</p></div><span aria-hidden="true">↗</span></a></div>'+
+ organizerShortcuts()+
  '<div class="ow-section-heading"><h2>'+escape(t("countTournaments"))+'</h2><a href="organizador.html?vista=torneos" data-nav="torneos">'+escape(t("viewAll"))+' →</a></div>'+
  (tours.length?'<div class="ow-table-wrap ow-home-table"><table class="ow-table"><thead><tr><th scope="col">'+escape(t("name"))+'</th><th scope="col">'+escape(t("league"))+'</th><th scope="col">'+escape(t("status"))+'</th><th scope="col">'+escape(t("actions"))+'</th></tr></thead><tbody>'+tours.slice(0,3).map(function(x,i){return '<tr class="ow-row-appear" style="--ow-delay:'+(i*55)+'ms"><td><span class="ow-item-name">'+escape(x.name)+'</span></td><td>'+escape(x.leagueName)+'</td><td>'+badge(x.state)+'</td><td><a class="ow-table-action" href="'+tournamentLink(x)+'">'+escape(t("openTournament"))+' ↗</a></td></tr>'}).join("")+'</tbody></table></div><div class="ow-mobile-list ow-home-mobile">'+tours.slice(0,3).map(mobileRow).join("")+'</div>':'<div class="ow-empty"><strong>'+escape(t("emptyAll"))+'</strong><p>'+escape(t("noTournamentsTip"))+'</p></div>')+
  '<p class="ow-caption">'+escape(t("onlyDemo"))+'</p></div>';
