@@ -87,9 +87,15 @@ function updateStatic(){
  document.querySelector(".ow-sidelabel").textContent=t("organizer").toUpperCase();
  document.querySelector(".ow-sidehelp strong").textContent=t("intro");
  document.querySelector(".ow-sidehelp p").textContent=t("help");
- document.querySelectorAll('[data-view="inicio"]').forEach(function(x){x.lastElementChild&&(x.lastElementChild.textContent=t("home"))});
- document.querySelectorAll('[data-view="ligas"]').forEach(function(x){x.lastElementChild&&(x.lastElementChild.textContent=t("leagues"))});
- document.querySelectorAll('[data-view="torneos"]').forEach(function(x){x.lastElementChild&&(x.lastElementChild.textContent=t("tournaments"))});
+ ["inicio","ligas","torneos"].forEach(function(view){
+  var label=t(view==="inicio"?"home":view==="ligas"?"leagues":"tournaments");
+  document.querySelectorAll('.ow-nav [data-view="'+view+'"] span:last-child').forEach(function(node){node.textContent=label;});
+  document.querySelectorAll('.ow-mobile-nav [data-view="'+view+'"]').forEach(function(node){
+    var icon=node.querySelector("span");var symbol=icon?icon.textContent:"";
+    node.textContent=label;
+    if(icon){var retained=document.createElement("span");retained.textContent=symbol;node.prepend(retained);}
+  });
+ });
  var side=document.querySelectorAll(".ow-sidebottom a");if(side[0])side[0].textContent="＋ "+t("createLeague");if(side[1])side[1].textContent="↩ "+t("switch");
 }
 function resetFilters(){state.search="";state.sport="all";state.league="all";state.status="all";state.page=1}
