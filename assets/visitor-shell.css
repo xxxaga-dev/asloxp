@@ -48,3 +48,42 @@ html[data-theme="light"] .aslo-visitor-drawer-controls p{color:#527689}
 .aslo-visitor-drawer-controls .aslo-public-geo select{min-height:40px;padding:6px 10px}
 html[data-theme="light"] .aslo-visitor-drawer-controls .aslo-public-geo{border-color:#c8dbe6}
 html[data-theme="light"] .aslo-visitor-drawer-controls .aslo-public-geo strong{color:#1b576f}
+
+
+/* Public identity: anonymous visitors have a sign-in action, not a user avatar. */
+body.aslo-visitor-layout .aslo-visitor-signin{
+ display:inline-flex;align-items:center;justify-content:center;
+ box-sizing:border-box;min-height:44px;padding:9px 17px;
+ border-radius:11px;border:1px solid #b6f789;
+ background:#baf580;color:#102a1d;
+ font-size:13px;font-weight:900;line-height:1.15;
+ white-space:nowrap;text-decoration:none;
+ transition:background .18s,border-color .18s,box-shadow .18s;
+}
+body.aslo-visitor-layout .aslo-visitor-signin:hover{
+ background:#dbffae;color:#0b2a19;
+ border-color:#e2ffbe;box-shadow:0 0 0 2px #91ef8e28;
+}
+body.aslo-visitor-layout .aslo-visitor-signin:focus-visible{
+ outline:3px solid #93d9ff;outline-offset:3px;
+}
+html[data-theme="light"] body.aslo-visitor-layout .aslo-visitor-signin{
+ background:#33764f;border-color:#33764f;color:#fff;
+}
+html[data-theme="light"] body.aslo-visitor-layout .aslo-visitor-signin:hover{
+ background:#245f3c;border-color:#245f3c;color:#fff;
+}
+@media(max-width:760px){
+ body.aslo-visitor-layout .aslo-visitor-signin{
+  min-height:44px;padding:10px 12px;border-radius:10px;
+  font-size:12px;max-width:120px;
+ }
+}
+@media(max-width:360px){
+ body.aslo-visitor-layout .aslo-visitor-signin{
+  padding:9px 8px;font-size:11px;min-height:42px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.aslo-visitor-layout .aslo-visitor-signin{transition:none}
+}
