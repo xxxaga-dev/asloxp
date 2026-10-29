@@ -173,9 +173,47 @@ function choose(){
 }
 function modePage(){
  const a=account();if(!a){location.replace("acceso.html");return}
- const qp=new URLSearchParams(location.search);const id=qp.get("modo")||activeMode();if(!a.roles.includes(id)){location.replace("modos.html");return}
- changeMode(id);if(id==="organizador"){location.replace("organizador.html");return}const r=role(id);
- render(`<div class="shell modeview"><section class="pagehead"><div class="crumb"><a href="modos.html">${tr("modes")}</a> / ${esc(r.name)}</div><span class="eyebrow">${tr("activeMode")}</span><h1>${r.icon} ${esc(r.name)}</h1><p class="intro">${tr("modeDescription")}</p><a href="modos.html" class="btn primary">${tr("switch")}</a><a href="cuenta.html?tab=perfil" class="btn">${tr("account")}</a></section><section class="mode-workspace"><h2>${tr("modeTitle")} ${esc(r.name)}</h2><p>${tr("modeWork")}</p><div class="mode-grid mode-promises">${r.parts.map(k=>`<div class="mode-tile preview-tile"><span class="chip">${tr("comingLater")}</span><h3>${esc(tr(k))}</h3></div>`).join("")}</div></section><p class="fineprint">${tr("noPerm")}</p></div>`,"mode");
+ const qp=new URLSearchParams(location.search),id=qp.get("modo")||activeMode();
+ if(!a.roles.includes(id)){location.replace("modos.html");return}
+ changeMode(id);
+ if(id==="organizador"){location.replace("organizador.html");return}
+ const r=role(id);
+ // The same shell as organizer, with navigation supplied by the selected mode.
+ // These are prototype topics from the existing role dictionary, not implemented actions.
+ if(window.asloShell){
+  document.body.dataset.activeMode=id;
+  document.title="ASLO · "+r.name;
+  const navigation=[
+   {key:"resumen",label:tr("home"),short:tr("home"),icon:"⌂",href:"#aslo-mode-summary"}
+  ].concat(r.parts.map((name,i)=>({
+   key:"section-"+i,label:tr(name),short:tr(name),icon:["▦","◈","▤","♧"][i%4],
+   href:"#aslo-mode-section-"+i
+  })));
+  window.asloShell.mount({
+   host:document.body,modeId:id,title:tr("modeTitle")+" · "+r.name,
+   brandHref:"modo.html?modo="+encodeURIComponent(id),
+   search:false,demoText:tr("sample"),
+   groups:[{title:tr("modeTitle"),items:navigation}],
+   bottom:navigation.slice(0,3),bodyId:"aslo-mode-content",
+   moreText:({es:"Más",en:"More",de:"Mehr"})[lang()]||"Más"
+  });
+  const panels=r.parts.map((name,i)=>
+   '<article class="aslo-preview-card" id="aslo-mode-section-'+i+'">'+
+   '<div class="ow-eyebrow">'+esc(tr("comingLater"))+'</div>'+
+   '<h2>'+esc(tr(name))+'</h2>'+
+   '<p>'+esc(tr("modeWork"))+'</p></article>'
+  ).join("");
+  const content=document.getElementById("aslo-mode-content");
+  if(content)content.innerHTML='<div class="aslo-generic-workspace ow-appear">'+
+   '<section class="ow-hero" id="aslo-mode-summary"><div>'+
+   '<div class="ow-eyebrow">'+esc(tr("activeMode"))+' / ASLO</div>'+
+   '<h1>'+esc(r.name)+'</h1><p>'+esc(tr("modeDescription"))+'</p></div></section>'+
+   '<section class="aslo-preview-group"><div class="ow-section-heading"><h2>'+esc(tr("modeTitle"))+'</h2></div>'+
+   '<div class="aslo-preview-grid">'+panels+'</div></section>'+
+   '<div class="aslo-preview-note">'+esc(tr("noPerm"))+'</div></div>';
+  return;
+ }
+ render('<div class="shell modeview"><section class="pagehead"><h1>'+esc(r.name)+'</h1><p>'+esc(tr("modeDescription"))+'</p></section></div>',"mode");
 }
 
 function avatarPicker(a){
