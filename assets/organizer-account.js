@@ -22,14 +22,17 @@ function mount(){
 }
 const sel=id=>document.getElementById(id);
 const labels={
- es:{account:"Abrir opciones de cuenta",organizer:"Organizador",guest:"Visitante",profile:"Mi perfil y avatar",appearance:"Apariencia",security:"Seguridad",switch:"Mis modos",language:"Idioma",logout:"Cerrar sesión",login:"Iniciar sesión",hint:"Cuenta personal · las mismas preferencias en todos tus modos"},
- en:{account:"Open account options",organizer:"Organizer",guest:"Guest",profile:"My profile & avatar",appearance:"Appearance",security:"Security",switch:"My modes",language:"Language",logout:"Sign out",login:"Sign in",hint:"Personal account · shared preferences across your modes"},
- de:{account:"Kontomenü öffnen",organizer:"Organisator",guest:"Gast",profile:"Mein Profil und Avatar",appearance:"Darstellung",security:"Sicherheit",switch:"Meine Modi",language:"Sprache",logout:"Abmelden",login:"Anmelden",hint:"Persönliches Konto · dieselben Einstellungen in allen Modi"}
+ es:{account:"Abrir opciones de cuenta",organizer:"Organizador",guest:"Visitante",profile:"Mi perfil y avatar",appearance:"Apariencia",security:"Seguridad",switch:"Mis modos",language:"Idioma",theme:"Tema",light:"Claro",dark:"Oscuro",system:"Automático",logout:"Cerrar sesión",login:"Iniciar sesión",hint:"Cuenta personal · las mismas preferencias en todos tus modos",guestHint:"Inicia sesión para acceder a las opciones personales"},
+ en:{account:"Open account options",organizer:"Organizer",guest:"Guest",profile:"My profile & avatar",appearance:"Appearance",security:"Security",switch:"My modes",language:"Language",theme:"Theme",light:"Light",dark:"Dark",system:"Automatic",logout:"Sign out",login:"Sign in",hint:"Personal account · shared preferences across your modes",guestHint:"Sign in to access personal settings"},
+ de:{account:"Kontomenü öffnen",organizer:"Organisator",guest:"Gast",profile:"Mein Profil und Avatar",appearance:"Darstellung",security:"Sicherheit",switch:"Meine Modi",language:"Sprache",theme:"Design",light:"Hell",dark:"Dunkel",system:"Automatisch",logout:"Abmelden",login:"Anmelden",hint:"Persönliches Konto · dieselben Einstellungen in allen Modi",guestHint:"Melde dich an, um Kontoeinstellungen zu öffnen"}
 };
 function text(el,string){if(el)el.textContent=string}
 function render(){
  const lang=auth.lang?.()||"es",d=labels[lang]||labels.es,acct=auth.getAccount?.();
- const mode=auth.tr?.("organizer")||d.organizer;
+ const roles={aficionado:"fan",jugador:"player",equipo:"team",organizador:"organizer",juez:"referee",planillador:"scorer",asistente:"assistant",academia:"academy",entrenador:"coach",escuela:"school",escenario:"venue",patrocinador:"sponsor",responsable:"guardian",aslo:"operator"};
+ const currentMode=control.closest("[data-aslo-mode]")?.dataset.asloMode||document.body.dataset.activeMode||"organizador";
+ const key=roles[currentMode]||"organizer";
+ const mode=auth.tr?.(key)||d.organizer;
  const name=(acct?.name||d.guest).trim()||d.guest;
  const figure=auth.avatarForAccount?.(acct,"ow-figure")||'<span class="aslo-account-avatar" aria-hidden="true">♙</span>';
  text(sel("ow-account-name"),name);
@@ -40,7 +43,7 @@ function render(){
  if(icon)icon.innerHTML=figure;
  if(panelIcon)panelIcon.innerHTML=figure;
  text(sel("ow-language-label"),d.language);
- text(sel("ow-account-hint"),d.hint);
+ text(sel("ow-account-hint"),acct?d.hint:d.guestHint);
  control.querySelector("summary")?.setAttribute("aria-label",d.account+" · "+name);
  control.querySelectorAll("[data-account-label]").forEach(a=>{
   const part=a.querySelector("span:nth-child(2)");
@@ -53,10 +56,41 @@ function render(){
  const signin=sel("ow-account-signin");
  if(signin){signin.hidden=!!acct;text(signin,d.login)}
  const personal=sel("ow-account-personal");
- if(personal)personal.hidden=!acct;
+ if(personal){
+  personal.hidden=false;
+  personal.querySelectorAll("a[data-account-label]").forEach(link=>{
+   if(!link.dataset.realHref)link.dataset.realHref=link.getAttribute("href");
+   if(acct){link.href=link.dataset.realHref;link.classList.remove("ow-account-gated");link.removeAttribute("title")}
+   else{
+    link.href="acceso.html";
+    link.classList.add("ow-account-gated");
+    link.title=d.guestHint;
+   }
+  });
+ }
+ const menu=sel("ow-account-language")?.closest(".ow-account-language");
+ if(menu&&!sel("ow-account-theme")){
+  const themeRow=document.createElement("label");
+  themeRow.className="ow-account-language ow-account-theme";
+  themeRow.setAttribute("for","ow-account-theme");
+  themeRow.innerHTML='<span><span aria-hidden="true">◐</span> <span id="ow-theme-label"></span></span>'+
+   '<select id="ow-account-theme" aria-label="'+d.theme+'"><option value="dark"></option><option value="light"></option><option value="system"></option></select>';
+  menu.parentNode.insertBefore(themeRow,menu);
+ }
+ const themeSelect=sel("ow-account-theme");
+ if(themeSelect){
+  text(sel("ow-theme-label"),d.theme);
+  themeSelect.setAttribute("aria-label",d.theme);
+  ["dark","light","system"].forEach((x,i)=>text(themeSelect.options[i],d[x]));
+  themeSelect.value=auth.theme?.()||"dark";
+ }
 }
 document.addEventListener("change",e=>{
  if(e.target?.id==="ow-account-language"&&auth.selectLanguage?.(e.target.value)){location.reload()}
+ if(e.target?.id==="ow-account-theme"&&auth.selectTheme?.(e.target.value)){
+  const isGeneric=document.body.dataset.page==="modo";
+  if(isGeneric){const el=document.getElementById("ow-account-menu");if(el)el.open=false}
+ }
 });
 document.addEventListener("click",e=>{
  if(e.target.closest("#ow-account-logout")){auth.logout?.();return}
